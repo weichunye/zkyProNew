@@ -358,7 +358,7 @@
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("dictId", 6);
-				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId')
+				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId',params)
 					.then(function(response) {
 						console.log("response.data.list", response.data.list)
 						_this.operatingSystemOption = response.data.list
