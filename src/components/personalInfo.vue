@@ -5,9 +5,9 @@
 		<!--content-->
 		<div class="content">
 			<div class="top-box">
-					<p>昵称：{{userInfo.trueName}}</p>
+				<p>昵称：{{userInfo.trueName}}</p>
 				<p>邮箱：{{userInfo.cstnetId}}</p>
-				
+
 			</div>
 
 		</div>
@@ -20,20 +20,20 @@
 						<!--软件信息-->
 						<div v-if="mySoftList.length>0">
 							<div v-for="item in mySoftList" class="personal-info-box">
-								
+
 								<p v-if="item.firstAudit==0" class="rj-state state-dsh">待审核
 								</p>
 								<div v-if="!item.isMatchSoft" class="btn-box">
 									<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
-									<button class="button1">查看</button>
+										<button class="button1">查看</button>
 									</router-link>
-									<router-link  v-if="item.firstAudit!=1":to="{path:'/softModify',query:{id:item.id,ParentName:'个人中心'}}">
+									<router-link v-if="item.firstAudit!=1" :to="{path:'/softModify',query:{id:item.id,ParentName:'个人中心'}}">
 										<button class="button2">修改</button>
 									</router-link>
-									<button  v-if="item.firstAudit!=1" @click="delSoftOrdinary(item)" class="button3">删除</button>
+									<button v-if="item.firstAudit!=1" @click="delSoftOrdinary(item)" class="button3">删除</button>
 
 								</div>
-								
+
 								<p v-if="item.firstAudit==1">
 									<el-popover placement="top-start" title="审核提示" width="200" trigger="hover" :content="item.firstAuditRejectReason">
 										<el-button class="rj-state state-pass" slot="reference">初审通过</el-button>
@@ -46,7 +46,7 @@
 										<el-button class="rj-state state-nopass" slot="reference">初审未通过</el-button>
 									</el-popover>
 								</p>
-
+							
 								<span v-if="item.firstAudit==1">
 								<p v-if="item.isExpertEvaluate==1&&item.isEvaluate==0" class="state-ps state-dsh">待评估
 							</p>
@@ -58,12 +58,12 @@
 							<p slot="reference" v-if="item.isExpertEvaluate==1&&item.isEvaluate==2" class="state-ps state-nopass">评估未通过 	
 							</p>
 							</el-popover>
-						
-							<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
+					
+						<!--	<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
 							</p>
-							<p class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
+							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
 								参赛作品请专家评估
-							</p>
+							</p>-->
 							<!--<p v-if="item.isExpertEvaluate==0" @click="getText(item.softName,item.softUrl,item.id)"  class=" state-zjpg">请专家评估
 							</p>-->
 							</span>
@@ -81,16 +81,16 @@
 									<p class="p">{{item.softIntroduce}}</p>
 									<div class="p-box">
 										<p v-if="item.firstAudit==1" class="rj-infor">
-										<span>收藏：&nbsp; {{item.collectionNum}}</span>
-										<span>分享：&nbsp; {{item.enjoyNum}}</span>
-										<span>运行：&nbsp;{{item.runNum}}</span>
-										<span>浏览：&nbsp; {{item.browseNum}}</span>
-									</p>
-									<p class="rj-time">
-										{{item.createTime}}
-									</p>
+											<span>收藏：&nbsp; {{item.collectionNum}}</span>
+											<span>分享：&nbsp; {{item.enjoyNum}}</span>
+											<span>运行：&nbsp;{{item.runNum}}</span>
+											<span>浏览：&nbsp; {{item.browseNum}}</span>
+										</p>
+										<p class="rj-time">
+											{{item.createTime}}
+										</p>
 									</div>
-									
+
 								</router-link>
 							</div>
 						</div>
@@ -222,7 +222,7 @@
 				</el-tab-pane>
 				<el-tab-pane label="我的反馈">
 					<div class="min-height">
-						<el-table class="myfeedbacktable" :data="myfeedbackList" border style="width: 100%; text-align: left;"  >
+						<el-table class="myfeedbacktable" :data="myfeedbackList" border style="width: 100%; text-align: left;">
 							<el-table-column prop="createTime" label="反馈日期" width="180">
 							</el-table-column>
 							<el-table-column prop="fbTypes" label="反馈问题" width="">
@@ -235,18 +235,15 @@
 							</el-table-column>
 							<el-table-column prop="helpLevel" label="操作" width="150">
 								<template slot-scope="scope">
-										<router-link target="_blank" :to="{path:'/details',query:{id:scope.row.id,ParentName:'个人中心'}}">
+									<router-link target="_blank" :to="{path:'/details',query:{id:scope.row.id,ParentName:'个人中心'}}">
 										<el-button style='float: left; margin-right: 5px;' size="small">查看反馈对象</el-button>
-										
-										
-										
-										</router-link>
-									</template>
+
+									</router-link>
+								</template>
 							</el-table-column>
 						</el-table>
 						<el-pagination layout="total, prev, pager, next, jumper" @size-change="myfeedbackObjSizeChange" @current-change="myfeedbackObjNumCurrentChange" :total="myfeedbackObj.total" :current-page.sync="myfeedbackObj.page" :page-size="limit">
 						</el-pagination>
-						
 
 					</div>
 				</el-tab-pane>
@@ -259,7 +256,7 @@
 
 		<!--查看报名信息-->
 
-		<el-dialog title="参赛信息" custom-class="activityInfo" :visible.sync="ActivityInfoPop" :close-on-click-modal="false"  :close-on-press-escape="false">
+		<el-dialog title="参赛信息" custom-class="activityInfo" :visible.sync="ActivityInfoPop" :close-on-click-modal="false" :close-on-press-escape="false">
 			<ul v-if="singInfo" class="acInfo-box">
 				<li>
 					<h4>软件名称：</h4>
@@ -293,17 +290,16 @@
 					<h4>代码地址：</h4>
 
 					<p>
-						<a :href="singInfo.softUrl">{{singInfo.softUrl}}</a>
+						<a target="_blank" :href="singInfo.softUrl">{{singInfo.softUrl}}</a>
 					</p>
 				</li>
 				<li>
 					<h4>操作平台：</h4>
 					<p>{{singInfo.operatingSystem}}</p>
 				</li>
-				
-				
+
 				<li v-if="teacherInfo">
-						<h4>指导教师：</h4>
+					<h4>指导教师：</h4>
 					<el-table :data="teacherInfo" border style="width: 100%;">
 						<el-table-column header-align="center" prop="userName" label="姓名" width="120">
 						</el-table-column>
@@ -313,11 +309,11 @@
 						<el-table-column header-align="center" prop="userPhone" label="手机" width="130">
 						</el-table-column>
 					</el-table>
-					
+
 				</li>
 				<li>
 					<h4>参赛人员：</h4>
-					<span class="ifniming">是否匿名：{{singInfo.isShowDeveloperName==0?'是':'否'}}</span>
+					<span class="ifniming">是否在发布时匿名：{{singInfo.isShowDeveloperName==0?'是':'否'}}</span>
 					<el-table :data="singuserList" border style="width: 100%;">
 						<el-table-column header-align="center" prop="userName" label="姓名" width="120">
 						</el-table-column>
@@ -404,7 +400,7 @@
 				<div class="box">
 					<el-form-item prop="softUrl" label="分析设计文档" :label-width="formLabelWidth">
 						<em class="addti">*</em>
-						<el-input v-model="form.analysisDoc" placeholder="" auto-complete="off"></el-input>
+						<el-input v-model="form.analysisName" placeholder="" auto-complete="off"></el-input>
 						<div class="tit">
 							<!--<button>下载模板</button>-->
 						</div>
@@ -418,7 +414,7 @@
 				<div class="box">
 					<el-form-item prop="softUrl" label="项目规格书" :label-width="formLabelWidth">
 						<em class="addti">*</em>
-						<el-input v-model="form.itemBookDoc" placeholder="" auto-complete="off"></el-input>
+						<el-input v-model="form.itemBookName" placeholder="" auto-complete="off"></el-input>
 						<div class="tit">
 							<!--<button>下载模板</button>-->
 
@@ -434,7 +430,7 @@
 				<div class="box">
 					<el-form-item prop="softUrl" label="测试文档" :label-width="formLabelWidth">
 						<em class="addti">*</em>
-						<el-input v-model="form.testDoc" placeholder="" auto-complete="off"></el-input>
+						<el-input v-model="form.testDocName" placeholder="" auto-complete="off"></el-input>
 						<div class="tit">
 							<!--<button>下载模板</button>-->
 
@@ -450,7 +446,7 @@
 				<div class="box">
 					<el-form-item prop="softUrl" label="用户手册" :label-width="formLabelWidth">
 						<em class="addti">*</em>
-						<el-input v-model="form.userDoc" placeholder="" auto-complete="off"></el-input>
+						<el-input v-model="form.userDocName" placeholder="" auto-complete="off"></el-input>
 						<div class="tit">
 							<!--<button>下载模板</button>-->
 
@@ -498,8 +494,8 @@
 						<p></p>
 
 					</el-form-item>
-						<p class="uploadtit"> 包括软件界面展示、运行结果展示或其他能够展示软件图片或视频，图片格式为jpg，单个图片不大于1M，视频时长不超过5分钟。
-</p>
+					<p class="uploadtit"> 包括软件界面展示、运行结果展示或其他能够展示软件图片或视频，图片格式为jpg，单个图片不大于1M，视频时长不超过5分钟。
+					</p>
 					<!--<el-upload class="upload-demo" ref="softResultDocRef" :action=upUrl multiple :on-success='softResultDocSuccess' :limit="1" alllist-con :auto-upload="false">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left: 10px;" size="small" type="success" @click="submitSoftResultDoc()">上传到服务器</el-button>
@@ -510,7 +506,7 @@
 				<div class="box">
 					<el-form-item prop="softUrl" label="设计架构及技术报告" :label-width="formLabelWidth">
 						<em class="addti">*</em>
-						<el-input v-model="form.frameworkReportDoc" placeholder="" auto-complete="off"></el-input>
+						<el-input v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
 						<div class="tit">
 							<!--<button>下载模板</button>-->
 
@@ -578,7 +574,7 @@
 					softImgTwo: '',
 					softImgThree: '',
 					softVideo: '',
-					analysisName:'',
+					analysisName: '',
 					frameworkReportName: '',
 					itemBookName: '',
 					softResultName: '',
@@ -598,13 +594,11 @@
 				limit: 5,
 				myDownList: {
 					dataList: [],
-					
 
 				},
 				imageUrl: '',
 				collecTionNum: {
 					dataList: [],
-				
 
 				},
 				fileList1: [],
@@ -653,26 +647,52 @@
 				dialogImageUrl: '',
 				dialogVisible: false,
 				myfeedbackList: [],
-				userInfoNew:'',
-				cstnetIdNew:''
-				
+				userInfoNew: '',
+				cstnetIdNew: ''
 
 			}
 		},
 		mounted() {
 			var _this = this;
 			//我的软件
-		_this.getMySoft()
+			_this.getMySoft()
 			//获取下载数据
-	/*		_this.getFollowList('collecTionNum', 1)
-			_this.getFollowList('enjoyNum', 2)
-			_this.getFollowList('myDownList', 3)
-			//我的报名
-			_this.getMyJoinList()
-			_this.getmyfeedbackList()*/
-			_this.userInfoNew=this.userInfo.trueName;
-			_this.cstnetIdNew=this.userInfo.cstnetId
-			console.log("_this.userInfoNew",_this.userInfoNew)
+			/*		_this.getFollowList('collecTionNum', 1)
+					_this.getFollowList('enjoyNum', 2)
+					_this.getFollowList('myDownList', 3)
+					//我的报名
+					_this.getMyJoinList()
+					_this.getmyfeedbackList()*/
+			_this.userInfoNew = this.userInfo.trueName;
+			_this.cstnetIdNew = this.userInfo.cstnetId
+			console.log("_this.userInfoNew", _this.userInfoNew)
+
+			//验证token是否过期
+			_this.axios.defaults.headers.common['token'] = this.token;
+			_this.axios.post(baseUrl.baseUrl + '/web/user/checkingToken')
+				.then(function(response) {
+					if(response.data.code == 401) {
+						_this.$confirm(response.data.msg, '提示', {
+							confirmButtonText: '确定',
+							cancelButtonText: '取消',
+							type: 'warning'
+						}).then(() => {
+							sessionStorage.clear()
+							console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+							var newUrl = baseUrl.baseUrl + '/web/auth/login';
+							window.open(newUrl)
+							return false;
+
+						}).catch(() => {
+
+						});
+					}
+
+				})
+				.catch(function(error) {
+					console.log(error);
+				})
+
 		},
 		methods: {
 			//我的软件
@@ -769,8 +789,8 @@
 				console.log("response", response)
 				this.form.analysisDoc = response.filePath;
 				this.form.analysisName = response.originalFileName;
-				
-					var codeStype;
+
+				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
 
@@ -778,7 +798,7 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList1",this.fileList1)
+				console.log("this.fileList1", this.fileList1)
 				if(response.code == 452) {
 					this.fileList1 = []
 				}
@@ -792,7 +812,7 @@
 				console.log("response", response)
 				this.form.itemBookDoc = response.filePath;
 				this.form.itemBookName = response.originalFileName;
-					var codeStype;
+				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
 
@@ -800,7 +820,7 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList2",this.fileList2)
+				console.log("this.fileList2", this.fileList2)
 				if(response.code == 452) {
 					this.fileList2 = []
 				}
@@ -813,7 +833,7 @@
 				console.log("response", response)
 				this.form.userDoc = response.filePath;
 				this.form.userDocName = response.originalFileName;
-					var codeStype;
+				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
 
@@ -821,7 +841,7 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList4",this.fileList4)
+				console.log("this.fileList4", this.fileList4)
 				if(response.code == 452) {
 					this.fileList4 = []
 				}
@@ -845,7 +865,7 @@
 				console.log("response", response)
 				this.form.frameworkReportDoc = response.filePath;
 				this.form.frameworkReportName = response.originalFileName;
-					var codeStype;
+				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
 
@@ -853,7 +873,7 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList9",this.fileList9)
+				console.log("this.fileList9", this.fileList9)
 				if(response.code == 452) {
 					this.fileList9 = []
 				}
@@ -901,7 +921,7 @@
 				this.form.softImgTwo = response.filePath;
 				this.form.softImgTwoName = response.originalFileName;
 				console.log("response", response)
-					var codeStype;
+				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
 
@@ -918,7 +938,7 @@
 				this.form.softImgThree = response.filePath;
 				this.form.softImgThreeName = response.originalFileName;
 				console.log("response", response)
-					var codeStype;
+				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
 
@@ -949,30 +969,29 @@
 
 			},
 			//tabs
-			handleClick:function(tab, event){
-				var _this=this;
-			
-				
-				if(tab.index==0){
+			handleClick: function(tab, event) {
+				var _this = this;
+
+				if(tab.index == 0) {
 					_this.getMySoft()
 				}
-				if(tab.index==1){
+				if(tab.index == 1) {
 					_this.getFollowList('myDownList', 3)
 				}
-				if(tab.index==2){
+				if(tab.index == 2) {
 					_this.getFollowList('collecTionNum', 1)
 				}
-				if(tab.index==3){
+				if(tab.index == 3) {
 					_this.getFollowList('enjoyNum', 2)
 				}
-				if(tab.index==4){
+				if(tab.index == 4) {
 					_this.getMyJoinList()
 				}
-				if(tab.index==5){
+				if(tab.index == 5) {
 					_this.getmyfeedbackList()
 				}
-				console.log("tab",tab,event)
-				
+				console.log("tab", tab, event)
+
 			},
 
 			//获取参赛人信息
@@ -1046,27 +1065,47 @@
 			delSoft: function(row) {
 				var _this = this;
 				console.log(row);
-				
-					this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+
+				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
 					type: 'warning'
 				}).then(() => {
-				var params = new URLSearchParams();
-				params.append("token", this.token);
-				params.append("userId", this.userId);
-				params.append("softId", row.softId);
-				params.append("activityId", row.id);
-				_this.axios.post(baseUrl.baseUrl + 'web/join/joinInfoDelete', params)
-					.then(function(response) {
+					var params = new URLSearchParams();
+					params.append("token", this.token);
+					params.append("userId", this.userId);
+					params.append("softId", row.softId);
+					params.append("activityId", row.id);
+					_this.axios.post(baseUrl.baseUrl + 'web/join/joinInfoDelete', params)
+						.then(function(response) {
 							var titStype = response.data.code == 0 ? 'success' : 'warning'
 
-							_this.$message({
-								type: titStype,
-								message: response.data.msg
-							});
 							if(response.data.code == 0) {
 								_this.getMyJoinList()
+								_this.$message({
+									type: titStype,
+									message: response.data.msg
+								});
+							} else if(response.data.code == 401) {
+								_this.$confirm(response.data.msg, '提示', {
+									confirmButtonText: '确定',
+									cancelButtonText: '取消',
+									type: 'warning'
+								}).then(() => {
+									sessionStorage.clear()
+									console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+									var newUrl = baseUrl.baseUrl + '/web/auth/login';
+									window.open(newUrl)
+									return false;
+
+								}).catch(() => {
+
+								});
+							} else {
+								_this.$message({
+									type: titStype,
+									message: response.data.msg
+								});
 							}
 
 						})
@@ -1080,14 +1119,6 @@
 						message: '已取消删除'
 					});
 				});
-				
-				
-			
-				
-				
-				
-				
-			
 
 			},
 			//
@@ -1110,12 +1141,34 @@
 						.then(function(response) {
 							var titStype = response.data.code == 0 ? 'success' : 'warning'
 
-							_this.$message({
-								type: titStype,
-								message: response.data.msg
-							});
 							if(response.data.code == 0) {
 								_this.getMySoft()
+
+								_this.$message({
+									type: titStype,
+									message: response.data.msg
+								});
+							} else if(response.data.code == 401) {
+								_this.$confirm(response.data.msg, '提示', {
+									confirmButtonText: '确定',
+									cancelButtonText: '取消',
+									type: 'warning'
+								}).then(() => {
+									sessionStorage.clear()
+									console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+									var newUrl = baseUrl.baseUrl + '/web/auth/login';
+									window.open(newUrl)
+									return false;
+
+								}).catch(() => {
+
+								});
+							} else {
+
+								_this.$message({
+									type: titStype,
+									message: response.data.msg
+								});
 							}
 
 						})
@@ -1192,7 +1245,7 @@
 				this.myfeedbackObj.pageNum = val;
 				this.getmyfeedbackList()
 			},
-			getText: function(name, url, id) {
+			getText: function(name, url, id, match) {
 				this.form.name = name;
 				this.form.softUrl = url;
 				this.curSoftId = id;
@@ -1201,6 +1254,74 @@
 				console.log("id", id)
 				this.dialogReview = true
 
+			},
+			expertReview: function(softId) {
+				var _this=this;
+				var softDoc = {
+					analysisDoc: this.form.analysisDoc,
+					analysisDocOriginalName: this.form.analysisName,
+					createTime: "",
+					frameworkReportDoc: this.form.frameworkReportDoc,
+					frameworkReportDocOriginalName: this.form.frameworkReportName,
+					id: 0,
+					itemBookDoc: this.form.itemBookDoc,
+					itemBookDocOriginalName: this.form.itemBookName,
+					softId: softId,
+					softResultDoc: this.form.softResultDoc,
+					softResultDocOriginalName: this.form.softResultName,
+					testDoc: this.form.testDoc,
+					testDocOriginalName: this.form.testDocName,
+					userDoc: this.form.userDoc,
+					userDocOriginalName: this.form.userDocName,
+					softImgOne: this.form.softImgOne,
+					softImgOneOriginalName: this.form.softImgOneName,
+					softImgTwo: this.form.softImgTwo,
+					softImgTwoOriginalName: this.form.softImgTwoName,
+					softImgThree: this.form.softImgThree,
+					softImgThreeOriginalName: this.form.softImgThreeName,
+					softVideo: this.form.softVideo,
+					softVideoOriginalName: this.form.softVideoName,
+					isMatchSoft: 1
+				}
+				
+			_this.axios.defaults.headers.common['token'] = this.token;
+							_this.axios.post(baseUrl.baseUrl + '/web/soft/startEvaluate', softDoc)
+								.then(function(response) {
+									if(response.data.code == 0) {
+										console.log('成功')
+										_this.$alert(response.data.msg, '提示信息', {
+											confirmButtonText: '确定',
+										});
+										_this.dialogReview = false;
+										_this.getMySoft()
+
+									} else if(response.data.code == 401) {
+										_this.$confirm(response.data.msg, '提示', {
+											confirmButtonText: '确定',
+											cancelButtonText: '取消',
+											type: 'warning'
+										}).then(() => {
+											sessionStorage.clear()
+											console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+											var newUrl = baseUrl.baseUrl + '/web/auth/login';
+											window.open(newUrl)
+											return false;
+
+										}).catch(() => {
+
+										});
+									} else {
+										_this.$alert(response.data.msg, '提示信息', {
+											confirmButtonText: '确定',
+										});
+									}
+
+								})
+								.catch(function(error) {
+									console.log(error);
+								})
+							console.log('form', this.form)
+						
 			},
 			submitForm: function(formName) {
 				var _this = this;
@@ -1228,6 +1349,7 @@
 					softImgThreeOriginalName: this.form.softImgThreeName,
 					softVideo: this.form.softVideo,
 					softVideoOriginalName: this.form.softVideoName,
+					isMatchSoft:0
 				}
 
 				if(!this.form.analysisDoc) {
@@ -1262,7 +1384,7 @@
 					_this.$refs[formName].validate((valid) => {
 						if(valid) {
 							_this.axios.defaults.headers.common['token'] = this.token;
-							_this.axios.post(baseUrl.baseUrl + '/web/join/joinEvaluate', softDoc)
+							_this.axios.post(baseUrl.baseUrl + '/web/soft/startEvaluate', softDoc)
 								.then(function(response) {
 									if(response.data.code == 0) {
 										console.log('成功')
@@ -1271,7 +1393,26 @@
 										});
 										_this.dialogReview = false;
 										_this.getMySoft()
-										
+
+									} else if(response.data.code == 401) {
+										_this.$confirm(response.data.msg, '提示', {
+											confirmButtonText: '确定',
+											cancelButtonText: '取消',
+											type: 'warning'
+										}).then(() => {
+											sessionStorage.clear()
+											console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+											var newUrl = baseUrl.baseUrl + '/web/auth/login';
+											window.open(newUrl)
+											return false;
+
+										}).catch(() => {
+
+										});
+									} else {
+										_this.$alert(response.data.msg, '提示信息', {
+											confirmButtonText: '确定',
+										});
 									}
 
 								})
@@ -1453,17 +1594,19 @@
 		width: 350px;
 		display: inline-block;
 	}
-	.personalInfo .examinedialog .upload-demo .el-button--primary{
+	
+	.personalInfo .examinedialog .upload-demo .el-button--primary {
 		background: #67C23A;
 		border: 1px solid #67C23A;
-		
 	}
-	.personalInfo .examinedialog .upload-demo .el-button--success{
+	
+	.personalInfo .examinedialog .upload-demo .el-button--success {
 		background: #46c3a1;
 		border: 1px solid #46c3a1;
-		
 	}
-	.personalInfo .examinedialog .upload-demo .el-button--primary span,.personalInfo .examinedialog .upload-demo .el-button--success span{
+	
+	.personalInfo .examinedialog .upload-demo .el-button--primary span,
+	.personalInfo .examinedialog .upload-demo .el-button--success span {
 		color: #fff;
 	}
 	
@@ -1478,11 +1621,12 @@
 		margin: 0 auto;
 		width: 300px;
 	}
-	.personalInfo .examinedialog .bottom .right button{
+	
+	.personalInfo .examinedialog .bottom .right button {
 		padding: 10px 50px;
 		line-height: 30px;
-		
 	}
+	
 	.personalInfo .content {}
 	
 	.personalInfo .content .min-height {
@@ -1616,27 +1760,31 @@
 		border: 1px solid #EBEEF5;
 	}
 	
-	.personalInfo .content .min-height .myfeedbacktable td{
+	.personalInfo .content .min-height .myfeedbacktable td {
 		text-align: left;
 	}
-	.personalInfo .addti{
+	
+	.personalInfo .addti {
 		float: left;
 		font-style: normal;
 		font-size: 14px;
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	.personalInfo .box-big .el-input{
+	
+	.personalInfo .box-big .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 150px;
 	}
+	
 	.personalInfo .box .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 150px;
 	}
-	.personalInfo .uploadtit{
+	
+	.personalInfo .uploadtit {
 		display: block;
 		margin-bottom: 20px;
 		margin-left: 160px;
@@ -1645,28 +1793,30 @@
 		color: #606266;
 		line-height: 16px;
 	}
-	.personalInfo  .ifmatchsoft1{
-		margin:5px 10px 0 0px;
+	
+	.personalInfo .ifmatchsoft1 {
+		margin: 5px 10px 0 0px;
 		float: left;
-		width:26px;
+		width: 26px;
 		height: 26px;
 		line-height: 24px;
 		text-align: center;
 		font-size: 14px;
 		color: #fff;
 		border-radius: 5px;
-		background:url(../assets/bg/bg_1.png) no-repeat
+		background: url(../assets/bg/bg_1.png) no-repeat
 	}
-		.personalInfo  .ifmatchsoft2{
-		margin:5px 10px 0 0px;
+	
+	.personalInfo .ifmatchsoft2 {
+		margin: 5px 10px 0 0px;
 		float: left;
-		width:26px;
+		width: 26px;
 		height: 26px;
 		line-height: 24px;
 		text-align: center;
 		font-size: 14px;
 		color: #fff;
 		border-radius: 5px;
-		background:url(../assets/bg/bg_2.png) no-repeat
+		background: url(../assets/bg/bg_2.png) no-repeat
 	}
 </style>

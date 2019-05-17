@@ -1,377 +1,374 @@
 <template>
 	<div class="bodybg">
-	    
-	
-	<div class="addbg">
 
-		<div class="agSignUp">
+		<div class="addbg">
 
-			<div class="header-top">
-				<div class="reposbox">
-					<router-link to="/">
-						<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
-					</router-link>
-					<p class="text">
-						欢迎来到科研开源软件社区！
-					</p>
+			<div class="agSignUp">
 
-					<p @click="toPersonalInfo" class="right-text">{{userInfo.trueName}},&nbsp;&nbsp;个人中心</p>
+				<div class="header-top">
+					<div class="reposbox">
+						<router-link to="/">
+							<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
+						</router-link>
+						<p class="text">
+							欢迎来到科研开源软件社区！
+						</p>
+
+						<p @click="toPersonalInfo" class="right-text">{{userInfo.trueName}},&nbsp;&nbsp;个人中心</p>
+					</div>
 				</div>
-			</div>
 
-			<div class="agSignUp-box">
+				<div class="agSignUp-box">
 
-				<h2>活动报名     <span  @click="back">返回竞赛首页</span></h2>
-				<!--banner-->
+					<h2>活动报名     <span  @click="back">返回竞赛首页</span></h2>
+					<!--banner-->
 
-				<el-form :model="form" ref="form" :inline="true" class="demo-form-inline" @submit.native.prevent>
-					<div class="box-big" style="margin-bottom: 15px;">
+					<el-form :model="form" ref="form" :inline="true" class="demo-form-inline" @submit.native.prevent>
+						<div class="box-big" style="margin-bottom: 15px;">
 
-						<el-form-item label="软件名称" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-input v-model="form.name" placeholder="请输入软件名称" auto-complete="off"></el-input>
-						</el-form-item>
-					</div>
-					<div class="box-big" style="margin-bottom: 15px;">
+							<el-form-item label="软件名称" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-input v-model="form.name" placeholder="请输入软件名称" auto-complete="off"></el-input>
+							</el-form-item>
+						</div>
+						<div class="box-big" style="margin-bottom: 15px;">
 
-						<el-form-item label="软件版本" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-input v-model="form.softVersion" placeholder="请输入软件版本" auto-complete="off"></el-input>
-						</el-form-item>
-					</div>
-					<div class="box-big">
+							<el-form-item label="软件版本" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-input v-model="form.softVersion" placeholder="请输入软件版本" auto-complete="off"></el-input>
+							</el-form-item>
+						</div>
+						<div class="box-big">
 
-						<el-form-item label="开源类型" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-select v-model="form.opensourceType" value-key="id" filterable multiple placeholder="请选择开源类型">
-								<el-option v-for="item in opensourceTypeOption " :key="item.id" :label="item.ctyName" :value="item">
-								</el-option>
-							</el-select>
-						</el-form-item>
-					</div>
-					<div class="box-big">
+							<el-form-item label="开源类型" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-select v-model="form.opensourceType" value-key="id" filterable multiple placeholder="请选择开源类型">
+									<el-option v-for="item in opensourceTypeOption " :key="item.id" :label="item.ctyName" :value="item">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</div>
+						<div class="box-big">
 
-						<el-form-item label="软件类别" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
-								<el-option v-for="item in softCategoryOption " :key="item.id" :label="item.ctyName" :value="item">
-								</el-option>
-							</el-select>
+							<el-form-item label="软件类别" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
+									<el-option v-for="item in softCategoryOption " :key="item.id" :label="item.ctyName" :value="item">
+									</el-option>
+								</el-select>
 
-						</el-form-item>
-					</div>
-					<div class="box-big">
+							</el-form-item>
+						</div>
+						<div class="box-big">
 
-						<el-form-item label="编程语言" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-select v-model="form.Language" value-key="id" filterable multiple placeholder="请选择编程语言">
-								<el-option v-for="item in LanguageOption " :key="item.id" :label="item.ctyName" :value="item">
-								</el-option>
-							</el-select>
-						</el-form-item>
-					</div>
-					<div class="box-big">
+							<el-form-item label="编程语言" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-select v-model="form.Language" value-key="id" filterable multiple placeholder="请选择编程语言">
+									<el-option v-for="item in LanguageOption " :key="item.id" :label="item.ctyName" :value="item">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</div>
+						<div class="box-big">
 
-						<el-form-item label="用户接口" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-select v-model="form.userInterface" value-key="id" filterable multiple placeholder="请选择用户接口">
-								<el-option v-for="item in userInterfaceOption " :key="item.id" :label="item.ctyName" :value="item">
-								</el-option>
-							</el-select>
-						</el-form-item>
-					</div>
-					<div class="box-big">
+							<el-form-item label="用户接口" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-select v-model="form.userInterface" value-key="id" filterable multiple placeholder="请选择用户接口">
+									<el-option v-for="item in userInterfaceOption " :key="item.id" :label="item.ctyName" :value="item">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</div>
+						<div class="box-big">
 
-						<el-form-item label="应用领域" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-select v-model="form.applicationField" value-key="id" filterable multiple placeholder="请选择应用领域">
-								<el-option v-for="item in applicationFieldOption " :key="item.id" :label="item.ctyName" :value="item">
-								</el-option>
-							</el-select>
-						</el-form-item>
+							<el-form-item label="应用领域" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-select v-model="form.applicationField" value-key="id" filterable multiple placeholder="请选择应用领域">
+									<el-option v-for="item in applicationFieldOption " :key="item.id" :label="item.ctyName" :value="item">
+									</el-option>
+								</el-select>
+							</el-form-item>
 
-					</div>
-					<div class="box-big">
-						<el-form-item label="操作平台" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-select v-model="form.operatingSystem" value-key="id" filterable multiple placeholder="请选择操作平台">
-								<el-option v-for="item in operatingSystemOption " :key="item.id" :label="item.label" :value="item">
-								</el-option>
-							</el-select>
-						</el-form-item>
-					</div>
-					<div class="box-big">
+						</div>
+						<div class="box-big">
+							<el-form-item label="操作平台" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-select v-model="form.operatingSystem" value-key="id" filterable multiple placeholder="请选择操作平台">
+									<el-option v-for="item in operatingSystemOption " :key="item.id" :label="item.label" :value="item">
+									</el-option>
+								</el-select>
+							</el-form-item>
+						</div>
+						<div class="box-big">
 
-						<el-form-item label="代码地址" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
-							<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>
-							<p class="textp"> {{softUrlTit}}</p>
-						</el-form-item>
-						<!--<el-form-item label=" " :label-width="formLabelWidth">
+							<el-form-item label="代码地址" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
+								<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>
+								<p class="textp"> {{softUrlTit}}</p>
+							</el-form-item>
+							<!--<el-form-item label=" " :label-width="formLabelWidth">
 						<el-checkbox v-model="form.ifCrossPlatform">是否跨平台</el-checkbox>
 					</el-form-item>-->
 
-					</div>
+						</div>
 
-					<div class="box-teacher">
+						<div class="box-teacher">
 
-						<el-form-item label="指导教师" :label-width="formLabelWidth">
-							<em class="addti">&nbsp;</em>
-							<el-input v-model="isTeacherVal.teacherName" placeholder="请输入指导教师姓名" auto-complete="off"></el-input>
-							<el-input v-model="isTeacherVal.teacherUnit" placeholder="请输入指导教师所在单位" auto-complete="off"></el-input>
-							<el-input v-model="isTeacherVal.teacherPhone" placeholder="请输入教师手机号码" auto-complete="off"></el-input>
-						</el-form-item>
-					</div>
+							<el-form-item label="指导教师" :label-width="formLabelWidth">
+								<em class="addti">&nbsp;</em>
+								<el-input v-model="isTeacherVal.teacherName" placeholder="请输入指导教师姓名" auto-complete="off"></el-input>
+								<el-input v-model="isTeacherVal.teacherUnit" placeholder="请输入指导教师所在单位" auto-complete="off"></el-input>
+								<el-input v-model="isTeacherVal.teacherPhone" placeholder="请输入教师手机号码" auto-complete="off"></el-input>
+							</el-form-item>
+						</div>
 
-					<h3 class="h3">参赛人员<span>(参赛人信息需如实填写)</span></h3>
-					<table class="singtext" border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<th width="30">&nbsp;</th>
-							<th width="120">姓名</th>
-							<th width="120">所在单位</th>
-							<th width="120">软件中承担工作</th>
-							<th width="150">手机</th>
-							<th width="80">操作</th>
-						</tr>
-						<tr>
-							<td class="domainsnum"><span>*</span></td>
-							<td>
-								<el-input v-model="firstDomains.userName" auto-complete="off"></el-input>
-								<!-- <p class="textp">{{nameValueTit}}</p>-->
-							</td>
-							<td>
-								<el-input v-model="firstDomains.userUnit" auto-complete="off"></el-input>
-								<!-- <p class="textp"> {{companyValueTit}}</p>-->
+						<h3 class="h3">参赛人员<span>(参赛人信息需如实填写)</span></h3>
+						<table class="singtext" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<th width="30">&nbsp;</th>
+								<th width="120">姓名</th>
+								<th width="120">所在单位</th>
+								<th width="120">软件中承担工作</th>
+								<th width="150">手机</th>
+								<th width="80">操作</th>
+							</tr>
+							<tr>
+								<td class="domainsnum"><span>*</span></td>
+								<td>
+									<el-input v-model="firstDomains.userName" auto-complete="off"></el-input>
+									<!-- <p class="textp">{{nameValueTit}}</p>-->
+								</td>
+								<td>
+									<el-input v-model="firstDomains.userUnit" auto-complete="off"></el-input>
+									<!-- <p class="textp"> {{companyValueTit}}</p>-->
 
-							</td>
-							<td>
-								<el-input v-model="firstDomains.userJob" auto-complete="off"></el-input>
-								<!--  <p class="textp">{{roleValueTit}}</p>-->
-							</td>
-							<td>
-								<el-input v-model="firstDomains.userPhone" auto-complete="off"></el-input>
-								<!--  <p class="textp">{{phoneValueTit}}</p>-->
-							</td>
-							<td>&nbsp;</td>
-						</tr>
-						<tr v-for="item in secondDomains">
-							<td class="domainsnum"></td>
-							<td>
-								<el-input v-model="item.userName" auto-complete="off"></el-input>
-							</td>
-							<td>
-								<el-input v-model="item.userUnit" auto-complete="off"></el-input>
+								</td>
+								<td>
+									<el-input v-model="firstDomains.userJob" auto-complete="off"></el-input>
+									<!--  <p class="textp">{{roleValueTit}}</p>-->
+								</td>
+								<td>
+									<el-input v-model="firstDomains.userPhone" auto-complete="off"></el-input>
+									<!--  <p class="textp">{{phoneValueTit}}</p>-->
+								</td>
+								<td>&nbsp;</td>
+							</tr>
+							<tr v-for="item in secondDomains">
+								<td class="domainsnum"></td>
+								<td>
+									<el-input v-model="item.userName" auto-complete="off"></el-input>
+								</td>
+								<td>
+									<el-input v-model="item.userUnit" auto-complete="off"></el-input>
 
-							</td>
-							<td>
-								<el-input v-model="item.userJob" auto-complete="off"></el-input>
+								</td>
+								<td>
+									<el-input v-model="item.userJob" auto-complete="off"></el-input>
 
-							</td>
-							<td>
-								<el-input v-model="item.userPhone" auto-complete="off"></el-input>
-								<p class="textp">{{phoneValueTit}}</p>
+								</td>
+								<td>
+									<el-input v-model="item.userPhone" auto-complete="off"></el-input>
+									<p class="textp">{{phoneValueTit}}</p>
+									</el-form-item>
+
+								</td>
+								<td>
+									<div @click="delTr($event)" class="deltrbtn">删除</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td colspan="6">
+									<a href="javascript:;" @click="addDomain" class="addtr">新增一行</a>
+									<el-checkbox style="float: right; margin:10px 10px 0 0 ;color: #999;" v-model="form.ifHsowRealName">是否在发布时匿名</el-checkbox>
+
+								</td>
+							</tr>
+						</table>
+						<div class="box-big">
+
+							<el-form-item label="作品摘要" :label-width="formLabelWidth">
+								<em class="addti">*</em>
+								<div class="box-input">
+									<tinymce-editor v-model="form.abstract" :disabled=false ref="editor"></tinymce-editor>
+
+								</div>
+							</el-form-item>
+						</div>
+						<div class="examinedialog">
+
+							<div class="box">
+								<el-form-item prop="softUrl" label="分析设计文档" :label-width="formLabelWidth">
+									<em class="addti">*</em>
+									<el-input :disabled="true" v-model="form.analysisName" placeholder="" auto-complete="off"></el-input>
+									<div class="tit">
+										<!--<button>下载模板</button>-->
+
+									</div>
+								</el-form-item>
+								<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :on-success='analysisDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
+									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload()">上传到服务器</el-button>
+									<a target="_blank" :href="analysisDocUrl">
+										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
+									</a>
+									<div slot="tip" class="el-upload__tip">描述设计架构，模块功能描述，相关依赖软件的说明，与同类软件对比分析等。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+								</el-upload>
+							</div>
+							<div class="box">
+								<el-form-item prop="softUrl" label="项目规格书" :label-width="formLabelWidth">
+									<em class="addti">*</em>
+									<el-input :disabled="true" v-model="form.itemBookName" placeholder="" auto-complete="off"></el-input>
+									<div class="tit">
+										<!--<button>下载模板</button>-->
+
+									</div>
 								</el-form-item>
 
-							</td>
-							<td>
-								<div @click="delTr($event)" class="deltrbtn">删除</div>
-							</td>
-						</tr>
+								<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :on-success='itemBookDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
 
-						<tr>
-							<td colspan="6">
-								<a href="javascript:;" @click="addDomain" class="addtr">新增一行</a>
-								<el-checkbox style="float: right; margin:10px 10px 0 0 ;color: #999;" v-model="form.ifHsowRealName">是否在发布时匿名</el-checkbox>
-
-							</td>
-						</tr>
-					</table>
-					<div class="box-big">
-
-						<el-form-item label="作品摘要" :label-width="formLabelWidth">
-							<em class="addti">*</em>
-							<div class="box-input">
-								<tinymce-editor v-model="form.abstract" :disabled=false ref="editor"></tinymce-editor>
+									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitItemBook()">上传到服务器</el-button>
+									<a target="_blank" :href="itemBookDocUrl">
+										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
+									</a>
+									<div slot="tip" class="el-upload__tip">包括创作思路，科研领域，成功案例等。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+								</el-upload>
 
 							</div>
-						</el-form-item>
-					</div>
-					<div class="examinedialog">
+							<div class="box">
+								<el-form-item prop="softUrl" label="测试文档" :label-width="formLabelWidth">
+									<em class="addti">*</em>
+									<el-input :disabled="true" v-model="form.testDocName" placeholder="" auto-complete="off"></el-input>
+									<div class="tit">
+										<!--<button>下载模板</button>-->
 
-						<div class="box">
-							<el-form-item prop="softUrl" label="分析设计文档" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-input :disabled="true" v-model="form.analysisName" placeholder="" auto-complete="off"></el-input>
-								<div class="tit">
-									<!--<button>下载模板</button>-->
+									</div>
+								</el-form-item>
+								<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :on-success='testDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
+									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitTestDoc()">上传到服务器</el-button>
+									<a target="_blank" :href="testDocUrl">
+										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
+									</a>
+									<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+								</el-upload>
 
-								</div>
-							</el-form-item>
-							<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :on-success='analysisDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
-								<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-								<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload()">上传到服务器</el-button>
-								<a target="_blank" :href="analysisDocUrl">
-									<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
-								</a>
-								<div slot="tip" class="el-upload__tip">描述设计架构，模块功能描述，相关依赖软件的说明，与同类软件对比分析等。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
-							</el-upload>
-						</div>
-						<div class="box">
-							<el-form-item prop="softUrl" label="项目规格书" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-input :disabled="true" v-model="form.itemBookName" placeholder="" auto-complete="off"></el-input>
-								<div class="tit">
-									<!--<button>下载模板</button>-->
+							</div>
+							<div class="box">
+								<el-form-item prop="softUrl" label="用户手册" :label-width="formLabelWidth">
+									<em class="addti">*</em>
+									<el-input :disabled="true" v-model="form.userDocName" placeholder="" auto-complete="off"></el-input>
+									<div class="tit">
+										<!--<button>下载模板</button>-->
 
-								</div>
-							</el-form-item>
+									</div>
+								</el-form-item>
+								<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :on-success='userDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
+									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUserDoc()">上传到服务器</el-button>
+									<a target="_blank" :href="userDocUrl">
+										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
+									</a>
+									<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+								</el-upload>
 
-							<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :on-success='itemBookDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
+							</div>
+							<div class="box">
+								<el-form-item prop="softUrl" label="设计架构及技术报告" :label-width="formLabelWidth">
+									<em class="addti">*</em>
+									<el-input :disabled="true" v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
+									<div class="tit">
+										<!--<button>下载模板</button>-->
 
-								<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-								<el-button style="margin-left: 10px;" size="small" type="success" @click="submitItemBook()">上传到服务器</el-button>
-								<a target="_blank" :href="itemBookDocUrl">
-									<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
-								</a>
-								<div slot="tip" class="el-upload__tip">包括创作思路，科研领域，成功案例等。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
-							</el-upload>
+									</div>
+								</el-form-item>
+								<el-upload class="upload-demo" ref="frameworkReportDocRef" :action=upUrl :on-success='frameworkReportDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList9">
+									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
+									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitFrameworkReportDoc()">上传到服务器</el-button>
+									<a target="_blank" :href="frameworkReportDocUrl">
+										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
+									</a>
+									<div slot="tip" class="el-upload__tip">系统设计架构概述、创新思路、对使用的技术机制进行分析，对各模块进行功能描述。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+								</el-upload>
 
-						</div>
-						<div class="box">
-							<el-form-item prop="softUrl" label="测试文档" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-input :disabled="true" v-model="form.testDocName" placeholder="" auto-complete="off"></el-input>
-								<div class="tit">
-									<!--<button>下载模板</button>-->
+							</div>
+							<div class="box-1">
+								<el-form-item prop="softUrl" label="软件效果展示" :label-width="formLabelWidth">
+									<em class="addti">*</em>
+									<div class="upload-box">
+										<el-upload class="avatar-uploader" :action=imgUrlNew :show-file-list="true" list-type="picture" :on-success="ImgSuccessFirst" :file-list="fileList5">
+											<img v-if="imageUrl" :src="imageUrl" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<img v-if="ifCheck&&form.softImgOne" class="addShowPic" :src="softImgOneUrl" />
+										</el-upload>
+										<p>请上传图片</p>
 
-								</div>
-							</el-form-item>
-							<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :on-success='testDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
-								<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-								<el-button style="margin-left: 10px;" size="small" type="success" @click="submitTestDoc()">上传到服务器</el-button>
-								<a target="_blank" :href="testDocUrl">
-									<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
-								</a>
-								<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
-							</el-upload>
+									</div>
+									<div class="upload-box">
+										<el-upload class="avatar-uploader" :action=imgUrlNew :show-file-list="true" list-type="picture" :on-success="ImgSuccessSecond" :file-list="fileList6">
+											<img v-if="imageUrl" :src="imageUrl" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<img v-if="ifCheck&&form.softImgTwo" class="addShowPic" :src="softImgTwoUrl" />
+										</el-upload>
+										<p>请上传图片</p>
+									</div>
+									<div class="upload-box">
+										<el-upload class="avatar-uploader" :action=imgUrlNew :show-file-list="true" list-type="picture" :on-success="ImgSuccessThird" :file-list="fileList7">
+											<img v-if="imageUrl" :src="imageUrl" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<img v-if="ifCheck&&form.softImgThree" class="addShowPic" :src="softImgThreeUrl" />
+										</el-upload>
+										<p>请上传图片</p>
+									</div>
+									<div class="upload-box">
+										<el-upload class="avatar-uploader" :action=imgUrlVideo :show-file-list="true" list-type="picture" :on-success="videoSuccessFirst" :file-list="fileList8">
+											<img v-if="imageUrl" :src="imageUrl" class="avatar">
+											<i v-else class="el-icon-plus avatar-uploader-icon"></i>
+											<img v-if="ifCheck&&form.softImgThree" class="addShowPic" :src="softImgThreeUrl" />
+										</el-upload>
+										<p>请上传视频</p>
+									</div>
 
-						</div>
-						<div class="box">
-							<el-form-item prop="softUrl" label="用户手册" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-input :disabled="true" v-model="form.userDocName" placeholder="" auto-complete="off"></el-input>
-								<div class="tit">
-									<!--<button>下载模板</button>-->
-
-								</div>
-							</el-form-item>
-							<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :on-success='userDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
-								<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-								<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUserDoc()">上传到服务器</el-button>
-								<a target="_blank" :href="userDocUrl">
-									<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
-								</a>
-								<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
-							</el-upload>
-
-						</div>
-						<div class="box">
-							<el-form-item prop="softUrl" label="设计架构及技术报告" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-input :disabled="true" v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
-								<div class="tit">
-									<!--<button>下载模板</button>-->
-
-								</div>
-							</el-form-item>
-							<el-upload class="upload-demo" ref="frameworkReportDocRef" :action=upUrl :on-success='frameworkReportDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList9">
-								<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-								<el-button style="margin-left: 10px;" size="small" type="success" @click="submitFrameworkReportDoc()">上传到服务器</el-button>
-								<a target="_blank" :href="frameworkReportDocUrl">
-									<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
-								</a>
-								<div slot="tip" class="el-upload__tip">系统设计架构概述、创新思路、对使用的技术机制进行分析，对各模块进行功能描述。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
-							</el-upload>
-
-						</div>
-						<div class="box-1">
-							<el-form-item prop="softUrl" label="软件效果展示" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<div class="upload-box">
-									<el-upload class="avatar-uploader" :action=imgUrlNew :show-file-list="true" list-type="picture" :on-success="ImgSuccessFirst" :file-list="fileList5">
-										<img v-if="imageUrl" :src="imageUrl" class="avatar">
-										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-										<img v-if="ifCheck&&form.softImgOne" class="addShowPic" :src="softImgOneUrl" />
-									</el-upload>
-									<p>请上传图片</p>
-
-								</div>
-								<div class="upload-box">
-									<el-upload class="avatar-uploader" :action=imgUrlNew :show-file-list="true" list-type="picture" :on-success="ImgSuccessSecond" :file-list="fileList6">
-										<img v-if="imageUrl" :src="imageUrl" class="avatar">
-										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-										<img v-if="ifCheck&&form.softImgTwo" class="addShowPic" :src="softImgTwoUrl" />
-									</el-upload>
-									<p>请上传图片</p>
-								</div>
-								<div class="upload-box">
-									<el-upload class="avatar-uploader" :action=imgUrlNew :show-file-list="true" list-type="picture" :on-success="ImgSuccessThird" :file-list="fileList7">
-										<img v-if="imageUrl" :src="imageUrl" class="avatar">
-										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-										<img v-if="ifCheck&&form.softImgThree" class="addShowPic" :src="softImgThreeUrl" />
-									</el-upload>
-									<p>请上传图片</p>
-								</div>
-								<div class="upload-box">
-									<el-upload class="avatar-uploader" :action=imgUrlVideo :show-file-list="true" list-type="picture" :on-success="videoSuccessFirst" :file-list="fileList8">
-										<img v-if="imageUrl" :src="imageUrl" class="avatar">
-										<i v-else class="el-icon-plus avatar-uploader-icon"></i>
-										<img v-if="ifCheck&&form.softImgThree" class="addShowPic" :src="softImgThreeUrl" />
-									</el-upload>
-									<p>请上传视频</p>
-								</div>
-							
-
-							</el-form-item>
-											<p class="uploadtit"> 包括软件界面展示、运行结果展示或其他能够展示软件图片或视频，图片格式为jpg，单个图片不大于1M，视频时长不超过5分钟。
-</p>
-						</div>
-			
-
-					</div>
-
-					<div class="bottom">
-						<div class="left-box">
-							<el-form-item label=" " :label-width="formLabelWidth">
-								<el-checkbox v-model="form.ifCheckedCns">
-									<router-link target="_blank" to="page1">科研开源软件创意大赛承诺书</router-link>
-								</el-checkbox>
-
-							</el-form-item>
-							<el-form-item label=" " :label-width="formLabelWidth">
-								<el-checkbox v-model="form.ifCheckedMzs">
-									<router-link target="_blank" to="page2">科研开源软件创意大赛免责协议</router-link>
-								</el-checkbox>
-
-							</el-form-item>
+								</el-form-item>
+								<p class="uploadtit"> 包括软件界面展示、运行结果展示或其他能够展示软件图片或视频，图片格式为jpg，单个图片不大于1M，视频时长不超过5分钟。
+								</p>
+							</div>
 
 						</div>
 
-						<div class="right-box">
-							<el-button type="primary" @click="submitForm('form')">提 交</el-button>
+						<div class="bottom">
+							<div class="left-box">
+								<el-form-item label=" " :label-width="formLabelWidth">
+									<el-checkbox v-model="form.ifCheckedCns">
+										<router-link target="_blank" to="page1">科研开源软件创意大赛承诺书</router-link>
+									</el-checkbox>
+
+								</el-form-item>
+								<el-form-item label=" " :label-width="formLabelWidth">
+									<el-checkbox v-model="form.ifCheckedMzs">
+										<router-link target="_blank" to="page2">科研开源软件创意大赛免责协议</router-link>
+									</el-checkbox>
+
+								</el-form-item>
+
+							</div>
+
+							<div class="right-box">
+								<el-button type="primary" @click="submitForm('form')">提 交</el-button>
+							</div>
+
 						</div>
+					</el-form>
 
-					</div>
-				</el-form>
-
+				</div>
 			</div>
-		</div>
-		<a :href="wordUrl" target="_blank" class="float_word">
-			报名资料模板下载
+			<a :href="wordUrl" target="_blank" class="float_word">
+				报名资料模板下载
 
-		</a>
-	</div>
+			</a>
+		</div>
 	</div>
 </template>
 <script type="text/javascript">
@@ -487,7 +484,7 @@
 				domainIndex: 1,
 				formLabelWidth: '150px',
 				ifCheck: false,
-				wordUrl:'',
+				wordUrl: '',
 
 			}
 		},
@@ -571,7 +568,7 @@
 
 					})
 			},
-				//下载比赛文档
+			//下载比赛文档
 			getWorldUrl: function() {
 				var _this = this;
 				_this.axios.post(baseUrl.baseUrl + '/web/join/joinDocPackageDownload')
@@ -635,10 +632,10 @@
 						for(var i = 1; i < userListObg.length; i++) {
 							_this.secondDomains.push(userListObg[i])
 						}
-						console.log("teacherObg",teacherObg)
-						_this.isTeacherVal.teacherName=teacherObg.userName;
-						_this.isTeacherVal.teacherUnit=teacherObg.userUnit;
-						_this.isTeacherVal.teacherPhone=teacherObg.userPhone;
+						console.log("teacherObg", teacherObg)
+						_this.isTeacherVal.teacherName = teacherObg.userName;
+						_this.isTeacherVal.teacherUnit = teacherObg.userUnit;
+						_this.isTeacherVal.teacherPhone = teacherObg.userPhone;
 						console.log("softDocObg.analysisDoc", baseUrl.baseUrlImg + softDocObg.analysisDoc)
 						_this.analysisDocUrl = baseUrl.baseUrlImg + softDocObg.analysisDoc
 						_this.frameworkReportDocUrl = baseUrl.baseUrlImg + softDocObg.frameworkReportDoc
@@ -675,9 +672,9 @@
 					})
 
 			},
-				back:function(){
-   		this.$router.go(-1);//返回上一层
-   	},
+			back: function() {
+				this.$router.go(-1); //返回上一层
+			},
 			//分析设计文档
 			submitUpload() {
 				this.$refs.analysisRef.submit();
@@ -870,16 +867,16 @@
 			//验证git地址是否存在
 			checkUrl: function() {
 				var _this = this;
-				
+
 				var regexp = /((http|ftp|https|file):\/\/([\w\-]+\.)+[\w\-]+(\/[\w\u4e00-\u9fa5\-\.\/?\@\%\!\&=\+\~\:\#\;\,]*)?)/ig;
-				
+
 				if(_this.form.softUrl) {
-					 var thisurl = _this.form.softUrl.match(regexp);
-				 if(!thisurl){
-				 		_this.messageOpen('填写正确链接地址', 'warning')
-				 			return false
-				 	
-				 }
+					var thisurl = _this.form.softUrl.match(regexp);
+					if(!thisurl) {
+						_this.messageOpen('填写正确链接地址', 'warning')
+						return false
+
+					}
 					var params = new URLSearchParams();
 					params.append("softUrl", _this.form.softUrl);
 					_this.axios.post(baseUrl.baseUrl + '/web/soft/checkIsEqualsSoftUrl', params)
@@ -1157,8 +1154,8 @@
 							userUnit: this.firstDomains.userUnit,
 						}
 						joinVo.userList.push(this.firstDomains);
-						
-						this.isTeacherVal={
+
+						this.isTeacherVal = {
 							activityId: this.$route.query.activityId,
 							awardLevel: 0,
 							isTeacher: 1,
@@ -1173,7 +1170,7 @@
 							userPhone: this.isTeacherVal.teacherPhone,
 							userUnit: this.isTeacherVal.teacherUnit,
 							userJob: '指导教师',
-						
+
 						}
 						joinVo.userList.push(this.isTeacherVal);
 						if(this.secondDomains.length > 0) {
@@ -1200,11 +1197,27 @@
 						_this.axios.post(baseUrl.baseUrl + _this.joinVoUrl, joinVo)
 							.then(function(response) {
 
-								_this.$alert(response.data.msg, '提示信息', {
-									confirmButtonText: '确定',
-								});
 								if(response.data.code == 0) {
 									_this.toPersonalInfo()
+								} else if(response.data.code == 401) {
+									_this.$confirm(response.data.msg, '提示', {
+										confirmButtonText: '确定',
+										cancelButtonText: '取消',
+										type: 'warning'
+									}).then(() => {
+										sessionStorage.clear()
+										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+										var newUrl = baseUrl.baseUrl + '/web/auth/login';
+										window.open(newUrl)
+										return false;
+
+									}).catch(() => {
+
+									});
+								} else {
+									_this.$alert(response.data.msg, '提示信息', {
+										confirmButtonText: '确定',
+									});
 								}
 
 							})
@@ -1254,17 +1267,19 @@
 		background: linear-gradient(to bottom, #dfecfa 0%, #2295d9 8%, #4794e4 100%);
 		border-bottom: 2px solid #2b75c2;
 	}
-	.agSignUp h2 span{
-		 float: right;
-		 margin-right: 10px;
-		 font-size: 12px;
-		 line-height: 60px;
-		 color: #ededed;
-		 text-indent: 0;
-		 cursor: pointer;
-		 text-decoration: underline;
-		 }
-	.agSignUp h2 span:hover{
+	
+	.agSignUp h2 span {
+		float: right;
+		margin-right: 10px;
+		font-size: 12px;
+		line-height: 60px;
+		color: #ededed;
+		text-indent: 0;
+		cursor: pointer;
+		text-decoration: underline;
+	}
+	
+	.agSignUp h2 span:hover {
 		color: #fdd765;
 	}
 	
@@ -1600,9 +1615,6 @@
 		margin-left: 10px;
 		height: 46px;
 		width: auto;
-	
-
-		
 	}
 	
 	.agSignUp .header-top .reposbox .text {
@@ -1650,7 +1662,8 @@
 		font-size: 16px;
 		color: #fff;
 	}
-	.agSignUp .uploadtit{
+	
+	.agSignUp .uploadtit {
 		display: block;
 		margin-bottom: 20px;
 		margin-left: 160px;
@@ -1659,13 +1672,14 @@
 		color: #606266;
 		line-height: 16px;
 	}
-	.box-1 .el-form-item{
+	
+	.box-1 .el-form-item {
 		padding: 0;
 		margin: 0;
 	}
-	.box-big .el-form-item{
+	
+	.box-big .el-form-item {
 		margin-bottom: 10px;
-		
 	}
 	
 	.float_word {

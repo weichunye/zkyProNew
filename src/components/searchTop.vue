@@ -263,13 +263,13 @@
 				<p>投递软件</p>
 			</li>
 			<li v-if="userIdData">
-				<a class="DownWorlds" @click="DownWorlds" target="_blank" href="javascript:;">
+				<a class="DownWorlds" @click="DownWorlds" href="javascript:;">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
 			</li>
-			<li v-else=""  @click="ifLogin">
-				<a class="DownWorlds"  target="_blank" href="javascript:;">
+			<li v-else="" @click="ifLogin">
+				<a class="DownWorlds" target="_blank" href="javascript:;">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
@@ -282,18 +282,13 @@
 				<img src="../assets/icon/float_nav_3.png" alt="" />
 				<p>模拟运行</p>
 			</li>
-			<li v-if="userIdData">
+			<li >
 				<a target="_blank" :href="newSoftUrl">
 					<img src="../assets/icon/float_nav_4.png" alt="" />
 					<p>查看源码</p>
 				</a>
 			</li>
-			<li v-else="" @click="ifLogin">
-				<a target="_blank">
-					<img src="../assets/icon/float_nav_4.png" alt="" />
-					<p>查看源码</p>
-				</a>
-			</li>
+			
 			<li @click="dialogFeed">
 				<img src="../assets/icon/float_nav_5.png" alt="" />
 				<p>意见反馈</p>
@@ -323,7 +318,7 @@
 				deliveringData: {
 
 				},
-				userIdData:'',
+				userIdData: '',
 				form: {
 					domains: [],
 					name: '',
@@ -460,7 +455,7 @@
 		},
 		mounted() {
 			var _this = this;
-			_this.userIdData=this.userId;
+			_this.userIdData = this.userId;
 			_this.toLoginUrl = baseUrl.baseUrl + 'web/auth/login'
 			console.log("this.userId", this.userId)
 			if(this.userId) {
@@ -511,9 +506,9 @@
 						_this.categoryOption = response.data.list;
 					})
 			},
-			ifLogin:function(){
+			ifLogin: function() {
 				var _this = this;
-					if(!this.userId) {
+				if(!this.userId) {
 					_this.$confirm('请登录', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
@@ -525,9 +520,8 @@
 					}).catch(() => {
 
 					});
-				} 
+				}
 
-				
 			},
 			//投递软件
 			deliverySoft: function() {
@@ -544,8 +538,8 @@
 					}).catch(() => {
 
 					});
-				} else{
-					_this.dialogDelivering=true;
+				} else {
+					_this.dialogDelivering = true;
 				}
 
 			},
@@ -580,9 +574,7 @@
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
 
-							$('.DownWorlds').bind('click', function() {
-								$(this).attr('href', _this.DownWordUrl)
-							})
+						window.location=_this.DownWordUrl; // 后更改页面地址
 
 						} else {
 							_this.$alert(response.data.msg, '提示信息', {
@@ -682,7 +674,7 @@
 					userInterfaceList: this.form.userInterface,
 					userList: [],
 				}
-				
+
 				sofoVo.isShowDeveloperName = _this.form.ifHsowRealName == true ? 0 : 1;
 				sofoVo.isSelf = _this.form.ifSelfStudy == true ? 1 : 0;
 				if(!sofoVo.isShowDeveloperName) {
@@ -767,9 +759,7 @@
 						_this.axios.defaults.headers.common['token'] = this.token;
 						_this.axios.post(baseUrl.baseUrl + '/web/user/saveSoftInfo', sofoVo)
 							.then(function(response) {
-								_this.$alert(response.data.msg, '提示信息', {
-									confirmButtonText: '确定',
-								});
+
 								if(response.data.code == 0) {
 									_this.dialogDelivering = false;
 									_this.$refs[formName].resetFields();
@@ -787,6 +777,25 @@
 										_this.toPersonalInfo()
 									}
 
+								} else if(response.data.code == 401) {
+									_this.$confirm(response.data.msg, '提示', {
+										confirmButtonText: '确定',
+										cancelButtonText: '取消',
+										type: 'warning'
+									}).then(() => {
+										sessionStorage.clear()
+										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+										var newUrl = baseUrl.baseUrl + '/web/auth/login';
+										window.open(newUrl)
+										return false;
+
+									}).catch(() => {
+
+									});
+								} else {
+									_this.$alert(response.data.msg, '提示信息', {
+										confirmButtonText: '确定',
+									});
 								}
 
 							})
@@ -960,9 +969,6 @@
 						_this.axios.post(baseUrl.baseUrl + '/web/user/addFeedback', feedback)
 							.then(function(response) {
 
-								_this.$alert(response.data.msg, '提示信息', {
-									confirmButtonText: '确定',
-								});
 								if(response.data.code == 0) {
 									_this.dialogFeedback = false;
 									_this.formdialogFeedback.scoreValue = null;
@@ -970,6 +976,26 @@
 									_this.formdialogFeedback.moreProposal = '';
 									_this.formdialogFeedback.ifAnonymous = false;
 
+								} else if(response.data.code == 401) {
+									_this.$confirm(response.data.msg, '提示', {
+										confirmButtonText: '确定',
+										cancelButtonText: '取消',
+										type: 'warning'
+									}).then(() => {
+										sessionStorage.clear()
+										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+										var newUrl = baseUrl.baseUrl + '/web/auth/login';
+										window.open(newUrl)
+										_this.dialogFeedback = false;
+										return false;
+
+									}).catch(() => {
+
+									});
+								} else {
+									_this.$alert(response.data.msg, '提示信息', {
+										confirmButtonText: '确定',
+									});
 								}
 
 							})

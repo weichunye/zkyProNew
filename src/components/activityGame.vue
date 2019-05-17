@@ -415,7 +415,7 @@
 		<!--报名-->
 
 		<!--报名浮窗-->
-		<a target="_blank" v-if="activityInfo.status==2&&!presentFloat" href="javascript:;" @click="signUpActity" class="present_float">
+		<a  v-if="activityInfo.status==2&&!presentFloat" href="javascript:;" @click="signUpActity" class="present_float">
 			<div class="ballute_blue">
 			</div>
 			<div class="ballute_pink">
@@ -596,12 +596,40 @@
 				}
 				console.log("this.userId", this.userId)
 				if(this.userId) {
+							//验证token是否过期
+			_this.axios.defaults.headers.common['token'] = this.token;
+			_this.axios.post(baseUrl.baseUrl + '/web/user/checkingToken')
+				.then(function(response) {
+							if(response.data.code==401){
+					_this.$confirm(response.data.msg, '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						sessionStorage.clear()
+				console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+						var newUrl = baseUrl.baseUrl + '/web/auth/login';
+						window.open(newUrl)
+						return false;
+
+					}).catch(() => {
+
+					});
+				}else{
 					_this.$router.push({
 						path: '/agSignUp',
 						query: {
 							activityId: _this.$route.query.id
 						}
 					});
+				}
+					
+				})
+				.catch(function(error) {
+					console.log(error);
+				})
+
+					
 
 				} else {
 					_this.$confirm('请登录', '提示', {

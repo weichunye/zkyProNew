@@ -61,7 +61,7 @@
 
 					</li>
 					<li  v-if="userIdData">
-						<a @click="saveFollow(3)" href="javascript:;" target="_blank">
+						<a @click="saveFollow(3)" href="javascript:;" >
 							下载<span>{{statInfo.downloadNum}} </span>
 						</a>
 					</li>
@@ -87,7 +87,7 @@
   						指数
   					</button>
 				<div class="indexbox">
-					<div id="oscilloGram" style="height:360px"></div>
+					<div id="oscilloGram" style="height:300px"></div>
 
 				</div>
 				<img v-if="softData.softLogo" class="softlogo" :src="softLogoUrl+softData.softLogo"/>
@@ -154,7 +154,7 @@
 			<ul class="bottom-btn-box">
 
 				<li v-if="userIdData">
-					<a class="DownWorlds" @click="DownWorlds" target="_blank" href="javascript:;">
+					<a class="DownWorlds" @click="DownWorlds"  href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
@@ -173,18 +173,13 @@
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>模拟运行</p>
 				</li>
-				<li v-if="userIdData">
+				<li >
 					<a target="_blank" :href="newSoftUrl">
 						<img src="../assets/icon/float_nav_4.png" alt="" />
 						<p>查看源码</p>
 					</a>
 				</li>
-					<li v-else="" @click="ifLogin">
-					<a  target="_blank" >
-						<img src="../assets/icon/float_nav_4.png" alt="" />
-						<p>查看源码</p>
-					</a>
-				</li>
+					
 
 			</ul>
 
@@ -324,7 +319,7 @@
 								max: 100
 							},
 						],
-						radius: 130
+						radius: 100
 					}],
 					series: [{
 						name: '软件指数',
@@ -491,10 +486,7 @@
 					}).catch(() => {
 
 					});
-				}
-						//验证token是否过期//
-						
-						if(response.data.code == 0) {
+				}else if(response.data.code == 0) {
 							if(type == 1) {
 
 								_this.statInfo.collectionNum = _this.statInfo.collectionNum + 1;
@@ -520,7 +512,8 @@
 							if(type == 3) {
 								_this.statInfo.downloadNum = _this.statInfo.downloadNum + 1;
 								
-							window.open(_this.newSoftUrl,'_blank')
+							var tempwindow=window.open('_blank'); // 先打开页面
+							tempwindow.location=_this.newSoftUrl; // 后更改页面地址
 								/*var openSoftUrl=_this.newSoftUrl.substr(0,6)
 								if(openSoftUrl!='https:'&&openSoftUrl!='http:/'){
 									_this.newSoftUrl='http://'+_this.newSoftUrl
@@ -530,6 +523,11 @@
 								/*'http://'*/
 							}
 
+						}else{
+							_this.$alert(
+								response.data.msg, '提示信息', {
+								confirmButtonText: '确定',
+							});
 						}
 						
 
@@ -715,10 +713,10 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-
-							$('.DownWorlds').bind('click', function() {
-								$(this).attr('href', _this.DownWordUrl)
-							})
+							console.log("_this.DownWordUrl",_this.DownWordUrl)
+							window.location=_this.DownWordUrl; // 后更改页面地址
+								
+						
 
 						} else {
 							_this.$alert(response.data.msg, '提示信息', {
@@ -1121,11 +1119,11 @@
 		position: absolute;
 		right: 100px;
 		top: 0px;
-		width: 400px;
-		height: 330px;
+		width: 360px;
+		height: 260px;
 		background: #fff;
-		border: 1px solid #dedede;
 		z-index: 100;
+		background: #fff;
 	}
 	
 	.details .bottom-btn-box {

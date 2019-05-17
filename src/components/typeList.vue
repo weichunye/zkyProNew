@@ -128,14 +128,14 @@ export default {
 </script>
 
 <style>
-	.list{
+	.typeList{
 	background: #f8f8f8;	
 	}
 	
-	.list .content{
+	.typeList .content{
 		background: #fff;
 	}
-	.list .content h2{
+	.typeList .content h2{
 		padding-top: 10px;
 		width: 100%;
 		font-size: 16px;
@@ -144,33 +144,33 @@ export default {
 		text-indent: 10px;
 		font-weight: normal;
 	}
-	.list .min-height{
+	.typeList .min-height{
 		padding: 5px 0 15px;
 		min-height: 500px;
 	}
-	.list .content .left-box{
+	.typeList .content .left-box{
 		float: left;
 		padding: 7px 0;
 		width: 960px;
 		background: #fff;
 	}
-	.list .content .left-box li{
+	.typeList .content .left-box li{
 		padding: 5px 10px 10px;
 		width: 940px;
 		border-bottom: 1px solid #dedede;
 	}
-	.list .content .left-box li h4{
+	.typeList .content .left-box li h4{
 		width: 100%;
 		font-size: 16px;
 		color: #666;
 		line-height: 46px;
 		font-weight: normal;
 	}
-	.list .content .left-box li p{
+	.typeList .content .left-box li p{
 		overflow: hidden;
 		width: 100%;
 	}
-	.list .content .left-box li p span{
+	.typeList .content .left-box li p span{
 		display: inline-block;
 		float: left;
 		margin-right: 20px;
@@ -179,19 +179,19 @@ export default {
 		line-height: 26px;
 		cursor: pointer;
 	}
-	.list .content .left-box li p span:hover{
+	.typeList .content .left-box li p span:hover{
 		color: #b81027;
 	}
-	.list .content .right-box{
+	.typeList .content .right-box{
 		float: right;
 		width: 230px;
 	}
-	.list .content .right-box .num-list{
+	.typeList .content .right-box .num-list{
 		padding: 10px 0;
 		width: 100%;
 		background: #fff;
 	}
-	.list .content .right-box .num-list h3{
+	.typeList .content .right-box .num-list h3{
 		width: 100%;
 		line-height: 36px;
 		font-size: 16px;
@@ -200,15 +200,15 @@ export default {
 		text-indent: 10px;
 		border-bottom: 1px solid #dedede;
 	}
-	.list .content .right-box .num-list ul{
+	.typeList .content .right-box .num-list ul{
 		margin: 5px;
 	}
-	.list .content .right-box .num-list ul li{
+	.typeList .content .right-box .num-list ul li{
 		overflow: hidden;
 		line-height: 30px;
 		
 	}
-	.list .content .right-box .num-list ul li span{
+	.typeList .content .right-box .num-list ul li span{
 		float: left;
 		margin: 7px 0 0 10px;
 		width: 26px;
@@ -220,16 +220,16 @@ export default {
 		color: #fff;
 		background: #7c7c7c;
 	}
-	.list .content .right-box .num-list ul li .span1{
+	.typeList .content .right-box .num-list ul li .span1{
 		background: #e76112;
 	}
 	
-	.list .content .right-box .num-list ul li p{
+	.typeList .content .right-box .num-list ul li p{
 		float: left;
 		margin-left: 10px;
 		color: #666;
 	}
-	.list .content .right-box .game-banner{
+	.typeList .content .right-box .game-banner{
 		margin-top: 10px;
 		width: 230px;
 		height: 218px;

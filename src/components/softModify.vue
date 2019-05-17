@@ -113,7 +113,7 @@
 					<div class="box-big">
 						<el-form-item v-if="!form.ifSelfStudy" label="开发人员" :label-width="formLabelWidth">
 							<em class="addti">&nbsp;&nbsp;</em>
-							<el-input v-model="form.developer" placeholder="请输入内容" auto-complete="off"></el-input>
+							<el-input v-model="form.developer" placeholder="请输入内容" ></el-input>
 						</el-form-item>
 
 						<el-form-item label=" " :label-width="formLabelWidth">
@@ -248,6 +248,7 @@
 					abstract: '',
 					ifSelfStudy: false, //是否为自研
 					ifHsowRealName: false, //true不匿名，false匿名
+					developer:''
 				},
 
 				softUrlTit: '',
@@ -373,14 +374,14 @@
 				params.append("token", this.token);
 				_this.axios.post(baseUrl.baseUrl + 'web/user/getSaveSoftDetail', params)
 					.then(function(response) {
-						
+
 						var softInfoObg = response.data.softInfo;
 						var userListObg = response.data.userList;
 						console.log("2222", softInfoObg)
 						var softDocObg = response.data.softDoc;
 						_this.softId = response.data.softInfo.id;
 						_this.form.name = softInfoObg.softName;
-						_this.form.developer=softInfoObg.developers;
+						_this.form.developer = softInfoObg.developers;
 						_this.form.softVersion = softInfoObg.softVersion;
 						console.log("6666", softInfoObg.opensourceTypes)
 						_this.form.opensourceType = softInfoObg.opensourceTypes;
@@ -398,8 +399,10 @@
 						_this.form.ifHsowRealName = softInfoObg.isShowDeveloperName == 0 ? true : false;
 						console.log("softInfoObg.isPlatform", softInfoObg.isPlatform)
 
-						var firstUserListObg = userListObg[0]
-						console.log("userListObg.userList[0]", _this.firstDomains.userName)
+						
+						if(userListObg.length>0){
+							var firstUserListObg = userListObg[0]
+							console.log("userListObg",userListObg)
 						_this.firstDomains.userName = firstUserListObg.userName;
 
 						_this.firstDomains.userUnit = firstUserListObg.userUnit;
@@ -409,6 +412,8 @@
 							_this.secondDomains.push(userListObg[i])
 						}
 
+						}
+						
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -502,7 +507,7 @@
 					userList: []
 
 				}
-				
+
 				joinVo.isShowDeveloperName = this.form.ifHsowRealName == true ? 0 : 1;
 				if(!joinVo.isShowDeveloperName) {
 					joinVo.developers = ''
@@ -637,11 +642,29 @@
 						_this.axios.post(baseUrl.baseUrl + '/web/user/saveSoftInfoUpdate', joinVo)
 							.then(function(response) {
 
-								_this.$alert(response.data.msg, '提示信息', {
-									confirmButtonText: '确定',
-								});
 								if(response.data.code == 0) {
 									_this.toPersonalInfo()
+								} else if(response.data.code == 401) {
+									_this.$confirm(response.data.msg, '提示', {
+										confirmButtonText: '确定',
+										cancelButtonText: '取消',
+										type: 'warning'
+									}).then(() => {
+										sessionStorage.clear()
+										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+										var newUrl = baseUrl.baseUrl + '/web/auth/login';
+										window.open(newUrl)
+										return false;
+
+									}).catch(() => {
+
+									});
+								} else {
+
+									_this.$alert(response.data.msg, '提示信息', {
+										confirmButtonText: '确定',
+									});
+
 								}
 
 							})
