@@ -5,7 +5,7 @@
 		<!--content-->
 		<div class="content">
 			<div class="top-box">
-				<p>昵称：{{userInfo.trueName}}</p>
+				<p>昵称：{{userInfo.trueName}}00000</p>
 				<p>邮箱：{{userInfo.cstnetId}}</p>
 
 			</div>
