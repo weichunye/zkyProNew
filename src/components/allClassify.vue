@@ -260,17 +260,22 @@ export default {
 	}
 	
 	.allClassify dl dt span {
+		display: block;
+		width: 220px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 		font-weight: bold;
 	}
 	
 	.allClassify dl dd {
 		font-size: 12px;
-		color: #999;
+		color: #b3b5b3;
 	}
 	
 	.allClassify dl dd span {
 		margin: 0 10px 0 5px;
-		color: #999;
+		color: #c0c1c5;
 	}
 	
 </style>

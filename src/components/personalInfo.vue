@@ -23,17 +23,7 @@
 
 								<p v-if="item.firstAudit==0" class="rj-state state-dsh">待审核
 								</p>
-								<div v-if="!item.isMatchSoft" class="btn-box">
-									<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
-										<button class="button1">查看</button>
-									</router-link>
-									<router-link v-if="item.firstAudit!=1" :to="{path:'/softModify',query:{id:item.id,ParentName:'个人中心'}}">
-										<button class="button2">修改</button>
-									</router-link>
-									<button v-if="item.firstAudit!=1" @click="delSoftOrdinary(item)" class="button3">删除</button>
-
-								</div>
-
+						
 								<p v-if="item.firstAudit==1">
 									<el-popover placement="top-start" title="审核提示" width="200" trigger="hover" :content="item.firstAuditRejectReason">
 										<el-button class="rj-state state-pass" slot="reference">初审通过</el-button>
@@ -70,7 +60,7 @@
 								<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
 									<h3><p v-if="item.isMatchSoft" class="ifmatchsoft1">竞</p>
 										<p v-else="" class="ifmatchsoft2">投</p>
-										{{item.softName}}
+									<p class="hp">{{item.softName}}</p>	
 									<p   v-if="item.firstAudit==1">
 
 										<span v-if="item.isHot==1" class="hot-bg">热</span>
@@ -93,6 +83,17 @@
 									</div>
 
 								</router-link>
+										<div v-if="!item.isMatchSoft" class="btn-box">
+									<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
+										<button class="button1">查看</button>
+									</router-link>
+									<router-link v-if="item.firstAudit!=1" :to="{path:'/softModify',query:{id:item.id,ParentName:'个人中心'}}">
+										<button class="button2">修改</button>
+									</router-link>
+									<button v-if="item.firstAudit!=1" @click="delSoftOrdinary(item)" class="button3">删除</button>
+
+								</div>
+
 							</div>
 						</div>
 						<div v-else="" class="el-tab-software">
@@ -110,7 +111,7 @@
 					<div class="min-height">
 						<div v-if="myDownList.dataList.length>0" class="personal-info-box" v-for="item in myDownList.dataList">
 							<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
-								<h3>{{item.softName}} <span v-if="item.isRecommend" class="jian-bg">荐</span> <span v-if="item.isHot==1" class="hot-bg">热</span><span v-if="item.isChina" class="guo-bg">国</span> <span v-if="item.isEvaluate" class="xin-bg">已评估</span> </h3>
+								<h3><p class="hp">{{item.softName}}</p> <span v-if="item.isRecommend" class="jian-bg">荐</span> <span v-if="item.isHot==1" class="hot-bg">热</span><span v-if="item.isChina" class="guo-bg">国</span> <span v-if="item.isEvaluate" class="xin-bg">已评估</span> </h3>
 								<p class="p">{{item.softIntroduce}}...</p>
 								<!--	<p class="rj-infor">
 									<span>收藏：&nbsp; 5</span>
@@ -137,7 +138,7 @@
 					<div class="min-height">
 						<div v-if="collecTionNum.dataList.length>0" class="personal-info-box" v-for="item in collecTionNum.dataList">
 							<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
-								<h3>{{item.softName}} <span v-if="item.isRecommend" class="jian-bg">荐</span> <span v-if="item.isHot==1" class="hot-bg">热</span><span v-if="item.isChina" class="guo-bg">国</span> <span v-if="item.isEvaluate" class="xin-bg">已评估</span> </h3>
+								<h3><p class="hp">{{item.softName}}</p> <span v-if="item.isRecommend" class="jian-bg">荐</span> <span v-if="item.isHot==1" class="hot-bg">热</span><span v-if="item.isChina" class="guo-bg">国</span> <span v-if="item.isEvaluate" class="xin-bg">已评估</span> </h3>
 								<p class="p">{{item.softIntroduce}}...</p>
 								<p class="rj-time">
 									{{item.createTime}}
@@ -158,7 +159,7 @@
 					<div class="min-height">
 						<div v-if="enjoyNum.dataList.length>0" class="personal-info-box" v-for="item in enjoyNum.dataList">
 							<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
-								<h3>{{item.softName}} <span v-if="item.isRecommend" class="jian-bg">荐</span> <span v-if="item.isHot==1" class="hot-bg">热</span><span v-if="item.isChina" class="guo-bg">国</span> <span v-if="item.isEvaluate" class="xin-bg">已评估</span> </h3>
+								<h3><p class="hp">{{item.softName}}</p> <span v-if="item.isRecommend" class="jian-bg">荐</span> <span v-if="item.isHot==1" class="hot-bg">热</span><span v-if="item.isChina" class="guo-bg">国</span> <span v-if="item.isEvaluate" class="xin-bg">已评估</span> </h3>
 								<p class="p">{{item.softIntroduce}}...</p>
 								<p class="rj-time">
 									{{item.createTime}}
@@ -1815,7 +1816,7 @@
 	}
 	
 	.personalInfo .ifmatchsoft2 {
-		margin: 0px 10px 0 0px;
+		margin: 5px 10px 0 0px;
 		float: left;
 		width: 26px;
 		height: 26px;

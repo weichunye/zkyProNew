@@ -955,6 +955,7 @@
 		border-radius: 2px;
 		color: #fff;
 		background: #fe7300;
+		cursor: pointer;
 	}
 	
 	.details .top-box .left-box .btn-zhishu:hover {
@@ -1103,7 +1104,12 @@
 	}
 	
 	.details .center-box .right-box dl dt span {
-		font-weight: bold;
+		display: block;
+		width: 220px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		/*不换行 */
 	}
 	
 	.details .center-box .right-box dl dd {

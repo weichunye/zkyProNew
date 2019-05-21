@@ -218,14 +218,23 @@ li{
 	background: #f8f8f0;
 }
 .personal-info-box h3{
+	overflow: hidden;
 	display: block;
 	padding: 0 10px;
-	font-size: 18px;
-	line-height: 26px;
-	color: #666;
+	
+	color: #333;
+	font-weight: normal;
+}
+.personal-info-box h3 p{
+	float: left;
+}
+.personal-info-box h3 .hp{
+	font-size: 16px;
+	line-height: 36px;
 }
 .personal-info-box h3 span{
-	margin-left: 10px;
+	float: left;
+	margin: 10px 0 0 10px;
 	padding: 0 4px;
     height: 18px;
     font-size: 12px;
@@ -252,29 +261,28 @@ li{
 .personal-info-box .p{
 	display: block;
 	padding:0 10px;
-	width: 1080px;
+	width: 1060px;
 	font-size: 14px;
 	text-indent: 20px;
-	line-height: 24px;
-	color: #666;
+	line-height: 22px;
+	color: #888;
 }
 .personal-info-box .p-box{
 	overflow: hidden;
-	margin: 10px 0 25px 0;
+	width: 100%;
 	
 }
 .personal-info-box .rj-infor{
-	margin-left: 20px;
-	padding: 0 10px;
+	margin-left: 0px;
+	padding: 5px 10px;
 	float: left;
 	width: 400px;
 	line-height: 16px;
 	color: #16a8e1;
 }
 .personal-info-box .btn-box{
-	position: absolute;
-	bottom: 5px;
-	right: 10px;
+overflow: hidden;
+float: right;
 }
 .personal-info-box .btn-box button{
 	float: left;
@@ -332,13 +340,13 @@ li{
 }
 .personal-info-box .state-zjpg{
 	position: absolute;
-	left: 30px;
+	left: 10px;
 	bottom: 10px;
-	padding: 5px 8px;
+	padding: 6px 8px;
 	font-size: 14px;
 	line-height: 14px;
 	color: #fff;
-	border-radius: 5px;
+	border-radius: 4px;
 	background: #ff9900;
 	cursor: pointer;
 }
@@ -374,7 +382,13 @@ li{
 	width: 1200px;
 	border: 1px solid #eef5f9;
 	box-sizing: border-box;
+	background: #fff;
+	border-radius: 2px;
 	
+	
+}
+.activity-box:hover{
+	box-shadow:  0 5px 10px #dedede; /*底边阴影*/ 
 }
 .activity-box dt{
 	float: left;
@@ -456,5 +470,8 @@ li{
 }
 .crumbs span{
 	color: #999;
+}
+.crumbs span:hover{
+	color: #ba7a73;
 }
    

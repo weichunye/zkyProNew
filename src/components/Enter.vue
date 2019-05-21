@@ -183,14 +183,14 @@
 
 <script>
 	/*	window.addEventListener('message',function(event) {    
-			console.log("event.origin",event.origin)
-			console.log('received response:',event.data);  
-			
-	    if(event.origin !== 'http://192.168.1.21:8090') return; //这个判断一下是不是我这个域名跳转过来的    
-	    console.log('received response:',event.data);    
-	},false); 
+					console.log("event.origin",event.origin)
+					console.log('received response:',event.data);  
+					
+			    if(event.origin !== 'http://192.168.1.21:8090') return; //这个判断一下是不是我这个域名跳转过来的    
+			    console.log('received response:',event.data);    
+			},false); 
 
-	*/
+			*/
 
 	import heade from './header.vue';
 	import foot from './footer.vue';
@@ -225,7 +225,7 @@
 			//获取热门软件
 			var params = new URLSearchParams();
 			params.append("page", 1);
-			params.append("limit", 5);
+			params.append("limit", 6);
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params)
 				.then(function(response) {
 					_this.hotList = response.data.page.list;
@@ -234,7 +234,7 @@
 			//获取推荐列表
 			var paramscom = new URLSearchParams();
 			paramscom.append("page", 1);
-			paramscom.append("limit", 6);
+			paramscom.append("limit", 8);
 			paramscom.append("isRecommend", 1);
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftListByCondition ', paramscom)
 				.then(function(response) {
@@ -332,10 +332,13 @@
 </script>
 
 <style>
-	.enter{background: #fff;}
+	.enter {
+		background: #fff;
+	}
+	
 	.enter .content {
 		overflow: visible;
-		margin: 10px auto 10px;
+		margin: 0 auto 0;
 		padding: 10px;
 		width: 1180px;
 		border-radius: 2px;
@@ -344,7 +347,7 @@
 	.enter .content .menu-left {
 		float: left;
 		width: 190px;
-		height: 350px;
+		height: 360px;
 		border-radius: 5px;
 		background: #4794e4;
 	}
@@ -449,40 +452,43 @@
 	.enter .content .recommend {
 		margin: 0 10px;
 		float: left;
-		width: 700px;
+		width: 770px;
 	}
 	
 	.enter .content .recommend h3,
 	.enter .content .hotbox h3 {
 		display: block;
 		width: 100%;
-		height: 50px;
+		height: 36px;
 		font-size: 16px;
 		color: #666666;
-		line-height: 50px;
+		line-height: 36px;
+		text-indent: 6px;
 	}
 	
 	.enter .content .recommend h3 span,
 	.enter .content .hotbox h3 span {
-		margin-right: 10px;
+		margin: 15px 20px 0 0;
 		float: right;
 		font-size: 14px;
-		color: #d2525b
+		line-height: 20px;
+		color: #d2525b;
+		font-weight: normal;
 	}
 	
 	.enter .content .recommend .con {
 		overflow: hidden;
-		width: 700px;
-		height: 296px;
+		width: 770px;
+		height: 318px;
 		/*background: #f4f4f4;*/
 		border-radius: 2px;
-		border-right: 1px dashed #dedede;
+		/*border-right: 1px dashed #dedede;*/
 	}
 	
 	.enter .content .recommend .con dl {
 		float: left;
-		padding: 10px 15px 5px 10px;
-		width: 319px;
+		padding: 5px 15px 5px 10px;
+		width: 355px;
 		/*border-right: 1px  dashed #dedede;*/
 	}
 	
@@ -498,17 +504,22 @@
 	
 	.enter .content .recommend .con dl dt p {
 		float: left;
-		width: 100%;
 		overflow: hidden;
+		margin-right: 10px;
+		max-width: 250px;
 		font-size: 14px;
 		font-weight: normal;
-		line-height: 20px;
-		color: #4598be;
+		line-height: 30px;
+		color: #5384a1;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
+		font-weight: bold;
 	}
 	
 	.enter .content .recommend .con dl dt em {
 		float: left;
-		margin-right: 10px;
+		margin: 5px 5px 0 0;
 		padding: 0 4px;
 		height: 18px;
 		font-size: 12px;
@@ -523,29 +534,28 @@
 		display: block;
 		width: 100%;
 		height: 40px;
-		font-size: 13px;
-		color: #666;
+		font-size: 14px;
+		color: #999;
 		line-height: 20px;
 		text-indent: 12px;
 	}
 	
 	.enter .content .hotbox {
 		float: left;
-		width: 290px;
+		width: 220px;
 	}
 	
 	.enter .content .hotbox .con {
-		padding-top: 15px;
+		padding-top: 0px;
 		width: 100%;
-		height: 333px;
 		/*background: #f4f4f4;*/
 		border-radius: 2px;
 	}
 	
 	.enter .content .hotbox .con dl {
-		margin: 0 10px;
-		padding: 5px 10px;
-		border-bottom: 1px dashed #dedede;
+		margin: 0;
+		padding: 2px 10px 5px;
+		/*border-bottom: 1px dashed #dedede;*/
 	}
 	
 	.enter .content .hotbox .con dl:hover p,
@@ -554,9 +564,13 @@
 	}
 	
 	.enter .content .hotbox .con dl dt p {
+		width: 200px;
 		color: #999;
 		font-size: 14px;
 		line-height: 24px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		white-space: nowrap;
 	}
 	
 	.enter .content .hotbox .con dl dt p span {
@@ -570,7 +584,7 @@
 	
 	.enter .content .hotbox .con dl dd p {
 		float: left;
-		margin-right: 10px;
+		margin-right: 22px;
 		font-size: 12px;
 		line-height: 20px;
 		color: #b1b0b0;
@@ -578,7 +592,7 @@
 	
 	.enter .game-banner {
 		position: relative;
-		margin: 10px auto;
+		margin: 15px auto 10px;
 		width: 1200px;
 		height: 158px;
 		background: url(../assets/bg/index_game_banner.jpg) no-repeat;
@@ -613,7 +627,6 @@
 	
 	.enter .classfiy {
 		position: relative;
-		margin-top: 10px;
 		padding-top: 5px;
 		width: 100%;
 		line-height: 40px;
