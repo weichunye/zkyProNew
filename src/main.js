@@ -43,12 +43,12 @@ Vue.prototype.messageOpen = function(msg, type) {
 var userJsonStr = sessionStorage.getItem('sessionData');
 var userEntity = JSON.parse(userJsonStr);
 
-if(userEntity){
+/*if(userEntity){
 Vue.prototype.token = userEntity.token;
 Vue.prototype.userInfo = userEntity.userInfo;
 Vue.prototype.userId = userEntity.userId;
 }
-
+*/
 
 console.log("userEntity", userEntity); // => tom
 //获取个人信息
@@ -68,14 +68,14 @@ console.log("userEntity", userEntity); // => tom
 	}
 )*/
 
-/*Vue.prototype.token = "0e46975e15708b1cc3364a264450ce80";
+Vue.prototype.token = "0e46975e15708b1cc3364a264450ce80";
 Vue.prototype.userId = 1;
 Vue.prototype.userName = "temporary";
 Vue.prototype.userInfo = {
 			trueName:'索隆',
 			cstnetId:'3852555555@qq.com'
 }
-*/
+
 /*Vue.prototype.token = "";
 Vue.prototype.userId = '';*/
 /*Vue.use(heyui)

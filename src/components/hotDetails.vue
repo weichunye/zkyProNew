@@ -14,7 +14,7 @@
 		<!--top-box-->
 		<div class="top-box">
 			<div class="left-box">
-
+				
 				<h2>{{softData.softName}} 	<span v-if="softData.isHot==1" class="hot-bg">热</span>
    	   					<span v-if="softData.isRecommend==1" class="jian-bg">荐</span>
    	   					<span v-if="softData.isChina==1" class="guo-bg">国</span>
@@ -60,13 +60,13 @@
 						</a>
 
 					</li>
-					<li v-if="userIdData">
-						<a @click="saveFollow(3)" href="javascript:;">
+					<li  v-if="userIdData">
+						<a @click="saveFollow(3)" href="javascript:;" >
 							下载<span>{{statInfo.downloadNum}} </span>
 						</a>
 					</li>
 					<li v-else="">
-						<a @click="saveFollow(3)" target="_blank">
+						<a  @click="saveFollow(3)"  target="_blank">
 							下载<span>{{statInfo.downloadNum}} </span>
 						</a>
 					</li>
@@ -90,7 +90,7 @@
 					<div id="oscilloGram" style="height:300px"></div>
 
 				</div>
-				<img v-if="softData.softLogo" class="softlogo" :src="softLogoUrl+softData.softLogo" />
+				<img v-if="softData.softLogo" class="softlogo" :src="softLogoUrl+softData.softLogo"/>
 
 				<!--<ul class="list-hub">
 					<li>
@@ -152,13 +152,14 @@
 			</div>
 			<!--right-box-->
 			<ul class="bottom-btn-box">
+
 				<li v-if="userIdData">
-					<a class="DownWorlds" @click="DownWorlds" href="javascript:;">
+					<a class="DownWorlds" @click="DownWorlds"  href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
 				</li>
-				<li v-else="" @click="ifLogin">
+				<li v-else=""  @click="ifLogin">
 					<a class="DownWorlds" href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
@@ -168,16 +169,18 @@
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>立即运行</p>
 				</li>
-				<li v-else="" @click="ifLogin">
+					<li v-else="" @click="ifLogin">
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>立即运行</p>
 				</li>
-				<li>
+				<li >
 					<a target="_blank" :href="newSoftUrl">
 						<img src="../assets/icon/float_nav_4.png" alt="" />
 						<p>查看源码</p>
 					</a>
 				</li>
+					
+
 			</ul>
 
 		</div>
@@ -226,7 +229,7 @@
 	import baseUrl from '../../config/index.js'
 	import Cookies from 'js-cookie';
 	export default {
-		name: 'detailsPage',
+		name: 'hotDetails',
 		components: {
 			foot,
 			searchTop
@@ -254,9 +257,9 @@
 				sharShow: false,
 				activityIngId: '',
 				DownWordUrl: '',
-				userIdData: '',
+				userIdData:'',
 				indexeCharts: false,
-				softLogoUrl: '',
+				softLogoUrl:'',
 				newSoftUrl: '',
 				config: {
 
@@ -344,9 +347,9 @@
 
 			var _this = this;
 			_this.softId = this.$route.query.id;
-			_this.userIdData = this.userId;
+			_this.userIdData=this.userId;
 			/*console.log("baseUrl",baseUrl)*/
-			_this.softLogoUrl = baseUrl.baseUrlImg
+			_this.softLogoUrl=baseUrl.baseUrlImg
 			_this.parentNamenew = _this.$route.query.ParentName == "首页" ? '' : _this.$route.query.ParentName;
 			_this.activityIng()
 
@@ -437,22 +440,23 @@
 			//收藏下载操作
 			saveFollow: function(type) {
 				var _this = this;
+				
+					if(!_this.userId) {
+						_this.$confirm('请登录', '提示', {
+							confirmButtonText: '确定',
+							cancelButtonText: '取消',
+							type: 'warning'
+						}).then(() => {
+							var newUrl = baseUrl.baseUrl + '/web/auth/login';
+							window.open(newUrl)
 
-				if(!_this.userId) {
-					_this.$confirm('请登录', '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						var newUrl = baseUrl.baseUrl + '/web/auth/login';
-						window.open(newUrl)
+						}).catch(() => {
 
-					}).catch(() => {
+						});
+						return false
+					}
 
-					});
-					return false
-				}
-
+				
 				_this.axios.defaults.headers.common['token'] = this.token;
 				var softFollowHistory = {
 					createTime: "",
@@ -460,36 +464,36 @@
 					operationType: type,
 					softId: _this.softId,
 					userId: this.userId,
-
+				
 				}
 
 				_this.axios.post(baseUrl.baseUrl + '/web/user/saveFollow', softFollowHistory)
 					.then(function(response) {
 						console.log("response.data.code", response.data.code)
 						//验证token是否过期
-						if(response.data.code == 401) {
-							_this.$confirm(response.data.msg, '提示', {
-								confirmButtonText: '确定',
-								cancelButtonText: '取消',
-								type: 'warning'
-							}).then(() => {
-								sessionStorage.clear()
-								console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
-								var newUrl = baseUrl.baseUrl + '/web/auth/login';
-								window.open(newUrl)
-								return false;
+						if(response.data.code==401){
+					_this.$confirm(response.data.msg, '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						sessionStorage.clear()
+				console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+						var newUrl = baseUrl.baseUrl + '/web/auth/login';
+						window.open(newUrl)
+						return false;
 
-							}).catch(() => {
+					}).catch(() => {
 
-							});
-						} else if(response.data.code == 0) {
+					});
+				}else if(response.data.code == 0) {
 							if(type == 1) {
 
 								_this.statInfo.collectionNum = _this.statInfo.collectionNum + 1;
 								_this.$alert(
-									response.data.msg, '提示信息', {
-										confirmButtonText: '确定',
-									});
+								response.data.msg, '提示信息', {
+								confirmButtonText: '确定',
+							});
 
 							}
 							if(type == 2 && !_this.sharShow) {
@@ -507,9 +511,9 @@
 							}
 							if(type == 3) {
 								_this.statInfo.downloadNum = _this.statInfo.downloadNum + 1;
-
-								var tempwindow = window.open('_blank'); // 先打开页面
-								tempwindow.location = _this.newSoftUrl; // 后更改页面地址
+								
+							var tempwindow=window.open('_blank'); // 先打开页面
+							tempwindow.location=_this.newSoftUrl; // 后更改页面地址
 								/*var openSoftUrl=_this.newSoftUrl.substr(0,6)
 								if(openSoftUrl!='https:'&&openSoftUrl!='http:/'){
 									_this.newSoftUrl='http://'+_this.newSoftUrl
@@ -519,12 +523,14 @@
 								/*'http://'*/
 							}
 
-						} else {
+						}else{
 							_this.$alert(
 								response.data.msg, '提示信息', {
-									confirmButtonText: '确定',
-								});
+								confirmButtonText: '确定',
+							});
 						}
+						
+
 
 					})
 					.catch(function(error) {
@@ -554,13 +560,13 @@
 				var _this = this;
 				_this.softId = newId;
 				_this.$router.push({
-					path: '/hotDetails',
+					path: '/details',
 					query: {
 						id: _this.softId,
 						ParentName: '首页'
 					}
 				});
-				/*	_this.getSoftInfo()*/
+			/*	_this.getSoftInfo()*/
 
 			},
 			dialogPromptTrue: function() {
@@ -572,10 +578,10 @@
 				var _this = this;
 				_this.axios.get(baseUrl.baseUrl + 'web/activity/config/2')
 					.then(function(response) {
-						if(response.data.config) {
+						if(response.data.config){
 							_this.activityIngId = response.data.config.paramValue;
 						}
-
+						
 						console.log("	_this.activityIngId", _this.activityIngId)
 
 					})
@@ -619,9 +625,9 @@
 
 					})
 			},
-			ifLogin: function() {
+				ifLogin:function(){
 				var _this = this;
-				if(!this.userId) {
+					if(!this.userId) {
 					_this.$confirm('请登录', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
@@ -633,8 +639,9 @@
 					}).catch(() => {
 
 					});
-				}
+				} 
 
+				
 			},
 			//下载资料文档
 
@@ -713,8 +720,10 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-							console.log("_this.DownWordUrl", _this.DownWordUrl)
-							window.location = _this.DownWordUrl; // 后更改页面地址
+							console.log("_this.DownWordUrl",_this.DownWordUrl)
+							window.location=_this.DownWordUrl; // 后更改页面地址
+								
+						
 
 						} else {
 							_this.$alert(response.data.msg, '提示信息', {
@@ -735,10 +744,8 @@
 	}
 	
 	.details .top-box {
-		overflow: hidden;
 		margin: 10px auto;
 		width: 1200px;
-		background: #fff;
 	}
 	/*
 	.details .el-dialog {
@@ -1065,15 +1072,14 @@
 		line-height: 30px;
 		font-weight: normal;
 	}
-	
-	.details .softlogo {
+	.details .softlogo{
 		position: absolute;
 		right: 20px;
 		top: 60px;
 		width: 100px;
 		height: auto;
+		
 	}
-	
 	.details .center-box .right-box h3 span {
 		margin-right: 10px;
 		float: right;

@@ -17,7 +17,7 @@
   			<p>
 				
 				<router-link  v-for="secItem in item.sonList" :to="{path:'/list',query:{categoryId:secItem.id,categoryName:secItem.ctyName,ParentName:'全部分类'}}">
-				<span >{{secItem.ctyName}} &nbsp;&nbsp;|</span>
+				<span >{{secItem.ctyName}}</span>
 				</router-link>
   			
   				
@@ -153,11 +153,11 @@ export default {
 	.allClassify .content .left-box li{
 		padding: 5px 10px 10px;
 		width: 940px;
-		border-bottom: 1px solid #dedede;
+		border-bottom: 1px dashed #dedede;
 	}
 	.allClassify .content .left-box li h4{
 		width: 100%;
-		font-size: 16px;
+		font-size: 18px;
 		color: #666;
 		line-height: 46px;
 		font-weight: normal;
@@ -169,14 +169,14 @@ export default {
 	.allClassify .content .left-box li p span{
 		display: inline-block;
 		float: left;
-		margin-right: 20px;
+		margin-right: 25px;
 		color: #999;
 		font-size: 14px;
 		line-height: 26px;
 		cursor: pointer;
 	}
 	.allClassify .content .left-box li p span:hover{
-		color: #b81027;
+		color: #ba7a73;
 	}
 	.allClassify .content .right-box{
 		float: right;
@@ -251,7 +251,7 @@ export default {
 	
 	.allClassify dl:hover span,
 	.allClassify dl:hover dd {
-		color: #e33214;
+		color: #ba7a73;
 	}
 	
 	.allClassify dl dt {

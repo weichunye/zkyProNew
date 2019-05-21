@@ -6,6 +6,7 @@ import heade from '@/components/header'
 import footBottm from '@/components/footer'
 import searchTop from '@/components/searchTop'
 import detailsPage from '@/components/details'
+import hotDetails from '@/components/hotDetails'
 import allClassify from '@/components/allClassify'
 import list from '@/components/list'
 import personalInfo from '@/components/personalInfo'
@@ -73,7 +74,12 @@ export default new Router({
     meta:{title:'活动列表'},
     component:activityList
     }, 
-     
+      {
+    path:'/hotDetails',
+    name:'热门详情',
+    meta:{title:'热门详情'},
+    component:hotDetails
+    }, 
      {
     path:'/details',
     name:'软件详情页',

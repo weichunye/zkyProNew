@@ -13,7 +13,7 @@
 		</div>
 		<!--//content-->
 		<div class="content">
-			<el-tabs type="border-card" @tab-click="handleClick">
+			<el-tabs  @tab-click="handleClick">
 				<el-tab-pane label="我的软件">
 
 					<div class="min-height">
@@ -59,25 +59,26 @@
 							</p>
 							</el-popover>
 					
-						<!--	<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
+							<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
 							</p>
 							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
 								参赛作品请专家评估
-							</p>-->
+							</p>
 							<!--<p v-if="item.isExpertEvaluate==0" @click="getText(item.softName,item.softUrl,item.id)"  class=" state-zjpg">请专家评估
 							</p>-->
 							</span>
 								<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
 									<h3><p v-if="item.isMatchSoft" class="ifmatchsoft1">竞</p>
 										<p v-else="" class="ifmatchsoft2">投</p>
-										{{item.softName}} </h3>
-									<div v-if="item.firstAudit==1">
+										{{item.softName}}
+									<p   v-if="item.firstAudit==1">
 
 										<span v-if="item.isHot==1" class="hot-bg">热</span>
 										<span v-if="item.isRecommend==1" class="jian-bg">荐</span>
 										<span v-if="item.isChina==1" class="guo-bg">国</span>
 										<!--<span v-if="item.isEvaluate==1" class="xin-bg">已评估</span>-->
-									</div>
+									</p>
+									 </h3>
 									<p class="p">{{item.softIntroduce}}</p>
 									<div class="p-box">
 										<p v-if="item.firstAudit==1" class="rj-infor">
@@ -258,42 +259,42 @@
 
 		<el-dialog title="参赛信息" custom-class="activityInfo" :visible.sync="ActivityInfoPop" :close-on-click-modal="false" :close-on-press-escape="false">
 			<ul v-if="singInfo" class="acInfo-box">
-				<li>
+				<li class="libor">
 					<h4>软件名称：</h4>
 					<p>{{singInfo.softName}}</p>
 				</li>
-				<li>
+					<li class="libor">
 					<h4>软件版本：</h4>
 					<p>{{singInfo.softVersion}}</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>开源类型：</h4>
 					<p>{{singInfo.opensourceType}}</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>应用领域：</h4>
 					<p>{{singInfo.applicationField}}</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>软件分类：</h4>
 					<p>{{singInfo.softCategoryName}}</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>编程语言：</h4>
 					<p>{{singInfo.programmingLanguage}}</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>用户接口：</h4>
 					<p>{{singInfo.userInterface}}</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>代码地址：</h4>
 
 					<p>
 						<a target="_blank" :href="singInfo.softUrl">{{singInfo.softUrl}}</a>
 					</p>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>操作平台：</h4>
 					<p>{{singInfo.operatingSystem}}</p>
 				</li>
@@ -311,7 +312,7 @@
 					</el-table>
 
 				</li>
-				<li>
+				<li class="libor">
 					<h4>参赛人员：</h4>
 					<span class="ifniming">是否在发布时匿名：{{singInfo.isShowDeveloperName==0?'是':'否'}}</span>
 					<el-table :data="singuserList" border style="width: 100%;">
@@ -329,11 +330,11 @@
 
 					</el-table>
 				</li>
-				<li>
+				<li class="libor">
 					<h4>作品摘要：</h4>
 					<p class="intron" v-html="singInfo.softIntroduce"></p>
 				</li>
-				<li>
+				<li class="libor">
 					<table class="wordlist" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<th width="131">分析设计文档</th>
@@ -362,7 +363,7 @@
 					</table>
 
 				</li>
-				<li>
+				<li class="libor">
 					<div class="imglist">
 						<img v-if="softDocObg.softImgOne" :src="softImgOneUrl" />
 						<img v-if="softDocObg.softImgTwo" :src="softImgTwoUrl" />
@@ -1454,7 +1455,7 @@
 		padding-top: 0px;
 	}
 	
-	.activityInfo .acInfo-box li {
+	.activityInfo .acInfo-box .libor {
 		overflow: hidden;
 		width: 100%;
 		line-height: 40px;
@@ -1627,11 +1628,17 @@
 		line-height: 30px;
 	}
 	
-	.personalInfo .content {}
+	.personalInfo .content {
+		margin-top: 10px;
+		background: #fff;
+		padding: 0 10px;
+		width: 1180px;
+	}
 	
 	.personalInfo .content .min-height {
 		margin-top: 10px;
 		min-height: 400px;
+		
 	}
 	
 	.personalInfo .content .min-height table td {
@@ -1642,7 +1649,7 @@
 		padding: 15px 0;
 		margin: 10px 0;
 		width: 100%;
-		background: #fff;
+	
 	}
 	
 	.personalInfo .top-box p {
@@ -1808,7 +1815,7 @@
 	}
 	
 	.personalInfo .ifmatchsoft2 {
-		margin: 5px 10px 0 0px;
+		margin: 0px 10px 0 0px;
 		float: left;
 		width: 26px;
 		height: 26px;

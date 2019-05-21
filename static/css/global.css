@@ -62,6 +62,7 @@ li{
 .content{
 	overflow: hidden;
 	margin: 0 auto;
+	padding: 0;
 	width: 1200px;
 }
 .content .el-tabs--border-card{
@@ -91,7 +92,7 @@ li{
 	/*height: 400px;*/
 }
 .el-tab-software{
-	min-height: 600px;
+	/*min-height: 400px;*/
 }
 .empty-tit{
 	display: block;
@@ -110,6 +111,14 @@ li{
 	border: 1px dashed #dedede;
 	background: #fff;
 }
+.software-box:hover{
+	border: 1px dashed #ba7a73;
+	box-shadow:  0 5px 10px #dedede; /*底边阴影*/ 
+	
+}
+.software-box:hover dd ,.software-box:hover dt h3,.software-box:hover dt p{
+	color: #ba7a73;
+}
 .software-box dd{
 	display: block;
 	margin-top: 3px;
@@ -119,6 +128,7 @@ li{
 	line-height: 24px;
 	text-indent: 20px;
 }
+
 
 .software-box dt{
 	position: relative;
@@ -198,6 +208,9 @@ li{
 	width: 100%;
 	border-bottom: 1px dashed #dedede;
 }
+.personal-info-box:hover h3,.personal-info-box:hover .p{
+	color: #ba7a73;
+},
 .personal-info-bg1{
 	background: #f4f9f3;
 }
@@ -208,7 +221,7 @@ li{
 	display: block;
 	padding: 0 10px;
 	font-size: 18px;
-	line-height: 40px;
+	line-height: 26px;
 	color: #666;
 }
 .personal-info-box h3 span{
@@ -356,10 +369,10 @@ li{
 .activity-box{
 	overflow: hidden;
 	display: block;
-	margin: 10px auto 0;
+	margin: 0px auto 10px;
 	padding: 10px 20px;
 	width: 1200px;
-	border: 1px solid #dedede;
+	border: 1px solid #eef5f9;
 	box-sizing: border-box;
 	
 }

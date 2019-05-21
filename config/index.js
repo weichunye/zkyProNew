@@ -7,10 +7,10 @@ const path = require('path')
 const baseUrlImg = "http://39.105.190.39:8080/rossc/upload/"; */
 /*const baseUrl = "http://localhost:8080/rossc/";
 const baseUrlImg = "http://localhost:8080/rossc/upload/";*/
-/*const baseUrl = "http://192.168.1.200:8080/rossc/";
-const baseUrlImg = "http://192.168.1.200:8080/rossc/upload/";*/
- const baseUrl = "http://cstsai.cstcloud.cn/rossc/";
-const baseUrlImg = " http://cstsai.cstcloud.cn/rossc/upload/"; 
+const baseUrl = "http://192.168.1.200:8080/rossc/";
+const baseUrlImg = "http://192.168.1.200:8080/rossc/upload/";
+/* const baseUrl = "http://cstsai.cstcloud.cn/rossc/";
+const baseUrlImg = " http://cstsai.cstcloud.cn/rossc/upload/"; */
 
 
 module.exports = {

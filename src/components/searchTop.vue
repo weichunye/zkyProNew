@@ -18,7 +18,7 @@
 
 			</div>
 		</div>
-		<div class="top-box">
+		<div class="searchtop-box">
 			<div class="con">
 				<router-link to="/">
 					<img class="logo" src="../assets/img/search_logo.png" alt="logo" />
@@ -262,25 +262,25 @@
 				<img src="../assets/icon/float_nav_1.png" alt="" />
 				<p>投递软件</p>
 			</li>
-			<li v-if="userIdData">
-				<a class="DownWorlds" @click="DownWorlds" href="javascript:;">
+			<li v-if="userIdData&&ifDownWordUrl">
+				<a class="DownWorlds"  :href="DownWordUrl">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
 			</li>
-			<li v-else="" @click="ifLogin">
-				<a class="DownWorlds" target="_blank" href="javascript:;">
+			<li v-else="" @click="ifLogin"  :class="ifDownWordUrl?'':'libg'">
+				<a class="DownWorlds"  href="javascript:;">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
 			</li>
 			<li v-if="userIdData">
 				<img src="../assets/icon/float_nav_3.png" alt="" />
-				<p>模拟运行</p>
+				<p>立即运行</p>
 			</li>
 			<li v-else="" @click="ifLogin">
 				<img src="../assets/icon/float_nav_3.png" alt="" />
-				<p>模拟运行</p>
+				<p>立即运行</p>
 			</li>
 			<li >
 				<a target="_blank" :href="newSoftUrl">
@@ -449,6 +449,7 @@
 				},
 				secondDomains: [],
 				DownWordUrl: '',
+				ifDownWordUrl:'',
 				feedbackOption: [], //反馈选项
 
 			}
@@ -489,12 +490,22 @@
 				$(".float-nav").css({
 					"left": L + "px"
 				});
-			} else {
+			} else if(this.$route.path == '/hotDetails'){
+				
+				$(".float-nav").show();
+				var W = $(window).width() - 1200;
+				var L = 1200 + W / 2
+				$(".float-nav").css({
+					"left": L + "px"
+				});
+			
+			}else {
 				$(".float-nav").hide();
 			}
 
 			_this.getoSystemOption()
 			_this.getFeedbackOption()
+			_this.DownWorlds()
 
 		},
 		methods: {
@@ -516,6 +527,8 @@
 					}).then(() => {
 						var newUrl = baseUrl.baseUrl + '/web/auth/login';
 						window.open(newUrl)
+						
+						
 
 					}).catch(() => {
 
@@ -573,14 +586,18 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
+							_this.ifDownWordUrl=response.data.packageUrl
+/*
+						window.location=_this.DownWordUrl; // 后更改页面地址*/
 
-						window.location=_this.DownWordUrl; // 后更改页面地址
-
-						} else {
-							_this.$alert(response.data.msg, '提示信息', {
+						} else {/*
+							if(type==1){
+								_this.$alert(response.data.msg, '提示信息', {
 								confirmButtonText: '确定',
 							});
-						}
+							}
+							
+						*/}
 
 					})
 			},
@@ -1065,10 +1082,11 @@
 		width: 100%;
 	}
 	
-	.searchTop .top-box {
+	.searchTop .searchtop-box {
+		padding: 10px 0;
 		width: 100%;
 		height: 110px;
-		background: url(../assets/bg/search_top_bg.png) left bottom repeat-x;
+		background: url(../assets/bg/search_top_bg.png) left bottom repeat-x ;
 	}
 	
 	.searchTop .musttit {
@@ -1091,41 +1109,41 @@
 		margin-bottom: 20px;
 	}
 	
-	.searchTop .top-box .con {
+	.searchTop .searchtop-box .con {
 		overflow: hidden;
 		margin: 0 auto;
 		width: 1200px;
 	}
 	
-	.searchTop .top-box .con .logo {
+	.searchTop .searchtop-box .con .logo {
 		float: left;
 		margin-top: 10px;
 		height: 90px;
 		width: auto;
 	}
 	
-	.searchTop .top-box .con .search-box {
+	.searchTop .searchtop-box .con .search-box {
 		overflow: hidden;
 		float: left;
 		margin: 40px 0 0 50px;
 		width: 600px;
 	}
 	
-	.searchTop .top-box .con .search-box .classify {
+	.searchTop .searchtop-box .con .search-box .classify {
 		float: left;
 		width: 120px;
 		height: 34px;
 		border: 1px solid #dedede;
 	}
 	
-	.searchTop .top-box .con .search-box .classify .el-input__inner {
+	.searchTop .searchtop-box .con .search-box .classify .el-input__inner {
 		width: 120px;
 		height: 34px;
 		line-height: 34px;
 		border: none;
 	}
 	
-	.searchTop .top-box .con .search-box .input {
+	.searchTop .searchtop-box .con .search-box .input {
 		float: left;
 		margin-left: 10px;
 		width: 340px;
@@ -1134,14 +1152,14 @@
 		border: 1px solid #dedede;
 	}
 	
-	.searchTop .top-box .con .search-box .input .el-input__inner {
+	.searchTop .searchtop-box .con .search-box .input .el-input__inner {
 		width: 340px;
 		height: 34px;
 		line-height: 34px;
 		border: none;
 	}
 	
-	.searchTop .top-box .con .search-box button {
+	.searchTop .searchtop-box .con .search-box button {
 		float: left;
 		width: 100px;
 		height: 36px;
@@ -1151,7 +1169,7 @@
 		background: #e26556;
 	}
 	
-	.searchTop .top-box .btn {
+	.searchTop .searchtop-box .btn {
 		display: block;
 		float: right;
 		margin-top: 35px;
@@ -1221,6 +1239,9 @@
 		border-bottom: 1px solid #a6ceec;
 		background: #2185d0;
 		cursor: pointer;
+	}
+	.float-nav .libg{
+		background: #979899;
 	}
 	
 	.float-nav li:hover {
