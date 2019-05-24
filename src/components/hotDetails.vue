@@ -1,7 +1,7 @@
 <template>
 	<div class="details">
 
-		<searchTop :newSoftUrl="newSoftUrl"></searchTop>
+		<searchTop :newSoftUrl="newSoftUrl" :runUrl="runUrl"></searchTop>
 		<!--面包屑-->
 		<div class="crumbs">
 			<router-link :to="{path:'/'}"><span>首页</span></router-link>
@@ -14,7 +14,7 @@
 		<!--top-box-->
 		<div class="top-box">
 			<div class="left-box">
-				
+
 				<h2>{{softData.softName}} 	<span v-if="softData.isHot==1" class="hot-bg">热</span>
    	   					<span v-if="softData.isRecommend==1" class="jian-bg">荐</span>
    	   					<span v-if="softData.isChina==1" class="guo-bg">国</span>
@@ -60,13 +60,13 @@
 						</a>
 
 					</li>
-					<li  v-if="userIdData">
-						<a @click="saveFollow(3)" href="javascript:;" >
+					<li v-if="userIdData">
+						<a @click="saveFollow(3)" href="javascript:;">
 							下载<span>{{statInfo.downloadNum}} </span>
 						</a>
 					</li>
 					<li v-else="">
-						<a  @click="saveFollow(3)"  target="_blank">
+						<a @click="saveFollow(3)" target="_blank">
 							下载<span>{{statInfo.downloadNum}} </span>
 						</a>
 					</li>
@@ -90,7 +90,7 @@
 					<div id="oscilloGram" style="height:300px"></div>
 
 				</div>
-				<img v-if="softData.softLogo" class="softlogo" :src="softLogoUrl+softData.softLogo"/>
+				<img v-if="softData.softLogo" class="softlogo" :src="softLogoUrl+softData.softLogo" />
 
 				<!--<ul class="list-hub">
 					<li>
@@ -152,34 +152,32 @@
 			</div>
 			<!--right-box-->
 			<ul class="bottom-btn-box">
-
-				<li v-if="userIdData">
-					<a class="DownWorlds" @click="DownWorlds"  href="javascript:;">
+				<li v-if="userIdData&&ifDownWordUrl">
+					<a class="DownWorlds" @click="DownWorlds" href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
 				</li>
-				<li v-else=""  @click="ifLogin">
+				<li v-if="!userIdData&&ifDownWordUrl" @click="ifLogin">
 					<a class="DownWorlds" href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
 				</li>
-				<li v-if="userIdData">
+				<li v-if="userIdData&&runUrl" @click="runThisSoft">
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>立即运行</p>
 				</li>
-					<li v-else="" @click="ifLogin">
+				<li v-if="!userIdData&&runUrl" @click="ifLogin">
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>立即运行</p>
 				</li>
-				<li >
+				<li>
 					<a target="_blank" :href="newSoftUrl">
 						<img src="../assets/icon/float_nav_4.png" alt="" />
 						<p>查看源码</p>
 					</a>
 				</li>
-					
 
 			</ul>
 
@@ -257,10 +255,12 @@
 				sharShow: false,
 				activityIngId: '',
 				DownWordUrl: '',
-				userIdData:'',
+				userIdData: '',
 				indexeCharts: false,
-				softLogoUrl:'',
+				softLogoUrl: '',
+				ifDownWordUrl:'',
 				newSoftUrl: '',
+				runUrl: '',
 				config: {
 
 					url: window.location.href,
@@ -347,9 +347,9 @@
 
 			var _this = this;
 			_this.softId = this.$route.query.id;
-			_this.userIdData=this.userId;
+			_this.userIdData = this.userId;
 			/*console.log("baseUrl",baseUrl)*/
-			_this.softLogoUrl=baseUrl.baseUrlImg
+			_this.softLogoUrl = baseUrl.baseUrlImg
 			_this.parentNamenew = _this.$route.query.ParentName == "首页" ? '' : _this.$route.query.ParentName;
 			_this.activityIng()
 
@@ -403,8 +403,12 @@
 						_this.softData.createTime = _this.softData.createTime.substring(0, 10)
 						_this.categoryInfo = response.data.categoryInfo;
 						_this.newSoftUrl = _this.softData.softUrl.split(",")[0]
-
-						_this.option.series[0].data[0].value = [_this.statInfo.collectionNum, _this.statInfo.enjoyNum, _this.statInfo.downloadNum, _this.statInfo.browseNum, _this.statInfo.runNum]
+						var collectionNumNew=_this.statInfo.collectionNum>100?100:_this.statInfo.collectionNum;
+						var enjoyNumNew=_this.statInfo.enjoyNum>100?100:_this.statInfo.enjoyNum;
+						var downloadNumNew=_this.statInfo.downloadNum>100?100:_this.statInfo.downloadNum;
+						var browseNumNew=_this.statInfo.browseNum>100?100:_this.statInfo.browseNum;
+						var runNumNew=_this.statInfo.runNum>100?100:_this.statInfo.runNum;
+						_this.option.series[0].data[0].value = [collectionNumNew, enjoyNumNew, downloadNumNew, browseNumNew, runNumNew]
 						console.log("_this[option].series[0].data[0]", _this.option.series[0].data[0].value)
 						_this.myChart.setOption(_this.option);
 
@@ -440,23 +444,22 @@
 			//收藏下载操作
 			saveFollow: function(type) {
 				var _this = this;
-				
-					if(!_this.userId) {
-						_this.$confirm('请登录', '提示', {
-							confirmButtonText: '确定',
-							cancelButtonText: '取消',
-							type: 'warning'
-						}).then(() => {
-							var newUrl = baseUrl.baseUrl + '/web/auth/login';
-							window.open(newUrl)
 
-						}).catch(() => {
+				if(!_this.userId) {
+					_this.$confirm('请登录', '提示', {
+						confirmButtonText: '确定',
+						cancelButtonText: '取消',
+						type: 'warning'
+					}).then(() => {
+						var newUrl = baseUrl.baseUrl + '/web/auth/login';
+						window.open(newUrl)
 
-						});
-						return false
-					}
+					}).catch(() => {
 
-				
+					});
+					return false
+				}
+
 				_this.axios.defaults.headers.common['token'] = this.token;
 				var softFollowHistory = {
 					createTime: "",
@@ -464,36 +467,36 @@
 					operationType: type,
 					softId: _this.softId,
 					userId: this.userId,
-				
+
 				}
 
 				_this.axios.post(baseUrl.baseUrl + '/web/user/saveFollow', softFollowHistory)
 					.then(function(response) {
 						console.log("response.data.code", response.data.code)
 						//验证token是否过期
-						if(response.data.code==401){
-					_this.$confirm(response.data.msg, '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						sessionStorage.clear()
-				console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
-						var newUrl = baseUrl.baseUrl + '/web/auth/login';
-						window.open(newUrl)
-						return false;
+						if(response.data.code == 401) {
+							_this.$confirm(response.data.msg, '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								type: 'warning'
+							}).then(() => {
+								sessionStorage.clear()
+								console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+								var newUrl = baseUrl.baseUrl + '/web/auth/login';
+								window.open(newUrl)
+								return false;
 
-					}).catch(() => {
+							}).catch(() => {
 
-					});
-				}else if(response.data.code == 0) {
+							});
+						} else if(response.data.code == 0) {
 							if(type == 1) {
 
 								_this.statInfo.collectionNum = _this.statInfo.collectionNum + 1;
 								_this.$alert(
-								response.data.msg, '提示信息', {
-								confirmButtonText: '确定',
-							});
+									response.data.msg, '提示信息', {
+										confirmButtonText: '确定',
+									});
 
 							}
 							if(type == 2 && !_this.sharShow) {
@@ -511,9 +514,9 @@
 							}
 							if(type == 3) {
 								_this.statInfo.downloadNum = _this.statInfo.downloadNum + 1;
-								
-							var tempwindow=window.open('_blank'); // 先打开页面
-							tempwindow.location=_this.newSoftUrl; // 后更改页面地址
+
+								var tempwindow = window.open('_blank'); // 先打开页面
+								tempwindow.location = _this.newSoftUrl; // 后更改页面地址
 								/*var openSoftUrl=_this.newSoftUrl.substr(0,6)
 								if(openSoftUrl!='https:'&&openSoftUrl!='http:/'){
 									_this.newSoftUrl='http://'+_this.newSoftUrl
@@ -523,14 +526,12 @@
 								/*'http://'*/
 							}
 
-						}else{
+						} else {
 							_this.$alert(
 								response.data.msg, '提示信息', {
-								confirmButtonText: '确定',
-							});
+									confirmButtonText: '确定',
+								});
 						}
-						
-
 
 					})
 					.catch(function(error) {
@@ -540,6 +541,10 @@
 				console.log("this.userId", this.userId)
 				console.log("this.userId", this.token)
 
+			},
+			//立即运行
+			runThisSoft:function(){
+				
 			},
 
 			//添加自定義標簽
@@ -566,7 +571,7 @@
 						ParentName: '首页'
 					}
 				});
-			/*	_this.getSoftInfo()*/
+				/*	_this.getSoftInfo()*/
 
 			},
 			dialogPromptTrue: function() {
@@ -578,10 +583,10 @@
 				var _this = this;
 				_this.axios.get(baseUrl.baseUrl + 'web/activity/config/2')
 					.then(function(response) {
-						if(response.data.config){
+						if(response.data.config) {
 							_this.activityIngId = response.data.config.paramValue;
 						}
-						
+
 						console.log("	_this.activityIngId", _this.activityIngId)
 
 					})
@@ -625,9 +630,9 @@
 
 					})
 			},
-				ifLogin:function(){
+			ifLogin: function() {
 				var _this = this;
-					if(!this.userId) {
+				if(!this.userId) {
 					_this.$confirm('请登录', '提示', {
 						confirmButtonText: '确定',
 						cancelButtonText: '取消',
@@ -639,9 +644,8 @@
 					}).catch(() => {
 
 					});
-				} 
+				}
 
-				
 			},
 			//下载资料文档
 
@@ -720,16 +724,9 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-							console.log("_this.DownWordUrl",_this.DownWordUrl)
-							window.location=_this.DownWordUrl; // 后更改页面地址
-								
-						
+							_this.ifDownWordUrl=response.data.packageUrl
 
-						} else {
-							_this.$alert(response.data.msg, '提示信息', {
-								confirmButtonText: '确定',
-							});
-						}
+						} 
 
 					})
 			},
@@ -1072,14 +1069,15 @@
 		line-height: 30px;
 		font-weight: normal;
 	}
-	.details .softlogo{
+	
+	.details .softlogo {
 		position: absolute;
 		right: 20px;
 		top: 60px;
 		width: 100px;
 		height: auto;
-		
 	}
+	
 	.details .center-box .right-box h3 span {
 		margin-right: 10px;
 		float: right;
@@ -1133,16 +1131,17 @@
 		background: #fff;
 	}
 	
-	.details .bottom-btn-box {
-		margin: 30px 0 50px 180px;
+		.details .bottom-btn-box {
+		margin: 30px 0 50px 100px;
 		overflow: hidden;
-		width: 900px;
+		text-align: center;
+		width: 800px;
 	}
 	
 	.details .bottom-btn-box li {
 		overflow: hidden;
-		float: left;
-		margin-left: 40px;
+		display: inline-block;
+		margin-right: 10px;
 		width: 150px;
 		height: 48px;
 		line-height: 48px;

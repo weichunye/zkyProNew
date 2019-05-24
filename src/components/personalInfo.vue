@@ -5,7 +5,7 @@
 		<!--content-->
 		<div class="content">
 			<div class="top-box">
-				<p>昵称：{{userInfo.trueName}}00000</p>
+				<p>昵称：{{userInfo.trueName}}</p>
 				<p>邮箱：{{userInfo.cstnetId}}</p>
 
 			</div>
@@ -49,11 +49,11 @@
 							</p>
 							</el-popover>
 					
-							<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
+					<!--		<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
 							</p>
 							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
 								参赛作品请专家评估
-							</p>
+							</p>-->
 							<!--<p v-if="item.isExpertEvaluate==0" @click="getText(item.softName,item.softUrl,item.id)"  class=" state-zjpg">请专家评估
 							</p>-->
 							</span>

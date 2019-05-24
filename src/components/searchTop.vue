@@ -33,7 +33,7 @@
 					</select>
 					<div class="input">
 
-						<el-input @keyup.enter.native="toSearchList" v-model="searchArr.keyword" auto-complete="off"></el-input>
+						<el-input @keyup.enter.native="toSearchList" v-model.trim="searchArr.keyword" auto-complete="off"></el-input>
 
 					</div>
 
@@ -268,17 +268,17 @@
 					<p>文档下载</p>
 				</a>
 			</li>
-			<li v-else="" @click="ifLogin"  :class="ifDownWordUrl?'':'libg'">
+			<li v-if="!userIdData&&ifDownWordUrl" @click="ifLogin" >
 				<a class="DownWorlds"  href="javascript:;">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
 			</li>
-			<li v-if="userIdData">
+			<li v-if="userIdData&&runUrl"  @click="runThisSoft">
 				<img src="../assets/icon/float_nav_3.png" alt="" />
 				<p>立即运行</p>
 			</li>
-			<li v-else="" @click="ifLogin">
+			<li v-if="!userIdData&&runUrl" @click="ifLogin">
 				<img src="../assets/icon/float_nav_3.png" alt="" />
 				<p>立即运行</p>
 			</li>
@@ -309,6 +309,7 @@
 		},
 		props: {
 			newSoftUrl: '',
+			runUrl:''
 
 		},
 
@@ -466,7 +467,6 @@
 			}
 
 			_this.getAllCategory();
-			_this.searchArr.keyword = _this.$route.query.keyword;
 			_this.searchArr.itemType = _this.$route.query.itemType ? _this.$route.query.itemType : 1;
 			if(_this.searchArr.itemType == 1) {
 				_this.searchArr.itemType = '软件'
@@ -481,6 +481,7 @@
 				_this.searchArr.itemType = '作者'
 
 			}
+			_this.searchArr.keyword=_this.$route.query.keyword
 
 			_this.getListOption()
 			if(this.$route.path == '/details') {
@@ -575,8 +576,77 @@
 				}
 
 			},
+			runThisSoft:function(){
+				var _this = this;
+				var params = new URLSearchParams();
+				params.append("softId", this.$route.query.id);
+				params.append("userId", this.userId);
+				_this.axios.defaults.headers.common['token'] = this.token;
+				_this.axios.post(baseUrl.baseUrl + '/web/soft/clickSoftInfoRunTime', params)
+					.then(function(response) {
+						console.log("6666666666888888", response.data)
+						if(response.data.code == 0) {
+							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
+							
+						_this.$confirm(response.data.msg, '提示', {
+							confirmButtonText: '确定',
+							cancelButtonText: '取消',
+							type: 'warning'
+						}).then(() => {
+							console.log("response.data.url,",response.data.url)
+							window.open(response.data.url)
+							return false;
 
-			//下载比赛文档
+						}).catch(() => {
+
+						});
+							/*
+						window.location=_this.DownWordUrl; // 后更改页面地址*/
+						} else if(response.data.code == 401) {
+									_this.$confirm(response.data.msg, '提示', {
+										confirmButtonText: '确定',
+										cancelButtonText: '取消',
+										type: 'warning'
+									}).then(() => {
+										sessionStorage.clear()
+										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+										var newUrl = baseUrl.baseUrl + '/web/auth/login';
+										window.open(newUrl)
+										return false;
+
+									}).catch(() => {
+
+									});
+								}else if(response.data.code == -1){
+									
+									_this.$confirm(response.data.msg, '提示', {
+										confirmButtonText: '确定',
+										cancelButtonText: '取消',
+										type: 'warning'
+									}).then(() => {
+										sessionStorage.clear()
+										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+										var newUrl = baseUrl.baseUrl + '/web/auth/login';
+										window.open(newUrl)
+										return false;
+
+									}).catch(() => {
+
+									});
+								
+									
+								}
+						
+						else {
+									_this.$alert(response.data.msg, '提示信息', {
+										confirmButtonText: '确定',
+									});
+								}
+
+					})
+			},
+
+			//下载文档
 			DownWorlds: function() {
 				var _this = this;
 				var params = new URLSearchParams();
@@ -590,14 +660,7 @@
 /*
 						window.location=_this.DownWordUrl; // 后更改页面地址*/
 
-						} else {/*
-							if(type==1){
-								_this.$alert(response.data.msg, '提示信息', {
-								confirmButtonText: '确定',
-							});
-							}
-							
-						*/}
+						} 
 
 					})
 			},
@@ -883,6 +946,7 @@
         },*/
 				var _this = this;
 				var params1 = new URLSearchParams();
+				this.searchArr.keyword=this.searchArr.keyword.replace(/(^\s*)|(\s*$)/g, ""); 
 				params1.append("keyword  ", this.searchArr.keyword);
 				params1.append("page", this.searchArr.keyword.page);
 				params1.append("limit", 10);
@@ -1227,7 +1291,7 @@
 	
 	.float-nav {
 		position: fixed;
-		top: 200px;
+		top: 230px;
 		left: 0;
 		width: 60px;
 		border-radius: 2px;

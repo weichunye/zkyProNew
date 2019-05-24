@@ -14,7 +14,7 @@
 					</el-select>
 					<div class="input">
 
-						<el-input @keyup.enter.native="toSearchList" v-model="searchArr.keyword" auto-complete="off"></el-input>
+						<el-input @keyup.enter.native="toSearchList" v-model.trim="searchArr.keyword" auto-complete="off"></el-input>
 
 					</div>
 

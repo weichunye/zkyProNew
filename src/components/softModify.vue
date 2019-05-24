@@ -464,7 +464,6 @@
 				var _this = this;
 				_this.form.ifCrossPlatform = _this.form.ifCrossPlatform == true ? 1 : 0;
 				var joinVo = {
-
 					applicationField: "",
 					applicationFieldList: _this.form.applicationField,
 					createTime: "",

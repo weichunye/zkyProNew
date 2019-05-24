@@ -1,7 +1,7 @@
 <template>
 	<div class="details">
 
-		<searchTop :newSoftUrl="newSoftUrl"></searchTop>
+		<searchTop :newSoftUrl="newSoftUrl" :runUrl="runUrl"></searchTop>
 		<!--面包屑-->
 		<div class="crumbs">
 			<router-link :to="{path:'/'}"><span>首页</span></router-link>
@@ -152,23 +152,23 @@
 			</div>
 			<!--right-box-->
 			<ul class="bottom-btn-box">
-				<li v-if="userIdData">
+				<li v-if="userIdData&&ifDownWordUrl">
 					<a class="DownWorlds" @click="DownWorlds" href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
 				</li>
-				<li v-else="" @click="ifLogin">
+				<li v-if="!userIdData&&ifDownWordUrl" @click="ifLogin">
 					<a class="DownWorlds" href="javascript:;">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
 				</li>
-				<li v-if="userIdData">
+				<li v-if="userIdData&&runUrl">
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>立即运行</p>
 				</li>
-				<li v-else="" @click="ifLogin">
+				<li v-if="!userIdData&&runUrl" @click="ifLogin">
 					<img src="../assets/icon/float_nav_3.png" alt="" />
 					<p>立即运行</p>
 				</li>
@@ -257,7 +257,9 @@
 				userIdData: '',
 				indexeCharts: false,
 				softLogoUrl: '',
+				ifDownWordUrl:'',
 				newSoftUrl: '',
+				runUrl:'1',
 				config: {
 
 					url: window.location.href,
@@ -363,6 +365,7 @@
 			_this.getSoftLabel()
 			_this.getSoftInfo()
 			_this.getSoftLabelList()
+			_this.DownWorlds()
 			_this.$nextTick(function() {
 				_this.myChart = this.$echarts.init(document.getElementById('oscilloGram'))
 
@@ -400,8 +403,12 @@
 						_this.softData.createTime = _this.softData.createTime.substring(0, 10)
 						_this.categoryInfo = response.data.categoryInfo;
 						_this.newSoftUrl = _this.softData.softUrl.split(",")[0]
-
-						_this.option.series[0].data[0].value = [_this.statInfo.collectionNum, _this.statInfo.enjoyNum, _this.statInfo.downloadNum, _this.statInfo.browseNum, _this.statInfo.runNum]
+						var collectionNumNew=_this.statInfo.collectionNum>100?100:_this.statInfo.collectionNum;
+						var enjoyNumNew=_this.statInfo.enjoyNum>100?100:_this.statInfo.enjoyNum;
+						var downloadNumNew=_this.statInfo.downloadNum>100?100:_this.statInfo.downloadNum;
+						var browseNumNew=_this.statInfo.browseNum>100?100:_this.statInfo.browseNum;
+						var runNumNew=_this.statInfo.runNum>100?100:_this.statInfo.runNum;
+						_this.option.series[0].data[0].value = [collectionNumNew, enjoyNumNew, downloadNumNew, browseNumNew, runNumNew]
 						console.log("_this[option].series[0].data[0]", _this.option.series[0].data[0].value)
 						_this.myChart.setOption(_this.option);
 
@@ -431,13 +438,11 @@
 						}
 						console.log("response6666", response)
 					})
-
 			},
 
 			//收藏下载操作
 			saveFollow: function(type) {
 				var _this = this;
-
 				if(!_this.userId) {
 					_this.$confirm('请登录', '提示', {
 						confirmButtonText: '确定',
@@ -713,14 +718,9 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-							console.log("_this.DownWordUrl", _this.DownWordUrl)
-							window.location = _this.DownWordUrl; // 后更改页面地址
+							_this.ifDownWordUrl=response.data.packageUrl
 
-						} else {
-							_this.$alert(response.data.msg, '提示信息', {
-								confirmButtonText: '确定',
-							});
-						}
+						} 
 
 					})
 			},
@@ -1134,15 +1134,16 @@
 	}
 	
 	.details .bottom-btn-box {
-		margin: 30px 0 50px 180px;
+		margin: 30px 0 50px 100px;
 		overflow: hidden;
-		width: 900px;
+		text-align: center;
+		width: 800px;
 	}
 	
 	.details .bottom-btn-box li {
 		overflow: hidden;
-		float: left;
-		margin-left: 40px;
+		display: inline-block;
+		margin-right: 10px;
 		width: 150px;
 		height: 48px;
 		line-height: 48px;
