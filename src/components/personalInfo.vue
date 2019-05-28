@@ -1,59 +1,40 @@
 <template>
 	<div class="personalInfo">
-
 		<searchTop></searchTop>
 		<!--content-->
 		<div class="content">
 			<div class="top-box">
 				<p>昵称：{{userInfo.trueName}}</p>
 				<p>邮箱：{{userInfo.cstnetId}}</p>
-
 			</div>
-
 		</div>
 		<!--//content-->
 		<div class="content">
-			<el-tabs  @tab-click="handleClick">
+			<el-tabs @tab-click="handleClick">
 				<el-tab-pane label="我的软件">
-
 					<div class="min-height">
 						<!--软件信息-->
 						<div v-if="mySoftList.length>0">
 							<div v-for="item in mySoftList" class="personal-info-box">
-
 								<p v-if="item.firstAudit==0" class="rj-state state-dsh">待审核
 								</p>
-						
-								<p v-if="item.firstAudit==1">
-									<el-popover placement="top-start" title="审核提示" width="200" trigger="hover" :content="item.firstAuditRejectReason">
-										<el-button class="rj-state state-pass" slot="reference">初审通过</el-button>
-									</el-popover>
-
-								</p>
-
+									<p v-if="item.firstAudit==1" class="rj-state state-pass">初审通过</p>
 								<p v-if="item.firstAudit==2">
 									<el-popover placement="top-start" title="审核提示" width="200" trigger="hover" :content="item.firstAuditRejectReason">
-										<el-button class="rj-state state-nopass" slot="reference">初审未通过</el-button>
+										<p class="rj-state state-nopass" slot="reference">初审未通过</p>
 									</el-popover>
 								</p>
-							
 								<span v-if="item.firstAudit==1">
 								<p v-if="item.isExpertEvaluate==1&&item.isEvaluate==0" class="state-ps state-dsh">待评估
 							</p>
-							<el-popover placement="top-start" title="审核提示" width="200" trigger="hover" :content="item.expertEvaluateRejectReason">
-								<p slot="reference" v-if="item.isExpertEvaluate==1&&item.isEvaluate==1" class="state-ps state-pass">评估已通过
+								<p v-if="item.isExpertEvaluate==1&&item.isEvaluate==1" class="state-ps state-pass">评估已通过
 							</p>
-							</el-popover>
 							<el-popover placement="top-start" title="审核提示" width="200" trigger="hover" :content="item.expertEvaluateRejectReason">
 							<p slot="reference" v-if="item.isExpertEvaluate==1&&item.isEvaluate==2" class="state-ps state-nopass">评估未通过 	
 							</p>
 							</el-popover>
-					
-					<!--		<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
-							</p>
-							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
-								参赛作品请专家评估
-							</p>-->
+				<!--	ppp，{{item.isExpertEvaluate}}kkk，{{item.isMatchSoft}}-->
+						
 							<!--<p v-if="item.isExpertEvaluate==0" @click="getText(item.softName,item.softUrl,item.id)"  class=" state-zjpg">请专家评估
 							</p>-->
 							</span>
@@ -83,17 +64,30 @@
 									</div>
 
 								</router-link>
-										<div v-if="!item.isMatchSoft" class="btn-box">
+								<div v-if="!item.isMatchSoft" class="btn-box">
+									<button v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1&&item.firstAudit==1" @click="getText(item.softName,item.softUrl,item.id)" class="button4">请专家评估</button>
 									<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
 										<button class="button1">查看</button>
 									</router-link>
 									<router-link v-if="item.firstAudit!=1" :to="{path:'/softModify',query:{id:item.id,ParentName:'个人中心'}}">
 										<button class="button2">修改</button>
 									</router-link>
+
 									<button v-if="item.firstAudit!=1" @click="delSoftOrdinary(item)" class="button3">删除</button>
 
 								</div>
-
+								<div v-else="" class="btn-box">
+									<button v-if="item.isExpertEvaluate==0&&item.isMatchSoft&&item.firstAudit==1" @click="expertReview(item.id)" class="button4">参赛作品请专家评估</button>
+<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
+										<button class="button1">查看</button>
+									</router-link>
+								</div>
+								<!--			<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
+							</p>
+							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
+								参赛作品请专家评估
+							</p>
+-->
 							</div>
 						</div>
 						<div v-else="" class="el-tab-software">
@@ -264,7 +258,7 @@
 					<h4>软件名称：</h4>
 					<p>{{singInfo.softName}}</p>
 				</li>
-					<li class="libor">
+				<li class="libor">
 					<h4>软件版本：</h4>
 					<p>{{singInfo.softVersion}}</p>
 				</li>
@@ -338,11 +332,11 @@
 				<li class="libor">
 					<table class="wordlist" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<th width="131">分析设计文档</th>
-							<th width="131">项目规格书</th>
-							<th width="131">测试文档</th>
-							<th width="131">用户手册</th>
-							<th width="131">设计架构及技术报告</th>
+							<th width="163">分析设计文档</th>
+							<th width="163">项目规格书</th>
+							<th width="163">测试文档</th>
+							<th width="163">用户手册</th>
+							<!--<th width="131">设计架构及技术报告</th>-->
 						</tr>
 						<tr>
 							<td>
@@ -357,9 +351,9 @@
 							<td>
 								<a :href="userDocUrl" target="_blank">查看已上传文件</a>
 							</td>
-							<td>
+							<!--<td>
 								<a :href="frameworkReportDocUrl" target="_blank">查看已上传文件</a>
-							</td>
+							</td>-->
 						</tr>
 					</table>
 
@@ -384,7 +378,7 @@
 
 		<!--pop-->
 
-		<el-dialog custom-class="examinedialog " title="请专家评估" :close-on-press-escape="false" :visible.sync="dialogReview" :close-on-click-modal="false" :show-close='false'>
+		<el-dialog custom-class="examinedialog " title="请专家评估" :close-on-press-escape="false" :visible.sync="dialogReview" :close-on-click-modal="false" :show-close='true'>
 			<el-form :model="form" ref="form" :inline="true" class="demo-form-inline">
 				<div class="box-big">
 					<el-form-item prop="name" label="软件名称" :label-width="formLabelWidth">
@@ -505,12 +499,12 @@
 					</el-upload>-->
 
 				</div>
-				<div class="box">
+			<!--	<div class="box">
 					<el-form-item prop="softUrl" label="设计架构及技术报告" :label-width="formLabelWidth">
 						<em class="addti">*</em>
 						<el-input v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
 						<div class="tit">
-							<!--<button>下载模板</button>-->
+						
 
 						</div>
 					</el-form-item>
@@ -520,7 +514,7 @@
 						<div slot="tip" class="el-upload__tip">系统设计架构概述、创新思路、对使用的技术机制进行分析，对各模块进行功能描述。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
 					</el-upload>
 
-				</div>
+				</div>-->
 
 				<div class="bottom">
 
@@ -755,7 +749,6 @@
 						_this[ele].dataList = response.data.page.records;
 						_this[ele].total = response.data.page.total;
 						console.log("response.data", _this[ele].total)
-
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -860,7 +853,7 @@
 				});
 
 			},
-			submitFrameworkReportDoc() {
+			/*submitFrameworkReportDoc() {
 				this.$refs.frameworkReportDocRef.submit();
 			},
 			frameworkReportDocSuccess: function(response, file, fileList) {
@@ -880,7 +873,7 @@
 					this.fileList9 = []
 				}
 
-			},
+			},*/
 			submitTestDoc() {
 				this.$refs.testDocRef.submit();
 			},
@@ -1258,7 +1251,7 @@
 
 			},
 			expertReview: function(softId) {
-				var _this=this;
+				var _this = this;
 				var softDoc = {
 					analysisDoc: this.form.analysisDoc,
 					analysisDocOriginalName: this.form.analysisName,
@@ -1285,45 +1278,45 @@
 					softVideoOriginalName: this.form.softVideoName,
 					isMatchSoft: 1
 				}
-				
-			_this.axios.defaults.headers.common['token'] = this.token;
-							_this.axios.post(baseUrl.baseUrl + '/web/soft/startEvaluate', softDoc)
-								.then(function(response) {
-									if(response.data.code == 0) {
-										console.log('成功')
-										_this.$alert(response.data.msg, '提示信息', {
-											confirmButtonText: '确定',
-										});
-										_this.dialogReview = false;
-										_this.getMySoft()
 
-									} else if(response.data.code == 401) {
-										_this.$confirm(response.data.msg, '提示', {
-											confirmButtonText: '确定',
-											cancelButtonText: '取消',
-											type: 'warning'
-										}).then(() => {
-											sessionStorage.clear()
-											console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
-											var newUrl = baseUrl.baseUrl + '/web/auth/login';
-											window.open(newUrl)
-											return false;
+				_this.axios.defaults.headers.common['token'] = this.token;
+				_this.axios.post(baseUrl.baseUrl + '/web/soft/startEvaluate', softDoc)
+					.then(function(response) {
+						if(response.data.code == 0) {
+							console.log('成功')
+							_this.$alert(response.data.msg, '提示信息', {
+								confirmButtonText: '确定',
+							});
+							_this.dialogReview = false;
+							_this.getMySoft()
 
-										}).catch(() => {
+						} else if(response.data.code == 401) {
+							_this.$confirm(response.data.msg, '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								type: 'warning'
+							}).then(() => {
+								sessionStorage.clear()
+								console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+								var newUrl = baseUrl.baseUrl + '/web/auth/login';
+								window.open(newUrl)
+								return false;
 
-										});
-									} else {
-										_this.$alert(response.data.msg, '提示信息', {
-											confirmButtonText: '确定',
-										});
-									}
+							}).catch(() => {
 
-								})
-								.catch(function(error) {
-									console.log(error);
-								})
-							console.log('form', this.form)
-						
+							});
+						} else {
+							_this.$alert(response.data.msg, '提示信息', {
+								confirmButtonText: '确定',
+							});
+						}
+
+					})
+					.catch(function(error) {
+						console.log(error);
+					})
+				console.log('form', this.form)
+
 			},
 			submitForm: function(formName) {
 				var _this = this;
@@ -1351,7 +1344,7 @@
 					softImgThreeOriginalName: this.form.softImgThreeName,
 					softVideo: this.form.softVideo,
 					softVideoOriginalName: this.form.softVideoName,
-					isMatchSoft:0
+					isMatchSoft: 0
 				}
 
 				if(!this.form.analysisDoc) {
@@ -1375,11 +1368,11 @@
 					_this.messageOpen('请上传软件效果展示', 'warning')
 					return false;
 				}
-				if(!this.form.frameworkReportDoc) {
+				/*if(!this.form.frameworkReportDoc) {
 					_this.messageOpen('请上传设计架构及技术报告', 'warning')
 					return false;
-				}
-				if(this.form.analysisDoc && this.form.frameworkReportDoc && this.form.itemBookDoc && this.form.testDoc && this.form.userDoc) {
+				}*/
+				if(this.form.analysisDoc && this.form.itemBookDoc && this.form.testDoc && this.form.userDoc) {
 					console.log("sub", softDoc)
 
 					console.log("formName", formName)
@@ -1639,7 +1632,6 @@
 	.personalInfo .content .min-height {
 		margin-top: 10px;
 		min-height: 400px;
-		
 	}
 	
 	.personalInfo .content .min-height table td {
@@ -1650,7 +1642,6 @@
 		padding: 15px 0;
 		margin: 10px 0;
 		width: 100%;
-	
 	}
 	
 	.personalInfo .top-box p {

@@ -5,7 +5,7 @@
 			<div class="reposbox">
 				<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 				<p class="text">
-					欢迎来到科研开源软件社区！
+					欢迎来到科学计算开源社区！
 				</p>
 				<div class="search-box">
 					<el-select class="classify" v-model="searchArr.itemType" placeholder="请选择">

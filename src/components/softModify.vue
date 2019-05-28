@@ -1,4 +1,5 @@
 <template>
+	<div class="bodybg">
 	<div class="addbg">
 
 		<div class="softModify">
@@ -9,7 +10,7 @@
 						<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 					</router-link>
 					<p class="text">
-						欢迎来到科研开源软件社区！
+						欢迎来到科学计算开源社区！
 					</p>
 
 					<p @click="toPersonalInfo" class="right-text">个人中心</p>
@@ -18,7 +19,7 @@
 
 			<div class="softModify-box">
 
-				<h2>活动报名</h2>
+				<h2>软件修改</h2>
 				<!--banner-->
 
 				<el-form :model="form" ref="form" :inline="true" class="demo-form-inline" @submit.native.prevent>
@@ -102,7 +103,7 @@
 						<el-form-item label="代码地址" :label-width="formLabelWidth">
 							<em class="addti">*</em>
 							<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
-							<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>
+							<!--<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>-->
 							<p class="textp"> {{softUrlTit}}</p>
 						</el-form-item>
 						<!--<el-form-item label=" " :label-width="formLabelWidth">
@@ -113,7 +114,7 @@
 					<div class="box-big">
 						<el-form-item v-if="!form.ifSelfStudy" label="开发人员" :label-width="formLabelWidth">
 							<em class="addti">&nbsp;&nbsp;</em>
-							<el-input v-model="form.developer" placeholder="请输入内容" ></el-input>
+							<el-input v-model="form.developer" placeholder="请输入内容"></el-input>
 						</el-form-item>
 
 						<el-form-item label=" " :label-width="formLabelWidth">
@@ -219,6 +220,7 @@
 			</div>
 		</div>
 	</div>
+	</div>
 </template>
 <script type="text/javascript">
 </script>
@@ -248,7 +250,7 @@
 					abstract: '',
 					ifSelfStudy: false, //是否为自研
 					ifHsowRealName: false, //true不匿名，false匿名
-					developer:''
+					developer: ''
 				},
 
 				softUrlTit: '',
@@ -318,23 +320,17 @@
 					userUnit: '',
 				});
 				_this.$nextTick(function() {
-
 					var L = _this.secondDomains.length;
 					console.log($('.deltrbtn').eq(L - 1))
 					$('.deltrbtn').eq(L - 1).attr("id", +L)
-
 				})
-
 			},
 			//删除一行
 			delTr: function(event) {
-
 				var _this = this;
 				var eve = event.currentTarget
-
 				var thisId = $(eve).attr('id')
 				_this.secondDomains.splice(thisId - 1, 1)
-
 				console.log("thisId", thisId)
 			},
 			//获取报名表单下拉内容
@@ -358,7 +354,7 @@
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("dictId", 6);
-				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId',params)
+				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId', params)
 					.then(function(response) {
 						console.log("response.data.list", response.data.list)
 						_this.operatingSystemOption = response.data.list
@@ -399,21 +395,20 @@
 						_this.form.ifHsowRealName = softInfoObg.isShowDeveloperName == 0 ? true : false;
 						console.log("softInfoObg.isPlatform", softInfoObg.isPlatform)
 
-						
-						if(userListObg.length>0){
+						if(userListObg.length > 0) {
 							var firstUserListObg = userListObg[0]
-							console.log("userListObg",userListObg)
-						_this.firstDomains.userName = firstUserListObg.userName;
+							console.log("userListObg", userListObg)
+							_this.firstDomains.userName = firstUserListObg.userName;
 
-						_this.firstDomains.userUnit = firstUserListObg.userUnit;
-						_this.firstDomains.userJob = firstUserListObg.userJob;
-						_this.firstDomains.userPhone = firstUserListObg.userPhone;
-						for(var i = 1; i < userListObg.length; i++) {
-							_this.secondDomains.push(userListObg[i])
+							_this.firstDomains.userUnit = firstUserListObg.userUnit;
+							_this.firstDomains.userJob = firstUserListObg.userJob;
+							_this.firstDomains.userPhone = firstUserListObg.userPhone;
+							for(var i = 1; i < userListObg.length; i++) {
+								_this.secondDomains.push(userListObg[i])
+							}
+
 						}
 
-						}
-						
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -684,9 +679,10 @@
 </script>
 
 <style>
-	body {
-		background: #f8f8f8;
-	}
+
+	.bodybg {
+    background: #eef5f9;
+}
 	
 	.addbg {
 		width: 100%;
@@ -742,7 +738,7 @@
 	
 	.softModify .singtext {
 		padding: 5px 0;
-		margin-left: 165px;
+		margin: 0 0 15px 165px;
 		width: 600px;
 		font-size: 14px;
 		line-height: 20px;

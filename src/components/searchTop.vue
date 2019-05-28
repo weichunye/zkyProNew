@@ -4,7 +4,7 @@
 			<div class="reposbox">
 				<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 				<p class="text">
-					欢迎来到科研开源软件社区！
+					欢迎来到科学计算开源社区！
 				</p>
 
 				<div v-if="!showLogin">
@@ -151,7 +151,7 @@
 
 					<el-form-item prop="softUrl" label="代码地址" :label-width="formLabelWidth">
 						<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
-						<!--<p class="diatit">gitbun或者</p>-->
+						<p class="diatit">多个地址请用英文","分隔</p>
 					</el-form-item>
 
 				</div>
@@ -263,18 +263,18 @@
 				<p>投递软件</p>
 			</li>
 			<li v-if="userIdData&&ifDownWordUrl">
-				<a class="DownWorlds"  :href="DownWordUrl">
+				<a class="DownWorlds" :href="DownWordUrl">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
 			</li>
-			<li v-if="!userIdData&&ifDownWordUrl" @click="ifLogin" >
-				<a class="DownWorlds"  href="javascript:;">
+			<li v-if="!userIdData&&ifDownWordUrl" @click="ifLogin">
+				<a class="DownWorlds" href="javascript:;">
 					<img src="../assets/icon/float_nav_2.png" alt="" />
 					<p>文档下载</p>
 				</a>
 			</li>
-			<li v-if="userIdData&&runUrl"  @click="runThisSoft">
+			<li v-if="userIdData&&runUrl" @click="runThisSoft">
 				<img src="../assets/icon/float_nav_3.png" alt="" />
 				<p>立即运行</p>
 			</li>
@@ -282,20 +282,18 @@
 				<img src="../assets/icon/float_nav_3.png" alt="" />
 				<p>立即运行</p>
 			</li>
-			<li >
+			<li>
 				<a target="_blank" :href="newSoftUrl">
 					<img src="../assets/icon/float_nav_4.png" alt="" />
 					<p>查看源码</p>
 				</a>
 			</li>
-			
+
 			<li @click="dialogFeed">
 				<img src="../assets/icon/float_nav_5.png" alt="" />
 				<p>意见反馈</p>
 			</li>
-
 		</ul>
-
 	</div>
 </template>
 
@@ -309,7 +307,7 @@
 		},
 		props: {
 			newSoftUrl: '',
-			runUrl:''
+			runUrl: ''
 
 		},
 
@@ -450,7 +448,7 @@
 				},
 				secondDomains: [],
 				DownWordUrl: '',
-				ifDownWordUrl:'',
+				ifDownWordUrl: '',
 				feedbackOption: [], //反馈选项
 
 			}
@@ -481,7 +479,7 @@
 				_this.searchArr.itemType = '作者'
 
 			}
-			_this.searchArr.keyword=_this.$route.query.keyword
+			_this.searchArr.keyword = _this.$route.query.keyword
 
 			_this.getListOption()
 			if(this.$route.path == '/details') {
@@ -491,16 +489,16 @@
 				$(".float-nav").css({
 					"left": L + "px"
 				});
-			} else if(this.$route.path == '/hotDetails'){
-				
+			} else if(this.$route.path == '/hotDetails') {
+
 				$(".float-nav").show();
 				var W = $(window).width() - 1200;
 				var L = 1200 + W / 2
 				$(".float-nav").css({
 					"left": L + "px"
 				});
-			
-			}else {
+
+			} else {
 				$(".float-nav").hide();
 			}
 
@@ -528,8 +526,6 @@
 					}).then(() => {
 						var newUrl = baseUrl.baseUrl + '/web/auth/login';
 						window.open(newUrl)
-						
-						
 
 					}).catch(() => {
 
@@ -576,73 +572,97 @@
 				}
 
 			},
-			runThisSoft:function(){
+			runThisSoft: function() {
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("softId", this.$route.query.id);
 				params.append("userId", this.userId);
 				_this.axios.defaults.headers.common['token'] = this.token;
-				_this.axios.post(baseUrl.baseUrl + '/web/soft/clickSoftInfoRunTime', params)
+				_this.axios.post(baseUrl.baseUrl + '/web/softrun/selectRunFirst', params)
 					.then(function(response) {
-						console.log("6666666666888888", response.data)
+						console.log("011222", response.data)
 						if(response.data.code == 0) {
-							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-							
-						_this.$confirm(response.data.msg, '提示', {
-							confirmButtonText: '确定',
-							cancelButtonText: '取消',
-							type: 'warning'
-						}).then(() => {
-							console.log("response.data.url,",response.data.url)
-							window.open(response.data.url)
+							_this.$confirm(response.data.msg, '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								type: 'success'
+							}).then(() => {
+
+								_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+									.then(function(response) {
+										console.log("6666666666888888", response.data)
+										if(response.data.code == 0) {
+											window.open(response.data.url)
+										} else {
+											_this.$alert(response.data.msg, '提示信息', {
+												confirmButtonText: '确定',
+											});
+										}
+									})
+								return false;
+
+							}).catch(() => {
+
+							});
+						} else if(response.data.code == 1) {
+							_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+								.then(function(response) {
+									console.log("6666666666888888", response.data)
+									if(response.data.code == 0) {
+										_this.$confirm(response.data.msg, '提示', {
+											confirmButtonText: '确定',
+											cancelButtonText: '取消',
+											type: 'warning'
+										}).then(() => {
+											window.open(response.data.url)
+											return false;
+
+										}).catch(() => {
+
+										});
+									} else if(response.data.code == -1) {
+
+										_this.$confirm(response.data.msg, '提示', {
+											confirmButtonText: '确定',
+											cancelButtonText: '取消',
+											type: 'warning'
+										}).then(() => {
+											window.open("http://www.baidu.com")
+											return false;
+
+										}).catch(() => {
+
+										});
+
+									} else {
+										_this.$alert(response.data.msg, '提示信息', {
+											confirmButtonText: '确定',
+										});
+									}
+								})
 							return false;
 
-						}).catch(() => {
-
-						});
-							/*
-						window.location=_this.DownWordUrl; // 后更改页面地址*/
 						} else if(response.data.code == 401) {
-									_this.$confirm(response.data.msg, '提示', {
-										confirmButtonText: '确定',
-										cancelButtonText: '取消',
-										type: 'warning'
-									}).then(() => {
-										sessionStorage.clear()
-										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
-										var newUrl = baseUrl.baseUrl + '/web/auth/login';
-										window.open(newUrl)
-										return false;
+							_this.$confirm(response.data.msg, '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								type: 'warning'
+							}).then(() => {
+								sessionStorage.clear()
+								var newUrl = baseUrl.baseUrl + '/web/auth/login';
+								window.open(newUrl)
+								return false;
+							}).catch(() => {
 
-									}).catch(() => {
-
-									});
-								}else if(response.data.code == -1){
-									
-									_this.$confirm(response.data.msg, '提示', {
-										confirmButtonText: '确定',
-										cancelButtonText: '取消',
-										type: 'warning'
-									}).then(() => {
-										sessionStorage.clear()
-										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
-										var newUrl = baseUrl.baseUrl + '/web/auth/login';
-										window.open(newUrl)
-										return false;
-
-									}).catch(() => {
-
-									});
-								
-									
-								}
-						
-						else {
-									_this.$alert(response.data.msg, '提示信息', {
-										confirmButtonText: '确定',
-									});
-								}
-
+							});
+						} else {
+							_this.$alert(response.data.msg, '提示信息', {
+								confirmButtonText: '确定',
+							});
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
 					})
 			},
 
@@ -656,11 +676,11 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-							_this.ifDownWordUrl=response.data.packageUrl
-/*
-						window.location=_this.DownWordUrl; // 后更改页面地址*/
+							_this.ifDownWordUrl = response.data.packageUrl
+							/*
+													window.location=_this.DownWordUrl; // 后更改页面地址*/
 
-						} 
+						}
 
 					})
 			},
@@ -946,7 +966,7 @@
         },*/
 				var _this = this;
 				var params1 = new URLSearchParams();
-				this.searchArr.keyword=this.searchArr.keyword.replace(/(^\s*)|(\s*$)/g, ""); 
+				this.searchArr.keyword = this.searchArr.keyword.replace(/(^\s*)|(\s*$)/g, "");
 				params1.append("keyword  ", this.searchArr.keyword);
 				params1.append("page", this.searchArr.keyword.page);
 				params1.append("limit", 10);
@@ -1150,7 +1170,7 @@
 		padding: 10px 0;
 		width: 100%;
 		height: 110px;
-		background: url(../assets/bg/search_top_bg.png) left bottom repeat-x ;
+		background: url(../assets/bg/search_top_bg.png) left bottom repeat-x;
 	}
 	
 	.searchTop .musttit {
@@ -1304,7 +1324,8 @@
 		background: #2185d0;
 		cursor: pointer;
 	}
-	.float-nav .libg{
+	
+	.float-nav .libg {
 		background: #979899;
 	}
 	
@@ -1425,5 +1446,12 @@
 		display: block;
 		margin: 10px auto;
 		width: 200px;
+	}
+	
+	.searchTop .diatit {
+		padding-top: 5px;
+		font-size: 12px;
+		line-height: 12px;
+		color: #d3d5d6;
 	}
 </style>

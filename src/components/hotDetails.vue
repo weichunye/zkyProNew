@@ -400,6 +400,7 @@
 						console.log("获取信息", response)
 						_this.softData = response.data.softInfo;
 						_this.statInfo = response.data.statInfo;
+						_this.runUrl=response.data.softInfo.runUrl;
 						_this.softData.createTime = _this.softData.createTime.substring(0, 10)
 						_this.categoryInfo = response.data.categoryInfo;
 						_this.newSoftUrl = _this.softData.softUrl.split(",")[0]
@@ -481,7 +482,6 @@
 								type: 'warning'
 							}).then(() => {
 								sessionStorage.clear()
-								console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 								var newUrl = baseUrl.baseUrl + '/web/auth/login';
 								window.open(newUrl)
 								return false;
@@ -543,9 +543,100 @@
 
 			},
 			//立即运行
-			runThisSoft:function(){
-				
+			runThisSoft: function() {
+				var _this = this;
+				var params = new URLSearchParams();
+				params.append("softId", this.$route.query.id);
+				params.append("userId", this.userId);
+				_this.axios.defaults.headers.common['token'] = this.token;
+				_this.axios.post(baseUrl.baseUrl + '/web/softrun/selectRunFirst', params)
+					.then(function(response) {
+						console.log("011222", response.data)
+						if(response.data.code == 0) {
+							_this.$confirm(response.data.msg, '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								type: 'success'
+							}).then(() => {
+
+								_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+									.then(function(response) {
+										console.log("6666666666888888", response.data)
+										if(response.data.code == 0) {
+											window.open(response.data.url)
+										} else {
+											_this.$alert(response.data.msg, '提示信息', {
+												confirmButtonText: '确定',
+											});
+										}
+									})
+								return false;
+
+							}).catch(() => {
+
+							});
+						} else if(response.data.code == 1) {
+							_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+								.then(function(response) {
+									console.log("6666666666888888", response.data)
+									if(response.data.code == 0) {
+										_this.$confirm(response.data.msg, '提示', {
+											confirmButtonText: '确定',
+											cancelButtonText: '取消',
+											type: 'warning'
+										}).then(() => {
+											window.open(response.data.url)
+											return false;
+
+										}).catch(() => {
+
+										});
+									} else if(response.data.code == -1) {
+
+										_this.$confirm(response.data.msg, '提示', {
+											confirmButtonText: '确定',
+											cancelButtonText: '取消',
+											type: 'warning'
+										}).then(() => {
+										window.open("http://www.baidu.com")
+											return false;
+
+										}).catch(() => {
+
+										});
+
+									} else {
+										_this.$alert(response.data.msg, '提示信息', {
+											confirmButtonText: '确定',
+										});
+									}
+								})
+							return false;
+
+						} else if(response.data.code == 401) {
+							_this.$confirm(response.data.msg, '提示', {
+								confirmButtonText: '确定',
+								cancelButtonText: '取消',
+								type: 'warning'
+							}).then(() => {
+								sessionStorage.clear()
+								var newUrl = baseUrl.baseUrl + '/web/auth/login';
+								window.open(newUrl)
+								return false;
+							}).catch(() => {
+
+							});
+						} else {
+							_this.$alert(response.data.msg, '提示信息', {
+								confirmButtonText: '确定',
+							});
+						}
+					})
+					.catch(function(error) {
+						console.log(error);
+					})
 			},
+
 
 			//添加自定義標簽
 			addLabelOpen: function() {

@@ -286,8 +286,8 @@ float: right;
 }
 .personal-info-box .btn-box button{
 	float: left;
+	padding: 0 15px;
 	margin-left: 5px;
-	width: 70px;
 	height: 30px;
 	line-height: 30px;
 	font-size: 14px;
@@ -307,17 +307,22 @@ float: right;
 		color: #fff;
 	background:#e26556 ;
 }
+.personal-info-box .btn-box .button4{
+			color: #977718;
+	background:#fdd765 ;
+}
 .personal-info-box .rj-infor span{
 	margin-right: 10px;
-	color: #16a8e1;
+	color: #999;
+	font-size: 12px;
 }
 .personal-info-box .rj-ypg{
 	background: #12ac38;
 }
 .personal-info-box .rj-state{
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	top: 10px;
+	right: 10px;
 	padding: 5px 8px;
 	font-size: 14px;
 	line-height: 14px;
@@ -352,9 +357,9 @@ float: right;
 }
 .personal-info-box .state-ps{
 	position: absolute;
-	left: 30px;
-	bottom: 10px;
-	padding: 5px 8px;
+	right:10px;
+	top: 40px;
+	padding: 5px 10px;
 	font-size: 14px;
 	line-height: 14px;
 	color: #fff;

@@ -584,7 +584,7 @@
 	
 	.enter .content .hotbox .con dl dd p {
 		float: left;
-		margin-right: 22px;
+		margin-right: 10px;
 		font-size: 12px;
 		line-height: 20px;
 		color: #b1b0b0;

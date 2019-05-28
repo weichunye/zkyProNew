@@ -11,7 +11,7 @@
 							<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 						</router-link>
 						<p class="text">
-							欢迎来到科研开源软件社区！
+							欢迎来到科学计算开源社区！
 						</p>
 
 						<p @click="toPersonalInfo" class="right-text">{{userInfo.trueName}},&nbsp;&nbsp;个人中心</p>
@@ -104,8 +104,9 @@
 							<el-form-item label="代码地址" :label-width="formLabelWidth">
 								<em class="addti">*</em>
 								<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
-								<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>
+							<!--	<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>-->
 								<p class="textp"> {{softUrlTit}}</p>
+								<p class="diatit">多个地址请用英文","分隔</p>
 							</el-form-item>
 							<!--<el-form-item label=" " :label-width="formLabelWidth">
 						<el-checkbox v-model="form.ifCrossPlatform">是否跨平台</el-checkbox>
@@ -275,13 +276,12 @@
 								</el-upload>
 
 							</div>
-							<div class="box">
+						<!--	<div class="box">
 								<el-form-item prop="softUrl" label="设计架构及技术报告" :label-width="formLabelWidth">
 									<em class="addti">*</em>
 									<el-input :disabled="true" v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
 									<div class="tit">
-										<!--<button>下载模板</button>-->
-
+										
 									</div>
 								</el-form-item>
 								<el-upload class="upload-demo" ref="frameworkReportDocRef" :action=upUrl :on-success='frameworkReportDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList9">
@@ -293,7 +293,7 @@
 									<div slot="tip" class="el-upload__tip">系统设计架构概述、创新思路、对使用的技术机制进行分析，对各模块进行功能描述。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
 								</el-upload>
 
-							</div>
+							</div>-->
 							<div class="box-1">
 								<el-form-item prop="softUrl" label="软件效果展示" :label-width="formLabelWidth">
 									<em class="addti">*</em>
@@ -657,7 +657,7 @@
 						_this.form.softVideo = softDocObg.softVideo
 
 						_this.form.analysisName = softDocObg.analysisDocOriginalName
-						_this.form.frameworkReportName = softDocObg.frameworkReportDocOriginalName
+						/*_this.form.frameworkReportName = softDocObg.frameworkReportDocOriginalName*/
 						_this.form.itemBookName = softDocObg.itemBookDocOriginalName
 						_this.form.userDocName = softDocObg.userDocOriginalName
 						_this.form.testDocName = softDocObg.testDocOriginalName
@@ -755,7 +755,7 @@
 				this.messageOpen(response.msg, codeStype)
 
 			},
-			submitFrameworkReportDoc() {
+			/*submitFrameworkReportDoc() {
 				this.$refs.frameworkReportDocRef.submit();
 			},
 			frameworkReportDocSuccess: function(response, file, fileList) {
@@ -774,7 +774,7 @@
 					this.fileList9 = []
 				}
 
-			},
+			},*/
 			submitTestDoc() {
 				this.$refs.testDocRef.submit();
 			},
@@ -1091,10 +1091,10 @@
 					_this.messageOpen('请上传软件效果展示', 'warning')
 					return false;
 				}
-				if(!this.form.frameworkReportDoc) {
+				/*if(!this.form.frameworkReportDoc) {
 					_this.messageOpen('请上传设计架构及技术报告', 'warning')
 					return false;
-				}
+				}*/
 				var phoneReg = /^[1][3,4,5,7,8][0-9]{9}$/;
 				if(_this.isTeacherVal.teacherName || _this.isTeacherVal.teacherUnit || _this.isTeacherVal.teacherPhone) {
 					if(_this.isTeacherVal.teacherName && _this.isTeacherVal.teacherUnit && _this.isTeacherVal.teacherPhone) {
@@ -1305,10 +1305,10 @@
 	}
 	
 	.agSignUp .diatit {
-		margin: 0;
-		line-height: 14px;
+		padding:10px 0 0px 18px;
+		line-height: 18px;
 		font-size: 12px;
-		color: #999;
+		color: #d3d5d6;
 	}
 	
 	.agSignUp .h3 {
@@ -1329,7 +1329,7 @@
 	
 	.agSignUp .singtext {
 		padding: 5px 0;
-		margin-left: 165px;
+		margin: 0 0 15px 165px;
 		width: 600px;
 		font-size: 14px;
 		line-height: 20px;
