@@ -4,7 +4,7 @@
 			<div class="reposbox">
 				<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 				<p class="text">
-					欢迎来到科学计算开源社区！
+					欢迎来到科学软件开源社区！
 				</p>
 
 				<div v-if="!showLogin">
@@ -572,7 +572,7 @@
 				}
 
 			},
-			runThisSoft: function() {
+			/*runThisSoft: function() {
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("softId", this.$route.query.id);
@@ -621,19 +621,11 @@
 
 										});
 									} else if(response.data.code == -1) {
-
-										_this.$confirm(response.data.msg, '提示', {
-											confirmButtonText: '确定',
-											cancelButtonText: '取消',
-											type: 'warning'
-										}).then(() => {
-											window.open("http://www.baidu.com")
-											return false;
-
-										}).catch(() => {
-
-										});
-
+										
+										_this.$alert(
+									"试用时间已结束，请通过“nienm@sccas.cn”该邮箱联系管理员", '提示信息', {
+										confirmButtonText: '确定',
+									});
 									} else {
 										_this.$alert(response.data.msg, '提示信息', {
 											confirmButtonText: '确定',
@@ -665,7 +657,20 @@
 						console.log(error);
 					})
 			},
-
+*/				
+			runThisSoft:function(){
+				
+				var _this = this;
+				var params = new URLSearchParams();
+				params.append("softId", this.$route.query.id);
+				params.append("userId", this.userId);
+				_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+									.then(function(response) {
+										console.log("6666666666888888", response.data)
+										window.open(response.data.url)
+									})
+				
+			},
 			//下载文档
 			DownWorlds: function() {
 				var _this = this;
@@ -1124,13 +1129,7 @@
 				console.log(" sessionStorage.getItem('sessionData');", sessionStorage.getItem('sessionData'))
 
 			},
-			toPersonalInfo: function() {
-				var _this = this
-				_this.$router.push({
-					path: '/personalInfo'
-				});
-
-			}
+		
 
 		}
 	}
@@ -1271,7 +1270,7 @@
 	
 	.searchTop .header-top {
 		width: 100%;
-		height: 46px;
+		height: 66px;
 		background: #4b505d;
 	}
 	
@@ -1280,9 +1279,9 @@
 		position: relative;
 		margin: 0 auto;
 		width: 1200px;
-		height: 46px;
+		height: 66px;
 		font-size: 14px;
-		line-height: 46px;
+		line-height: 66px;
 		color: #fff;
 	}
 	
@@ -1296,7 +1295,7 @@
 	.searchTop .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
-		line-height: 46px;
+		line-height: 66px;
 		color: #fff;
 	}
 	
@@ -1304,7 +1303,7 @@
 		float: right;
 		margin-right: 10px;
 		font-size: 14px;
-		line-height: 46px;
+		line-height: 66px;
 		color: #f4f4f4;
 		cursor: pointer;
 	}
@@ -1321,7 +1320,7 @@
 		width: 60px;
 		height: 86px;
 		border-bottom: 1px solid #a6ceec;
-		background: #2185d0;
+		background: #3c6bf7;
 		cursor: pointer;
 	}
 	

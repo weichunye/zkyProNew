@@ -11,7 +11,7 @@
 							<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 						</router-link>
 						<p class="text">
-							欢迎来到科学计算开源社区！
+							欢迎来到科学软件开源社区！
 						</p>
 
 						<p @click="toPersonalInfo" class="right-text">{{userInfo.trueName}},&nbsp;&nbsp;个人中心</p>
@@ -28,14 +28,14 @@
 
 							<el-form-item label="软件名称" :label-width="formLabelWidth">
 								<em class="addti">*</em>
-								<el-input v-model="form.name" placeholder="请输入软件名称" auto-complete="off"></el-input>
+								<el-input v-model.trim="form.name" placeholder="请输入软件名称" auto-complete="off"></el-input>
 							</el-form-item>
 						</div>
 						<div class="box-big" style="margin-bottom: 15px;">
 
 							<el-form-item label="软件版本" :label-width="formLabelWidth">
 								<em class="addti">*</em>
-								<el-input v-model="form.softVersion" placeholder="请输入软件版本" auto-complete="off"></el-input>
+								<el-input v-model.trim="form.softVersion" placeholder="请输入软件版本" auto-complete="off"></el-input>
 							</el-form-item>
 						</div>
 						<div class="box-big">
@@ -103,7 +103,7 @@
 
 							<el-form-item label="代码地址" :label-width="formLabelWidth">
 								<em class="addti">*</em>
-								<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
+								<el-input v-model.trim="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
 							<!--	<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>-->
 								<p class="textp"> {{softUrlTit}}</p>
 								<p class="diatit">多个地址请用英文","分隔</p>
@@ -429,6 +429,7 @@
 				fileList8: [],
 				fileList9: [],
 				softUrlTit: '',
+				getSoftUrl:'',
 				joinVoUrl: '',
 				upUrl: baseUrl.baseUrl + '/sys/upload/uploadForEvaluate/',
 				imgUrlNew: baseUrl.baseUrl + '/sys/upload/uploadForEvaluateImg/',
@@ -543,13 +544,10 @@
 			},
 			//删除一行
 			delTr: function(event) {
-
 				var _this = this;
 				var eve = event.currentTarget
-
 				var thisId = $(eve).attr('id')
 				_this.secondDomains.splice(thisId - 1, 1)
-
 				console.log("thisId", thisId)
 			},
 			//获取报名表单下拉内容
@@ -617,7 +615,7 @@
 						_this.form.applicationField = softInfoObg.applicationFields;
 						_this.form.operatingSystem = softInfoObg.operatingSystems;
 						console.log("_this.form.operatingSystem", _this.form.operatingSystem)
-						_this.form.softUrl = softInfoObg.softUrl;
+						_this.form.softUrl=_this.getSoftUrl = softInfoObg.softUrl;
 						_this.form.abstract = softInfoObg.softIntroduce;
 						_this.form.ifCrossPlatform = softInfoObg.isPlatform == 1 ? true : false;
 						_this.form.ifHsowRealName = softInfoObg.isShowDeveloperName == 0 ? true : false;
@@ -877,7 +875,10 @@
 						return false
 
 					}
-					var params = new URLSearchParams();
+					if(_this.getSoftUrl&&_this.form.softUrl==_this.getSoftUrl){
+						
+					}else{
+						var params = new URLSearchParams();
 					params.append("softUrl", _this.form.softUrl);
 					_this.axios.post(baseUrl.baseUrl + '/web/soft/checkIsEqualsSoftUrl', params)
 						.then(function(response) {
@@ -893,6 +894,8 @@
 						.catch(function(error) {
 							console.log(error);
 						})
+					}
+					
 
 				}
 

@@ -543,7 +543,7 @@
 
 			},
 			//立即运行
-			runThisSoft: function() {
+			/*runThisSoft: function() {
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("softId", this.$route.query.id);
@@ -592,19 +592,13 @@
 
 										});
 									} else if(response.data.code == -1) {
-
-										_this.$confirm(response.data.msg, '提示', {
-											confirmButtonText: '确定',
-											cancelButtonText: '取消',
-											type: 'warning'
-										}).then(() => {
-										window.open("http://www.baidu.com")
-											return false;
-
-										}).catch(() => {
-
-										});
-
+										
+										
+										_this.$alert(
+									"试用时间已结束，请通过“nienm@sccas.cn”该邮箱联系管理员", '提示信息', {
+										confirmButtonText: '确定',
+									});
+									
 									} else {
 										_this.$alert(response.data.msg, '提示信息', {
 											confirmButtonText: '确定',
@@ -635,6 +629,19 @@
 					.catch(function(error) {
 						console.log(error);
 					})
+			},*/
+				runThisSoft:function(){
+				
+				var _this = this;
+				var params = new URLSearchParams();
+				params.append("softId", this.$route.query.id);
+				params.append("userId", this.userId);
+				_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+									.then(function(response) {
+										console.log("6666666666888888", response.data)
+										window.open(response.data.url)
+									})
+				
 			},
 
 

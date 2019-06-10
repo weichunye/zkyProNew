@@ -31,6 +31,9 @@
 				<span  v-if="thitdItem.isEvaluate==1" class="pg-ico">已评估</span>
 		</dt>
 		<dd>{{thitdItem.softIntroduce}}</dd>
+	<dd class="dd">
+									<span class="span spanbg">{{thitdItem.programmingLanguage}}</span> <span class="span">{{thitdItem.softVersion}}</span><!--<span class="span">{{thitdItem.userInterface}}</span>--><span class="span" > {{thitdItem.opensourceType}}</span><span class="span" v-if="thitdItem.operatingSystem"> {{thitdItem.operatingSystem}}</span><span class="spantime">{{thitdItem.createTime.substring(0, 10)}}</span><span class="num">{{thitdItem.browseNum}}人浏览</span>
+								</dd>
 		</dl>
 		</router-link>
 		<div v-if="softData.length==0" class="empty-tit"></div>
@@ -94,7 +97,11 @@ export default {
    		.then(function(response){
    			_this.softData=response.data.page.records;
    			_this.totalPage=response.data.page.total
-   			console.log("response",	_this.softData)
+   				_this.$nextTick(function() {
+						var curJ=$('.software-box')
+									$(curJ).eq(curJ.length-1).css('border','0px solid #fff')
+						
+					})
    		
    			
    		})

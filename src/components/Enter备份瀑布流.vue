@@ -2,7 +2,7 @@
 	<div class="enter">
 		<heade></heade>
 
-		<div class="contenttop">
+		<div class="contenttop" >
 			<!--menu-left-->
 			<div class="menu-left">
 				<router-link to="allClassify">
@@ -39,13 +39,9 @@
    	   							
    	   				</dt>
 							<dd>
-								<p>{{item.softIntroduce}}</p>
+								<p>{{item.softIntroduce}} ...</p>
 							</dd>
-							<dd class="dd">
-								<span class="span spanbg">{{item.programmingLanguage}}</span> <span class="span">{{item.softVersion}}</span>
-								<!--<span class="span">{{thitdItem.userInterface}}</span>--><span class="span"> {{item.opensourceType}}</span>
-								<!--<span class="span" v-if="item.operatingSystem"> {{item.operatingSystem}}</span>-->
-							</dd>
+							<dd><span class="spanbg">Window</span> <span> 0.7.2</span><span>组件或类库</span><span> BSD许可</span><span> C++</span></dd>
 						</dl>
 					</router-link>
 
@@ -63,9 +59,9 @@
 						<dl>
 							<dt><p><span>{{item.softName}}</span></p> </dt>
 							<dd>
-								<p><img src="../assets/icon/icon_4.png" />{{item.collectionNum}}</p>
-								<p><img src="../assets/icon/icon_5.png" />{{item.downloadNum}}</p>
-								<p><img src="../assets/icon/icon_6.png" />{{item.runNum}}</p>
+								<p><img src="../assets/icon/icon_4.png"/>{{item.collectionNum}}</p>
+								<p><img src="../assets/icon/icon_5.png"/>{{item.downloadNum}}</p>
+								<p><img src="../assets/icon/icon_6.png"/>{{item.runNum}}</p>
 							</dd>
 						</dl>
 					</router-link>
@@ -77,38 +73,28 @@
 		</div>
 		<div class="game-banner">
 			<router-link target="_blank" :to="'activityGame?id='+activityIngId">
-				<div class="button-box">
-					<router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd1'">
-
-					</router-link>
-					<router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd2'">
-
-					</router-link>
-					<router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd3'">
-
-					</router-link>
-					<router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd4'">
-
-					</router-link>
-				</div>
+				<button>立即参加</button>
+				<!--<h4>
+   			2019年5月1日正式开始
+   		</h4>-->
 			</router-link>
 
 		</div>
 		<!--分类应用领域-->
 		<div id="contype" class="content contype ">
-			<div v-for="item in indexSoftList" class="soft-con">
+			<div  v-for="item in indexSoftList" class="soft-con">
 				<h4 class="classfiy">
    			
    			{{item.ctyName}}
    			
    		</h4>
-				<el-tabs>
-					<el-tab-pane v-for="secondItem in item.sonList" :label="secondItem.ctyName">
-						<router-link :to="{path:'/list',query:{categoryId:secondItem.id,categoryName:secondItem.ctyName,ParentName:'首页'}}"><span class="more">更多</span></router-link>
-						<div class="el-tab-software">
-							<router-link v-if="secondItem.softList.length>0" v-for="thitdItem in secondItem.softList" :to="{path:'/details',query:{id:thitdItem.id,ParentName:'首页'}}">
-								<dl class="software-box">
-									<dt>
+			<el-tabs  @tab-click="handleClick">
+				<el-tab-pane v-for="secondItem in item.sonList" :label="secondItem.ctyName">
+					<router-link :to="{path:'/list',query:{categoryId:secondItem.id,categoryName:secondItem.ctyName,ParentName:'首页'}}"><span class="more">更多</span></router-link>
+					<div class="el-tab-software">
+						<router-link v-if="secondItem.softList.length>0" v-for="thitdItem in secondItem.softList" :to="{path:'/details',query:{id:thitdItem.id,ParentName:'首页'}}">
+							<dl class="software-box">
+								<dt>
 		<h3>{{thitdItem.softName}} 	<span v-if="thitdItem.isHot==1" class="hot-bg">热</span>
    	   					<span v-if="thitdItem.isRecommend==1" class="jian-bg">荐</span>
    	   					<span v-if="thitdItem.isChina==1" class="guo-bg">国</span>
@@ -119,21 +105,20 @@
 		</p>-->
 			<!--<p class="p">版本：{{thitdItem.softVersion}}</p>
 			<p class="p">License：{{thitdItem.softLicense}}</p>-->
-		<!--	<span  v-if="thitdItem.isEvaluate==1" class="pg-ico">已评估</span>-->
+			<span  v-if="thitdItem.isEvaluate==1" class="pg-ico">已评估</span>
 	</dt>
-									<dd>{{thitdItem.softIntroduce}}...</dd>
-									<dd class="dd">
-										<span class="span spanbg">{{thitdItem.programmingLanguage}}</span> <span class="span">{{thitdItem.softVersion}}</span>
-										<!--<span class="span">{{thitdItem.userInterface}}</span>--><span class="span"> {{thitdItem.opensourceType}}</span><span class="span" v-if="thitdItem.operatingSystem"> {{thitdItem.operatingSystem}}</span><span class="spantime">{{thitdItem.createTime.substring(0, 10)}}</span><span class="num">{{thitdItem.browseNum}}人浏览</span>
-									</dd>
-								</dl>
-							</router-link>
-							<div v-if="secondItem.softList.length==0" class="empty-tit"></div>
-						</div>
-					</el-tab-pane>
-				</el-tabs>
+								<dd>{{thitdItem.softIntroduce}}...</dd>
+								<dd class="dd">
+									<span class="span spanbg">Window</span> <span class="span"> 0.7.2</span><span class="span">组件或类库</span><span class="span"> BSD许可</span><span class="span"> C++</span><span class="spantime">2019-04-25</span><span class="num">523人浏览</span>
+								</dd>
+							</dl>
+						</router-link>
+						<div v-if="secondItem.softList.length==0" class="empty-tit"></div>
+					</div>
+				</el-tab-pane>
+			</el-tabs>
 			</div>
-
+			
 		</div>
 		<!--分类应用领域-->
 		<!--竞赛天地-->
@@ -198,18 +183,6 @@
 
 		</div>-->
 		<!--竞赛天地-->
-		<div class="aboutLink">
-			<h3>相关链接</h3>
-			<div class="linkbox">
-				<a href="http://www.cstcloud.cn/" target="_blank"><img src="../assets/img/link_logo_4.png" /></a>
-				<a href="http://www.cnic.cn/front/pc.html#/cnicSite/home" target="_blank"> <img src="../assets/img/link_logo_1.png" /></a>
-				<a href="http://www.cseep.cn" target="_blank"><img src="../assets/img/link_logo_2.png" /></a>
-				<a href="http://www.cstos.cstcloud.cn" target="_blank"><img src="../assets/img/bottom_logo.png" /></a>
-				
-
-			</div>
-
-		</div>
 
 		<foot></foot>
 	</div>
@@ -217,14 +190,14 @@
 
 <script>
 	/*	window.addEventListener('message',function(event) {    
-						console.log("event.origin",event.origin)
-						console.log('received response:',event.data);  
-						
-				    if(event.origin !== 'http://192.168.1.21:8090') return; //这个判断一下是不是我这个域名跳转过来的    
-				    console.log('received response:',event.data);    
-				},false); 
+					console.log("event.origin",event.origin)
+					console.log('received response:',event.data);  
+					
+			    if(event.origin !== 'http://192.168.1.21:8090') return; //这个判断一下是不是我这个域名跳转过来的    
+			    console.log('received response:',event.data);    
+			},false); 
 
-				*/
+			*/
 
 	import heade from './header.vue';
 	import foot from './footer.vue';
@@ -244,21 +217,22 @@
 				indexSoftList: [],
 				activeListIng: [],
 				activeEnd: [],
-				activityIngId: '',
-				//正在进行的竞赛
+				activityIngId: '', //正在进行的竞赛
 
 			}
 		},
 		mounted() {
 			//获取菜单
 			var _this = this;
+			console.log("newtoken", this.token)
+
 			//获取菜单列表
 			_this.getListData('/web/soft/softCtyAllList', 'menuList', _this.mentList)
 			_this.activityIng()
 			//获取热门软件
 			var params = new URLSearchParams();
 			params.append("page", 1);
-			params.append("limit", 5);
+			params.append("limit", 6);
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params)
 				.then(function(response) {
 					_this.hotList = response.data.page.list;
@@ -272,32 +246,25 @@
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftListByCondition ', paramscom)
 				.then(function(response) {
 					_this.recommendedList = response.data.page.list;
-					for(var i=0; i<_this.recommendedList.length; i++){
-						var cur=_this.recommendedList[i];
-						cur.softIntroduce=_this.reBytesStr(cur.softIntroduce,108)+'...'
-					}
 					console.log("_this.recommendedList", _this.recommendedList)
 				})
 
 			//首页所有类别展示
 			var params1 = new URLSearchParams();
 			params1.append("sonCtyNum", 5);
-			params1.append("countNum", 5);
+			params1.append("countNum", 4);
+			console.log("params", params1);
+
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryIndexCtySoftList', params1)
 				.then(function(response) {
 					_this.indexSoftList = response.data.list;
 					console.log("indexSoftList", _this.indexSoftList)
 					_this.$nextTick(function() {
-						for(var i = 0; i < $('.soft-con').length; i++) {
-							var curI = $('.soft-con')[i];
-							for(var k = 0; k < $(curI).find('.el-tab-software').length; k++) {
-								var curK = $(curI).find('.el-tab-software')[k]
-								var curJ = $(curK).find('.software-box')
-								$(curJ).eq(curJ.length - 1).css('border', '0px solid #fff')
-							}
-						}
+						_this.softCon()
 					})
+
 				})
+
 			//活动列表
 			//活动正在报名展示
 			_this.activeDataList('activeListIng', '/web/activity/queryJoinActivityListByCondition', '1,2')
@@ -315,6 +282,7 @@
 						if(fun) {
 							fun()
 						}
+
 					})
 			},
 			mentList: function() {
@@ -337,7 +305,9 @@
 					.then(function(response) {
 						if(response.data.config) {
 							_this.activityIngId = response.data.config.paramValue;
+							console.log("	_this.activityIngId", _this.activityIngId)
 						}
+
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -354,24 +324,78 @@
 					.then(function(response) {
 						_this[ele] = response.data.page.list;
 						console.log("参赛列表", _this[ele])
+
 					})
+
 			},
-			reBytesStr: function(str, len) {
-				if((!str && typeof(str) != 'undefined')) {
-					return '';
+			handleClick:function(){
+				this.softCon()
+				
+			},
+			softCon:function(){
+				
+						var oWrap = document.getElementById("contype");
+				var aItems = oWrap.children;//动态获取长度
+				//取总宽度
+				var totalWidth =  oWrap.offsetWidth;
+				//单个区块宽度
+				var perWidth = aItems[0].offsetWidth;
+				//一行的列数
+				var cols = Math.floor(totalWidth/perWidth);
+				
+				//区块的间距
+				var ml=10
+				var mt  = 10;
+				
+				//排第一行区块的位置
+				//保存每一列高度的数组
+				var arrHei = [];
+				for(var i = 0; i < cols; i++){
+					aItems[i].style.top = 0;
+					aItems[i].style.left = (perWidth+ml)*i + "px";
+					arrHei.push(aItems[i].offsetHeight);
 				}
-				var num = 0;
-				var str1 = str;
-				var str = '';
-				for(var i = 0, lens = str1.length; i < lens; i++) {
-					num += ((str1.charCodeAt(i) > 255) ? 2 : 1);
-					if(num > len) {
-						break;
-					} else {
-						str = str1.substring(0, i + 1);
+				
+				//排剩余的区块
+				conPos(cols);
+				
+				function conPos(startNum){
+					for(var i = startNum; i < aItems.length; i++){
+						aItems[i].style.left = aItems[getMinIndex(arrHei)].style.left;
+						aItems[i].style.top = arrHei[getMinIndex(arrHei)] + mt + "px";
+						//拍完一个之后，更新数组
+						arrHei[getMinIndex(arrHei)] += aItems[i].offsetHeight + mt;
 					}
 				}
-				return str;
+				
+				//定义一个取最小值索引的方法
+				
+				function getMinIndex(arr){
+					var minVal = Math.min.apply(null,arr);
+					var minIndex = arr.indexOf(minVal);
+					return minIndex;
+				}
+				
+				for(var i=0; i<$('.soft-con').length; i++){
+					var cur=$('.soft-con')[i]
+					var curDl=$(cur).find('.software-box')
+					var curDlL=curDl.length;
+					console.log("curDl",curDlL)
+					$(curDl[curDlL-1]).css('border','0px solid green')
+					console.log('$(curDl[curDlL-1])',$(curDl[curDlL-1]).css('border'))
+					
+				}
+				
+				
+					var softConLength=$('.soft-con').length
+						var softConT=$('.soft-con').eq(softConLength-1) 
+						var contypeH=parseFloat(softConT.css('top')) +parseFloat(softConT.css('height'))+softConLength/2*15
+						$('.contype').css('height',contypeH)
+						console.log("softConT",contypeH)
+			
+			
+
+					
 			}
 
 		}
@@ -382,36 +406,31 @@
 	.enter {
 		background: #f2f2f2;
 	}
-	
-	.enter .contype {
+	.enter .contype{
 		position: relative;
 	}
-	
 	.enter .content {
-		overflow: hidden;
+		overflow: visible;
 		margin: 0 auto 0;
 		width: 1200px;
 	}
-	
-	.enter .soft-con {
+	.enter .soft-con{
+		position: absolute;
+		overflow: visible;
 		float: left;
-		margin: 5px;
-		padding: 10px 35px;
+		padding: 10px 37px;
 		width: 520px;
-		height: 750px;
 		background: #fff;
 	}
-	
-	.enter .contenttop {
+	.enter .contenttop{
 		overflow: visible;
-		margin: 10px auto 0;
+		margin: 0 auto 0;
 		width: 1200px;
 		height: 530px;
 	}
 	
 	.enter .contenttop .menu-left {
 		float: left;
-		margin-left: 5px;
 		width: 190px;
 		height: 530px;
 		background: #fff;
@@ -448,9 +467,10 @@
 		line-height: 90px;
 		font-size: 20px;
 		color: #fff;
-		text-indent: 25px;
+		text-align: center;
 		font-weight: bold;
 		background: #3c6bf7;
+
 	}
 	
 	.enter .content .el-tabs--border-card {
@@ -474,14 +494,6 @@
 		background: #de482f;
 	}
 	
-	.enter .contenttop .menu-left .menu-li:hover p {
-		color: #fff;
-	}
-	
-	.enter .contenttop .menu-left .menu-li:hover em {
-		background: url(../assets/icon/arrow_write.png) no-repeat;
-	}
-	
 	.enter .contenttop .menu-left .menu-li p {
 		float: left;
 		font-size: 16px;
@@ -492,7 +504,7 @@
 	.enter .contenttop .menu-left .menu-li em {
 		display: block;
 		float: right;
-		margin: 10px 40px 0 0;
+		margin: 10px 40px 0 0 ;
 		width: 10px;
 		height: 18px;
 		background: url(../assets/icon/arrow.png) no-repeat;
@@ -511,11 +523,11 @@
 	
 	.menu-left-box span {
 		float: left;
-		margin: 0px 12px;
+		margin: 0px 10px;
 		padding: 3px;
-		font-size: 14px;
+		font-size: 13px;
 		color: #666;
-		line-height: 20px;
+		line-height: 18px;
 	}
 	
 	.menu-left-box span:hover {
@@ -524,7 +536,7 @@
 	}
 	
 	.enter .contenttop .recommend {
-		margin: 0 10px;
+		margin: 0 15px;
 		float: left;
 		width: 740px;
 	}
@@ -569,7 +581,7 @@
 		/*border-right: 1px  dashed #dedede;*/
 	}
 	
-	.enter .contenttop .recommend .con dl:hover p {
+	.enter .contenttop .recommend .con dl:hover p{
 		color: #ba7a73;
 	}
 	
@@ -586,7 +598,7 @@
 		font-size: 14px;
 		font-weight: normal;
 		line-height: 30px;
-		color: #4D4D4D;
+		color: #4D4D4D ;
 		overflow: hidden;
 		text-overflow: ellipsis;
 		white-space: nowrap;
@@ -606,18 +618,16 @@
 	}
 	
 	.enter .contenttop .recommend .con dl dd p {
+		overflow: hidden;
+		display: block;
+		width: 100%;
 		height: 34px;
 		font-size: 12px;
 		color: #333;
 		line-height: 17px;
-		overflow: hidden;
-		/*        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;*/
+		text-indent: 12px;
 	}
-	
-	.enter .contenttop .recommend .con dl dd span {
+	.enter .contenttop .recommend .con dl dd span{
 		display: inline-block;
 		background: #B3B3B3;
 		color: #fff;
@@ -627,8 +637,7 @@
 		font-size: 10px;
 		border-radius: 4px;
 	}
-	
-	.enter .contenttop .recommend .con dl dd .spanbg {
+	.enter .contenttop .recommend .con dl dd .spanbg{
 		background: #29ABE2;
 	}
 	
@@ -647,8 +656,8 @@
 	}
 	
 	.enter .contenttop .hotbox .con dl {
-		margin: 13px 0 0;
-		padding: 2px 20px 0px;
+		margin: 15px 0 0;
+		padding: 2px 20px 5px;
 		/*border-bottom: 1px dashed #dedede;*/
 	}
 	
@@ -668,7 +677,7 @@
 	}
 	
 	.enter .contenttop .hotbox .con dl dt p span {
-		font-size: 16px;
+		font-size: 21px;
 		font-weight: bold;
 		line-height: 28px;
 		color: #808080;
@@ -680,13 +689,12 @@
 	
 	.enter .contenttop .hotbox .con dl dd p {
 		float: left;
-		margin: 10px 25px 0px 0;
+		margin: 10px 25px 10px 0;
 		font-size: 14px;
 		line-height: 20px;
 		color: #aaaaaa;
 	}
-	
-	.enter .contenttop .hotbox .con dl dd p img {
+	.enter .contenttop .hotbox .con dl dd p img{
 		margin-right: 5px;
 		width: 14px;
 		height: 13px;
@@ -695,31 +703,10 @@
 	.enter .game-banner {
 		position: relative;
 		margin: 15px auto 10px;
-		width: 1190px;
-		height: 328px;
+		width: 1200px;
+		height: 158px;
 		background: url(../assets/bg/index_game_banner.jpg) no-repeat;
 		cursor: pointer;
-	}
-	
-	.enter .game-banner a {
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-	
-	.enter .game-banner .button-box {
-		position: absolute;
-		bottom: 60px;
-		right: 46px;
-		overflow: hidden;
-	}
-	
-	.enter .game-banner .button-box a {
-		display: block;
-		margin-left: 18px;
-		width: 82px;
-		height: 35px;
-		float: left;
 	}
 	
 	.enter .game-banner button {
@@ -765,13 +752,11 @@
 		width: 4px;
 		background: #e26556;
 	}
-	
-	.enter .el-tabs__item.is-active {
-		color: #F15A24;
+	.enter  .el-tabs__item.is-active{
+		color: #F15A24 ;
 	}
-	
-	.enter .el-tabs__active-bar {
-		background-color: #F15A24;
+	.enter .el-tabs__active-bar{
+		background-color:#F15A24 ;
 	}
 	
 	.enter .el-tab-pane .more {
@@ -799,32 +784,5 @@
 	
 	.enter .activity-box dt {
 		width: 780px;
-	}
-	
-	.enter .aboutLink {
-		overflow: hidden;
-		margin: 15px auto;
-		padding: 0 40px;
-		width: 1110px;
-		height: 140px;
-		background: #fff;
-	}
-	
-	.enter .aboutLink h3 {
-		font-size: 20px;
-		color: #000;
-		line-height: 70px;
-	}
-	
-	.enter .aboutLink .linkbox {
-		overflow: hidden;
-		margin-top: 5px;
-	}
-	
-	.enter .aboutLink .linkbox img {
-		float: left;
-		margin-right: 40px;
-		width: auto;
-		height: 40px;
 	}
 </style>

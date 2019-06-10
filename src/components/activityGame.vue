@@ -47,7 +47,7 @@
 		<!--con-W1200-->
 		<div class="con-W1200">
 			<!--1-->
-			<div class="title-top title-top1">
+			<div id="acTd1" class="title-top title-top1">
 				<span class="span1">1</span>
 				<span class="span2">活动目的</span>
 			</div>
@@ -147,14 +147,14 @@
 			</div>
 			<div v-else="">
 				<!--2-->
-				<div class="title-top title-top2">
+				<div id="acTd2" class="title-top title-top2">
 					<span class="span1">2</span>
 					<span class="span2">日程安排和比赛流程</span>
 				</div>
 				<img class="stepimg" :src="stepImgSrc" alt="日程安排和比赛流程" />
 				<!--2-->
 				<!--3-->
-				<div class="title-top title-top1">
+				<div id="acTd3" class="title-top title-top1">
 					<span class="span1">3</span>
 					<span class="span2">参赛方式</span>
 				</div>
@@ -164,7 +164,7 @@
 				</div>
 				<!--3-->
 				<!--4-->
-				<div class="title-top title-top1">
+				<div id="acTd4" class="title-top title-top1">
 					<span class="span1">4</span>
 					<span class="span2">作品评审</span>
 				</div>
@@ -190,7 +190,7 @@
 					<li class="li4">{{activityInfo.potentialAward}}</li>
 				</ul>
 				<p class="prize4">
-					所有报名参与大赛未获得奖项的有效选手，均将获得参赛纪念证书，软件可以在“中国科技云”科研开源软件社区发布。
+					所有报名参与大赛未获得奖项的有效选手，均将获得参赛纪念证书，软件可以在“中国科技云”科学软件开源社区发布。
 				</p>
 			</div>
 			<div class="copy-box">
@@ -415,7 +415,7 @@
 		<!--报名-->
 
 		<!--报名浮窗-->
-		<a  v-if="activityInfo.status==2&&!presentFloat" href="javascript:;" @click="signUpActity" class="present_float">
+		<a v-if="activityInfo.status==2&&!presentFloat" href="javascript:;" @click="signUpActity" class="present_float">
 			<div class="ballute_blue">
 			</div>
 			<div class="ballute_pink">
@@ -430,7 +430,6 @@
 
 	</div>
 </template>
-
 
 <script>
 	import TinymceEditor from '@/components/tinymce-editor'
@@ -545,6 +544,7 @@
 					_this.activityInfo = _this.activityData.activityInfo
 					_this.matchStartDate = _this.activityInfo.startDate.substring(0, 10)
 					_this.matchEndDate = _this.activityInfo.endDate.substring(0, 10)
+					_this.anchorJump()
 
 					console.log("_this.activityInfo", _this.activityInfo)
 					_this.stepImgSrc = baseUrl.baseUrlImg + _this.activityInfo.scheduleProcess
@@ -596,40 +596,38 @@
 				}
 				console.log("this.userId", this.userId)
 				if(this.userId) {
-							//验证token是否过期
-			_this.axios.defaults.headers.common['token'] = this.token;
-			_this.axios.post(baseUrl.baseUrl + '/web/user/checkingToken')
-				.then(function(response) {
-							if(response.data.code==401){
-					_this.$confirm(response.data.msg, '提示', {
-						confirmButtonText: '确定',
-						cancelButtonText: '取消',
-						type: 'warning'
-					}).then(() => {
-						sessionStorage.clear()
-				console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
-						var newUrl = baseUrl.baseUrl + '/web/auth/login';
-						window.open(newUrl)
-						return false;
+					//验证token是否过期
+					_this.axios.defaults.headers.common['token'] = this.token;
+					_this.axios.post(baseUrl.baseUrl + '/web/user/checkingToken')
+						.then(function(response) {
+							if(response.data.code == 401) {
+								_this.$confirm(response.data.msg, '提示', {
+									confirmButtonText: '确定',
+									cancelButtonText: '取消',
+									type: 'warning'
+								}).then(() => {
+									sessionStorage.clear()
+									console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
+									var newUrl = baseUrl.baseUrl + '/web/auth/login';
+									window.open(newUrl)
+									return false;
 
-					}).catch(() => {
+								}).catch(() => {
 
-					});
-				}else{
-					_this.$router.push({
-						path: '/agSignUp',
-						query: {
-							activityId: _this.$route.query.id
-						}
-					});
-				}
-					
-				})
-				.catch(function(error) {
-					console.log(error);
-				})
+								});
+							} else {
+								_this.$router.push({
+									path: '/agSignUp',
+									query: {
+										activityId: _this.$route.query.id
+									}
+								});
+							}
 
-					
+						})
+						.catch(function(error) {
+							console.log(error);
+						})
 
 				} else {
 					_this.$confirm('请登录', '提示', {
@@ -949,6 +947,14 @@
 				})
 
 			},
+			anchorJump: function() {
+				var _this=this;
+				var getId=_this.$route.query.acId;
+				const anchorEle =document.querySelector("#"+getId);
+				if(!!anchorEle) {
+					anchorEle.scrollIntoView(true);
+				}
+			},
 			ismobile: function() {
 				var mobileArry = ["iPhone", "iPad", "Android", "Windows Phone", "BB10; Touch", "BB10; Touch", "PlayBook", "Nokia"];
 				var ua = navigator.userAgent;
@@ -1047,12 +1053,14 @@
 </script>
 
 <style>
-	body{
+	body {
 		background: #fff;
 	}
-	.activityGame{
+	
+	.activityGame {
 		background: #fff;
 	}
+	
 	.activityGame .logo {
 		position: absolute;
 		left: -50px;
@@ -1818,10 +1826,10 @@
 	}
 	
 	@media only screen and (max-width:1200px) {
-		body{
+		body {
 			background: #fff;
 		}
-	/*	.activityGame .title-top{
+		/*	.activityGame .title-top{
 			background: #4794e4;
 			height: 40px;
 		}
@@ -1835,17 +1843,17 @@
 			line-height: 40px;
 			color: #fff;
 		}*/
-		.activityGame .objective{
+		.activityGame .objective {
 			background-image: none;
 			background: #eef5f9;
 			height: auto;
 		}
-		.activityGame .objective .objectivep{
+		.activityGame .objective .objectivep {
 			padding: 10px;
 			font-size: 16px;
 			line-height: 20px;
 		}
-	/*	.activityGame .entry-mode{
+		/*	.activityGame .entry-mode{
 			font-size: 24px;
 		}
 		.activityGame .review-center h4{

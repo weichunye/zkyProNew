@@ -10,7 +10,7 @@
 						<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 					</router-link>
 					<p class="text">
-						欢迎来到科学计算开源社区！
+						欢迎来到科学软件开源社区！
 					</p>
 
 					<p @click="toPersonalInfo" class="right-text">个人中心</p>
@@ -102,7 +102,7 @@
 
 						<el-form-item label="代码地址" :label-width="formLabelWidth">
 							<em class="addti">*</em>
-							<el-input v-model="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
+							<el-input v-model.trim="form.softUrl" @blur='checkUrl' placeholder="github或cstos.cstcloud.cn的项目地址，推荐使用cstos.cstcloud.cn" auto-complete="off"></el-input>
 							<!--<a class="gitUrl" v-if="form.softUrl" target="_blank" :href="form.softUrl">查看</a>-->
 							<p class="textp"> {{softUrlTit}}</p>
 						</el-form-item>
@@ -256,6 +256,7 @@
 				softUrlTit: '',
 				joinVoUrl: '',
 				imageUrl: '',
+				getSoftUrl:'',
 				firstDomains: {
 					activityId: 0,
 					awardLevel: 0,
@@ -388,7 +389,7 @@
 						_this.form.operatingSystem = softInfoObg.operatingSystems;
 						console.log("softInfoObg.isSelf", softInfoObg.isSelf)
 						console.log("_this.form.operatingSystem", _this.form.operatingSystem)
-						_this.form.softUrl = softInfoObg.softUrl;
+						_this.form.softUrl=_this.getSoftUrl = softInfoObg.softUrl;
 						_this.form.abstract = softInfoObg.softIntroduce;
 						_this.form.ifCrossPlatform = softInfoObg.isPlatform == 1 ? true : false;
 						_this.form.ifSelfStudy = softInfoObg.isSelf == 1 ? true : false;
@@ -428,7 +429,10 @@
 						return false
 
 					}
-					var params = new URLSearchParams();
+					if(_this.getSoftUrl&&_this.form.softUrl==_this.getSoftUrl){
+						
+					}else{
+							var params = new URLSearchParams();
 					params.append("softUrl", _this.form.softUrl);
 					_this.axios.post(baseUrl.baseUrl + '/web/soft/checkIsEqualsSoftUrl', params)
 						.then(function(response) {
@@ -444,6 +448,8 @@
 						.catch(function(error) {
 							console.log(error);
 						})
+					}
+				
 
 				}
 

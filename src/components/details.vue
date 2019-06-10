@@ -153,7 +153,7 @@
 			<!--right-box-->
 			<ul class="bottom-btn-box">
 				<li v-if="userIdData&&ifDownWordUrl">
-					<a class="DownWorlds"  :href="DownWordUrl">
+					<a class="DownWorlds" :href="DownWordUrl">
 						<img src="../assets/icon/float_nav_2.png" alt="" />
 						<p>文档下载</p>
 					</a>
@@ -257,9 +257,9 @@
 				userIdData: '',
 				indexeCharts: false,
 				softLogoUrl: '',
-				ifDownWordUrl:'',
+				ifDownWordUrl: '',
 				newSoftUrl: '',
-				runUrl:'',
+				runUrl: '',
 				config: {
 
 					url: window.location.href,
@@ -400,15 +400,15 @@
 						console.log("获取信息", response)
 						_this.softData = response.data.softInfo;
 						_this.statInfo = response.data.statInfo;
-						_this.runUrl=response.data.softInfo.runUrl;
+						_this.runUrl = response.data.softInfo.runUrl;
 						_this.softData.createTime = _this.softData.createTime.substring(0, 10)
 						_this.categoryInfo = response.data.categoryInfo;
 						_this.newSoftUrl = _this.softData.softUrl.split(",")[0]
-						var collectionNumNew=_this.statInfo.collectionNum>100?100:_this.statInfo.collectionNum;
-						var enjoyNumNew=_this.statInfo.enjoyNum>100?100:_this.statInfo.enjoyNum;
-						var downloadNumNew=_this.statInfo.downloadNum>100?100:_this.statInfo.downloadNum;
-						var browseNumNew=_this.statInfo.browseNum>100?100:_this.statInfo.browseNum;
-						var runNumNew=_this.statInfo.runNum>100?100:_this.statInfo.runNum;
+						var collectionNumNew = _this.statInfo.collectionNum > 100 ? 100 : _this.statInfo.collectionNum;
+						var enjoyNumNew = _this.statInfo.enjoyNum > 100 ? 100 : _this.statInfo.enjoyNum;
+						var downloadNumNew = _this.statInfo.downloadNum > 100 ? 100 : _this.statInfo.downloadNum;
+						var browseNumNew = _this.statInfo.browseNum > 100 ? 100 : _this.statInfo.browseNum;
+						var runNumNew = _this.statInfo.runNum > 100 ? 100 : _this.statInfo.runNum;
 						_this.option.series[0].data[0].value = [collectionNumNew, enjoyNumNew, downloadNumNew, browseNumNew, runNumNew]
 						console.log("_this[option].series[0].data[0]", _this.option.series[0].data[0].value)
 						_this.myChart.setOption(_this.option);
@@ -440,7 +440,7 @@
 						console.log("response6666", response)
 					})
 			},
-			runThisSoft: function() {
+			/*runThisSoft: function() {
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("softId", this.$route.query.id);
@@ -489,19 +489,11 @@
 
 										});
 									} else if(response.data.code == -1) {
-
-										_this.$confirm(response.data.msg, '提示', {
-											confirmButtonText: '确定',
-											cancelButtonText: '取消',
-											type: 'warning'
-										}).then(() => {
-										window.open("http://www.baidu.com")
-											return false;
-
-										}).catch(() => {
-
-										});
-
+										
+										_this.$alert(
+									"试用时间已结束，请通过“nienm@sccas.cn”该邮箱联系管理员", '提示信息', {
+										confirmButtonText: '确定',
+									});
 									} else {
 										_this.$alert(response.data.msg, '提示信息', {
 											confirmButtonText: '确定',
@@ -532,6 +524,19 @@
 					.catch(function(error) {
 						console.log(error);
 					})
+			},*/
+			runThisSoft: function() {
+
+				var _this = this;
+				var params = new URLSearchParams();
+				params.append("softId", this.$route.query.id);
+				params.append("userId", this.userId);
+				_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
+					.then(function(response) {
+						console.log("6666666666888888", response.data)
+						window.open(response.data.url)
+					})
+
 			},
 
 			//收藏下载操作
@@ -810,9 +815,9 @@
 						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
-							_this.ifDownWordUrl=response.data.packageUrl
+							_this.ifDownWordUrl = response.data.packageUrl
 
-						} 
+						}
 
 					})
 			},
@@ -950,6 +955,7 @@
 	
 	.details .top-box .left-box .p a {
 		color: #c86f60;
+		line-height: 14px;
 		text-decoration: underline;
 	}
 	

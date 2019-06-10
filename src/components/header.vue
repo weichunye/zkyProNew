@@ -5,7 +5,7 @@
 			<div class="reposbox">
 				<img class="logo" src="../assets/img/top_logo.png" alt="logo" />
 				<p class="text">
-					欢迎来到科学计算开源社区！
+					欢迎来到科学软件开源社区！
 				</p>
 				<div class="search-box">
 					<el-select class="classify" v-model="searchArr.itemType" placeholder="请选择">
@@ -18,7 +18,7 @@
 
 					</div>
 
-					<button @click="toSearchList">搜索</button>
+					<button @click="toSearchList"></button>
 
 				</div>
 					<div v-if="!showLogin">
@@ -111,13 +111,13 @@
 <style>
 	.header .header-top {
 		width: 100%;
-		height: 46px;
+		height:66px;
 		background: #4b505d;
 	}
 	
 	.header .classify {
 		float: left;
-		width: 100px;
+		width: 80px;
 	}
 	
 	.header .input {
@@ -131,9 +131,9 @@
 		position: relative;
 		margin: 0 auto;
 		width: 1200px;
-		height: 46px;
+		height: 66px;
 		font-size: 14px;
-		line-height: 46px;
+		line-height: 66px;
 		color: #fff;
 	}
 	
@@ -147,16 +147,17 @@
 	.header .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
-		line-height: 46px;
+		line-height: 66px;
 		color: #fff;
 	}
 	
 	.header .header-top .reposbox .search-box {
 		overflow: hidden;
 		float: left;
-		margin: 7px 0 0 100px;
+		margin: 14px 0 0 260px;
 		width: 500px;
-		height: 32px;
+		height: 40px;
+		
 	}
 	
 	.header .header-top .reposbox .search-box input {
@@ -164,20 +165,26 @@
 		margin: 0;
 		padding: 0 10px;
 		width: 320px;
-		height: 32px;
+		height: 40px;
 		box-sizing: border-box;
 		border-radius: 0;
+		background: #fff;
+		border: 0;
+		border-left: 1px solid #dedede;
 	}
 	
 	.header .header-top .reposbox .search-box button {
+		display: block;
 		float: left;
 		width: 60px;
 		text-align: center;
-		line-height: 32px;
+		line-height: 40px;
+		height: 40px;
 		font-size: 16px;
 		color: #fff;
-		background: #e26556;
+		background: url(../assets/bg/search_icon.png) no-repeat;
 		box-sizing: border-box;
+		border: none;
 	}
 	
 	.header .header-top .reposbox .search-box select {
@@ -192,7 +199,7 @@
 		float: right;
 		margin-right: 10px;
 		font-size: 14px;
-		line-height: 46px;
+		line-height: 66px;
 		color: #f4f4f4;
 		cursor: pointer;
 	}

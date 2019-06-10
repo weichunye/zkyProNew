@@ -33,6 +33,8 @@ export default {
 
 <style>
 	.foot{
+		overflow: hidden;
+		display: block;
 		width: 100%;
 		line-height: 36px;
 		background: #4b505d;

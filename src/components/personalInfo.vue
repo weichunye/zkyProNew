@@ -147,7 +147,6 @@
 						<el-pagination layout="total, prev, pager, next, jumper" @size-change="collecTionNumSizeChange" @current-change="collecTionNumCurrentChange" :total="collecTionNum.total" :current-page.sync="collecTionNum.page" :page-size="limit">
 						</el-pagination>
 					</div>
-
 				</el-tab-pane>
 				<el-tab-pane label="分享">
 					<div class="min-height">
@@ -162,24 +161,26 @@
 						</div>
 						<div v-else="" class="el-tab-software">
 							<div class="empty-tit">
-
 							</div>
 						</div>
 						<el-pagination layout="total, prev, pager, next, jumper" @size-change="enjoyNumSizeChange" @current-change="enjoyNumCurrentChange" :total="enjoyNum.total" :current-page.sync="enjoyNum.page" :page-size="limit">
 						</el-pagination>
 					</div>
-
 				</el-tab-pane>
 				<el-tab-pane label="我的报名">
 					<div class="min-height">
 						<template>
 							<el-table :data="myJoinList" border style="width: 100%;">
-								<el-table-column header-align="center" prop="joinTime" label="活动时间" width="260">
+								<el-table-column header-align="center" prop="joinTime" label="活动时间" width="140">
+									<template slot-scope="scope">
+										{{scope.row.joinTime.substring(0,10)}}
+									</template>
+									
 								</el-table-column>
 
 								<el-table-column header-align="center" prop="activityName" label="活动名称">
 								</el-table-column>
-								<el-table-column header-align="center" prop="softName" label="软件名称" width="120">
+								<el-table-column header-align="center" prop="softName" label="软件名称" >
 								</el-table-column>
 								<el-table-column header-align="center" prop="status" label="状态" width="150">
 									<template slot-scope="scope">
@@ -661,7 +662,6 @@
 					_this.getmyfeedbackList()*/
 			_this.userInfoNew = this.userInfo.trueName;
 			_this.cstnetIdNew = this.userInfo.cstnetId
-			console.log("_this.userInfoNew", _this.userInfoNew)
 
 			//验证token是否过期
 			_this.axios.defaults.headers.common['token'] = this.token;
@@ -674,7 +674,6 @@
 							type: 'warning'
 						}).then(() => {
 							sessionStorage.clear()
-							console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 							var newUrl = baseUrl.baseUrl + '/web/auth/login';
 							window.open(newUrl)
 							return false;
@@ -720,7 +719,7 @@
 				params1.append("limit", _this.limit);
 				_this.axios.post(baseUrl.baseUrl + '/web/user/listMyFeedback', params1)
 					.then(function(response) {
-						console.log("66666", response.data)
+						console.log("我的投递", response.data)
 						_this.myfeedbackList = response.data.page.list;
 						_this.myfeedbackObj.page = response.data.page.currPage;
 						_this.myfeedbackObj.total = response.data.page.totalCount;
@@ -748,7 +747,6 @@
 					.then(function(response) {
 						_this[ele].dataList = response.data.page.records;
 						_this[ele].total = response.data.page.total;
-						console.log("response.data", _this[ele].total)
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -767,8 +765,7 @@
 						_this.myJoinList = response.data.page.records;
 						_this.myJoinObj.page = response.data.page.current;
 						_this.myJoinObj.total = response.data.page.total;
-						console.log("_this.myJoinList.total", _this.myJoinList.total)
-						console.log("myJoinList", _this.myJoinList)
+						console.log("我参加的竞赛", _this.myJoinList)
 
 					})
 					.catch(function(error) {
@@ -991,7 +988,6 @@
 
 			//获取参赛人信息
 			getActivityInfo: function(row) {
-				console.log("row005", row)
 				var _this = this;
 				_this.ActivityInfoPop = true;
 				var params = new URLSearchParams();
@@ -1016,7 +1012,6 @@
 						_this.softImgTwoUrl = baseUrl.baseUrlImg + _this.softDocObg.softImgTwo
 						_this.softImgThreeUrl = baseUrl.baseUrlImg + _this.softDocObg.softImgThree
 						_this.softVideoUrl = baseUrl.baseUrlImg + _this.softDocObg.softVideo
-						console.log("_this.singInfo", response)
 
 					})
 					.catch(function(error) {
@@ -1027,7 +1022,6 @@
 			//修改参赛餐料
 			toModify: function(row) {
 				var _this = this;
-				console.log(row);
 				var params = new URLSearchParams();
 				params.append("token", this.token);
 				params.append("softId", row.softId);
@@ -1059,7 +1053,6 @@
 			//删除软件
 			delSoft: function(row) {
 				var _this = this;
-				console.log(row);
 
 				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
 					confirmButtonText: '确定',
@@ -1088,7 +1081,6 @@
 									type: 'warning'
 								}).then(() => {
 									sessionStorage.clear()
-									console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 									var newUrl = baseUrl.baseUrl + '/web/auth/login';
 									window.open(newUrl)
 									return false;
@@ -1119,8 +1111,6 @@
 			//
 			delSoftOrdinary: function(row) {
 				var _this = this;
-				console.log(row);
-
 				this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
 					confirmButtonText: '确定',
 					cancelButtonText: '取消',
@@ -1150,7 +1140,6 @@
 									type: 'warning'
 								}).then(() => {
 									sessionStorage.clear()
-									console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 									var newUrl = baseUrl.baseUrl + '/web/auth/login';
 									window.open(newUrl)
 									return false;
@@ -1182,7 +1171,6 @@
 
 			toActivity(row) {
 				var _this = this;
-				console.log(row);
 				var newObj = {
 					id: row.id
 				}
@@ -1244,9 +1232,6 @@
 				this.form.name = name;
 				this.form.softUrl = url;
 				this.curSoftId = id;
-				console.log("name", name)
-				console.log("url", url)
-				console.log("id", id)
 				this.dialogReview = true
 
 			},
@@ -1283,7 +1268,6 @@
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/startEvaluate', softDoc)
 					.then(function(response) {
 						if(response.data.code == 0) {
-							console.log('成功')
 							_this.$alert(response.data.msg, '提示信息', {
 								confirmButtonText: '确定',
 							});
@@ -1297,7 +1281,6 @@
 								type: 'warning'
 							}).then(() => {
 								sessionStorage.clear()
-								console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 								var newUrl = baseUrl.baseUrl + '/web/auth/login';
 								window.open(newUrl)
 								return false;
@@ -1373,16 +1356,13 @@
 					return false;
 				}*/
 				if(this.form.analysisDoc && this.form.itemBookDoc && this.form.testDoc && this.form.userDoc) {
-					console.log("sub", softDoc)
 
-					console.log("formName", formName)
 					_this.$refs[formName].validate((valid) => {
 						if(valid) {
 							_this.axios.defaults.headers.common['token'] = this.token;
 							_this.axios.post(baseUrl.baseUrl + '/web/soft/startEvaluate', softDoc)
 								.then(function(response) {
 									if(response.data.code == 0) {
-										console.log('成功')
 										_this.$alert(response.data.msg, '提示信息', {
 											confirmButtonText: '确定',
 										});
@@ -1396,7 +1376,6 @@
 											type: 'warning'
 										}).then(() => {
 											sessionStorage.clear()
-											console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 											var newUrl = baseUrl.baseUrl + '/web/auth/login';
 											window.open(newUrl)
 											return false;
