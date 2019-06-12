@@ -747,6 +747,7 @@
 					firstAudit: 0,
 					firstAuditRejectReason: "",
 					id: 0,
+					createUserName:this.userInfo.trueName,
 					isChina: 0,
 					isEvaluate: 0,
 					isExpertEvaluate: 0,

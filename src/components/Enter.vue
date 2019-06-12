@@ -258,7 +258,7 @@
 			//获取热门软件
 			var params = new URLSearchParams();
 			params.append("page", 1);
-			params.append("limit", 5);
+			params.append("limit", 7);
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params)
 				.then(function(response) {
 					_this.hotList = response.data.page.list;
@@ -647,7 +647,7 @@
 	}
 	
 	.enter .contenttop .hotbox .con dl {
-		margin: 13px 0 0;
+		margin: 10px 0 0;
 		padding: 2px 20px 0px;
 		/*border-bottom: 1px dashed #dedede;*/
 	}
@@ -670,7 +670,7 @@
 	.enter .contenttop .hotbox .con dl dt p span {
 		font-size: 16px;
 		font-weight: bold;
-		line-height: 28px;
+		line-height: 26px;
 		color: #808080;
 	}
 	
@@ -680,7 +680,7 @@
 	
 	.enter .contenttop .hotbox .con dl dd p {
 		float: left;
-		margin: 10px 25px 0px 0;
+		margin: 5px 25px 0px 0;
 		font-size: 14px;
 		line-height: 20px;
 		color: #aaaaaa;

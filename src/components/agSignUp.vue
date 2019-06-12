@@ -208,13 +208,15 @@
 
 									</div>
 								</el-form-item>
-								<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :on-success='analysisDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
+								<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :on-success='analysisDocSuccess' :on-change="analysisDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload()">上传到服务器</el-button>
+									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitUpload()">上     传</el-button>
 									<a target="_blank" :href="analysisDocUrl">
 										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
 									</a>
-									<div slot="tip" class="el-upload__tip">描述设计架构，模块功能描述，相关依赖软件的说明，与同类软件对比分析等。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+									<div slot="tip" class="el-upload__tip">描述设计架构，模块功能描述，相关依赖软件的说明，与同类软件对比分析等。只能上传 .doc/.docx/.pdf文件，且不超过1M
+									<span v-if="analysisCheck&&!form.analysisName">请确认文档并上传</span>
+									</div>
 								</el-upload>
 							</div>
 							<div class="box">
@@ -227,14 +229,14 @@
 									</div>
 								</el-form-item>
 
-								<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :on-success='itemBookDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
+								<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :on-success='itemBookDocSuccess' :on-change="itemBookDocChange"  :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
 
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitItemBook()">上传到服务器</el-button>
+									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitItemBook()">上     传</el-button>
 									<a target="_blank" :href="itemBookDocUrl">
 										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
 									</a>
-									<div slot="tip" class="el-upload__tip">包括创作思路，科研领域，成功案例等。只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+									<div slot="tip" class="el-upload__tip">包括创作思路，科研领域，成功案例等。只能上传 .doc/.docx/.pdf文件，且不超过1M<span v-if="itemBookCheck&&!form.itemBookName">请确认文档并上传</span></div>
 								</el-upload>
 
 							</div>
@@ -247,13 +249,13 @@
 
 									</div>
 								</el-form-item>
-								<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :on-success='testDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
+								<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :on-success='testDocSuccess' :on-change="testDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitTestDoc()">上传到服务器</el-button>
+									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitTestDoc()">上     传</el-button>
 									<a target="_blank" :href="testDocUrl">
 										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
 									</a>
-									<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+									<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M<span  v-if="testDocCheck&&!form.testDocName">请确认文档并上传</span></div>
 								</el-upload>
 
 							</div>
@@ -266,13 +268,13 @@
 
 									</div>
 								</el-form-item>
-								<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :on-success='userDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
+								<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :on-success='userDocSuccess' :on-change="userDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitUserDoc()">上传到服务器</el-button>
+									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitUserDoc()">上     传</el-button>
 									<a target="_blank" :href="userDocUrl">
 										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
 									</a>
-									<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M</div>
+									<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M<span v-if="userDocCheck&&!form.userDocName" >请确认文档并上传</span></div>
 								</el-upload>
 
 							</div>
@@ -286,7 +288,7 @@
 								</el-form-item>
 								<el-upload class="upload-demo" ref="frameworkReportDocRef" :action=upUrl :on-success='frameworkReportDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList9">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-									<el-button style="margin-left: 10px;" size="small" type="success" @click="submitFrameworkReportDoc()">上传到服务器</el-button>
+									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitFrameworkReportDoc()">上     传</el-button>
 									<a target="_blank" :href="frameworkReportDocUrl">
 										<el-button v-if="ifCheck" style="float: right; margin-left: 10px;" size="small">查看已上传文件</el-button>
 									</a>
@@ -419,6 +421,10 @@
 					softVideoName: '',
 					ifHsowRealName: false, //true不匿名，false匿名
 				},
+				analysisCheck:'',
+				itemBookCheck:'',
+				testDocCheck:'',
+				userDocCheck:'',
 				fileList1: [],
 				fileList2: [],
 				fileList3: [],
@@ -679,7 +685,7 @@
 			},
 			analysisDocSuccess: function(response, file, fileList) {
 				console.log("response", response)
-				this.form.analysisDoc = response.filePath;
+				console.log("this.analysisCheck",this.analysisCheck)
 				this.form.analysisDoc = response.filePath;
 				this.form.analysisName = response.originalFileName;
 				var codeStype;
@@ -688,13 +694,18 @@
 
 				} else {
 					codeStype = 'warning'
+					
 				}
 				this.messageOpen(response.msg, codeStype)
-				if(response.code == 452) {
-					this.fileList1 = []
-				}
+				this.fileList1 = []
 
+	
 			},
+			  analysisDocChange(file) {
+			  	this.analysisCheck=file.name
+			  
+       			 
+      			},
 
 			//项目规格书
 			submitItemBook() {
@@ -712,11 +723,12 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				if(response.code == 452) {
-					this.fileList2 = []
-				}
+				this.fileList2 = []
 
 			},
+			 itemBookDocChange(file) {
+       				this.itemBookCheck=file.name
+      			},
 			submitUserDoc() {
 				this.$refs.userDocRef.submit();
 			},
@@ -732,11 +744,12 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				if(response.code == 452) {
-					this.fileList4 = []
-				}
+				this.fileList4 = []
 
 			},
+			 userDocChange(file) {
+       				this.userDocCheck=file.name
+      			},
 			submitSoftResultDoc() {
 				this.$refs.softResultDocRef.submit();
 			},
@@ -753,6 +766,7 @@
 				this.messageOpen(response.msg, codeStype)
 
 			},
+			
 			/*submitFrameworkReportDoc() {
 				this.$refs.frameworkReportDocRef.submit();
 			},
@@ -788,11 +802,12 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				if(response.code == 452) {
-					this.fileList3 = []
-				}
+				this.fileList3 = []
 
 			},
+			testDocChange(file) {
+       			this.testDocCheck=file.name
+      			},
 
 			ImgSuccessFirst: function(response, file, fileList) {
 				this.form.softImgOne = response.filePath;
@@ -921,6 +936,7 @@
 					firstAudit: 0,
 					firstAuditRejectReason: "",
 					id: _this.checkId,
+					createUserName:this.userInfo.trueName,
 					isChina: 0,
 					isEvaluate: 0,
 					isExpertEvaluate: 0,
@@ -1699,5 +1715,12 @@
 		color: #fff;
 		z-index: 10000;
 		background: url(../assets/icon/icon_word.png) no-repeat;
+	}
+	.agSignUp .el-upload__tip span{
+		display: block;
+		width: 100%;
+		font-size: 12px;
+		color: #F56C6C;
+		
 	}
 </style>
