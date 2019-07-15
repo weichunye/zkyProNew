@@ -360,7 +360,6 @@
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params1)
 				.then(function(response) {
 					_this.hotList = response.data.page.list;
-					console.log("_this.hotList", response)
 				})
 			//获取标签列表
 			_this.getSoftLabel()
@@ -369,7 +368,6 @@
 			_this.$nextTick(function() {
 				_this.myChart = this.$echarts.init(document.getElementById('oscilloGram'))
 
-				console.log("myChart", _this.myChart)
 				_this.myChart.setOption(_this.option);
 			})
 			_this.$nextTick(function() {
@@ -397,7 +395,6 @@
 				params.append("labelNum", 5);
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftInfoById', params)
 					.then(function(response) {
-						console.log("获取信息", response)
 						_this.softData = response.data.softInfo;
 						_this.statInfo = response.data.statInfo;
 						_this.runUrl=response.data.softInfo.runUrl;
@@ -410,7 +407,6 @@
 						var browseNumNew=_this.statInfo.browseNum>100?100:_this.statInfo.browseNum;
 						var runNumNew=_this.statInfo.runNum>100?100:_this.statInfo.runNum;
 						_this.option.series[0].data[0].value = [collectionNumNew, enjoyNumNew, downloadNumNew, browseNumNew, runNumNew]
-						console.log("_this[option].series[0].data[0]", _this.option.series[0].data[0].value)
 						_this.myChart.setOption(_this.option);
 
 						if(_this.softData.opensourceType == 1) {
@@ -437,7 +433,6 @@
 						if(_this.softData.opensourceType == 8) {
 							_this.softData.opensourceType = '其他类型'
 						}
-						console.log("response6666", response)
 					})
 
 			},
@@ -473,7 +468,6 @@
 
 				_this.axios.post(baseUrl.baseUrl + '/web/user/saveFollow', softFollowHistory)
 					.then(function(response) {
-						console.log("response.data.code", response.data.code)
 						//验证token是否过期
 						if(response.data.code == 401) {
 							_this.$confirm(response.data.msg, '提示', {
@@ -503,10 +497,7 @@
 								_this.sharShow = true;
 								$('.sharbox-over a').each(function(index, item) {
 									$(item).unbind().bind('click', function() {
-										console.log("this", $(item))
-										console.log("_this.statInfo.enjoyNum", _this.statInfo.enjoyNum)
 										_this.statInfo.enjoyNum = _this.statInfo.enjoyNum + 1;
-										console.log("_this.statInfo.enjoyNum", _this.statInfo.enjoyNum)
 										_this.sharShow = false;
 									})
 								})

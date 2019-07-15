@@ -262,7 +262,6 @@
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params)
 				.then(function(response) {
 					_this.hotList = response.data.page.list;
-					console.log("_this.hotList", response)
 				})
 			//获取推荐列表
 			var paramscom = new URLSearchParams();
@@ -276,7 +275,6 @@
 						var cur=_this.recommendedList[i];
 						cur.softIntroduce=_this.reBytesStr(cur.softIntroduce,108)+'...'
 					}
-					console.log("_this.recommendedList", _this.recommendedList)
 				})
 
 			//首页所有类别展示
@@ -286,7 +284,6 @@
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryIndexCtySoftList', params1)
 				.then(function(response) {
 					_this.indexSoftList = response.data.list;
-					console.log("indexSoftList", _this.indexSoftList)
 					_this.$nextTick(function() {
 						for(var i = 0; i < $('.soft-con').length; i++) {
 							var curI = $('.soft-con')[i];
@@ -344,7 +341,6 @@
 					})
 			},
 			activeDataList: function(ele, url, satus) {
-				console.log("ele", ele)
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("page", 1);
@@ -353,7 +349,6 @@
 				_this.axios.post(baseUrl.baseUrl + url, params)
 					.then(function(response) {
 						_this[ele] = response.data.page.list;
-						console.log("参赛列表", _this[ele])
 					})
 			},
 			reBytesStr: function(str, len) {

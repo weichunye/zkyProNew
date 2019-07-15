@@ -532,21 +532,16 @@
 			//获取活动基本信息
 			var _this = this;
 			_this.ifMobile = _this.ismobile()
-			console.log("ismobile", _this.ismobile())
-			
-
 			var params = new URLSearchParams();
 			params.append("activityId", _this.$route.query.id);
 			_this.axios.post(baseUrl.baseUrl + '/web/activity/activityInfo ', params)
 				.then(function(response) {
 					_this.activityData = response.data.activity;
-					console.log("_this.activityData", response)
 					_this.activityInfo = _this.activityData.activityInfo
 					_this.matchStartDate = _this.activityInfo.startDate.substring(0, 10)
 					_this.matchEndDate = _this.activityInfo.endDate.substring(0, 10)
 					_this.anchorJump()
 
-					console.log("_this.activityInfo", _this.activityInfo)
 					_this.stepImgSrc = baseUrl.baseUrlImg + _this.activityInfo.scheduleProcess
 					var rankEle = _this.activityData.activityUserList;
 					if(rankEle) {
@@ -579,7 +574,6 @@
 				var _this = this;
 				_this.axios.post(baseUrl.baseUrl + '/web/join/joinDocPackageDownload')
 					.then(function(response) {
-						console.log("esponse.data", response.data)
 						_this.wordUrl = baseUrl.baseUrlImg + response.data.packageUrl
 
 					})
@@ -594,7 +588,6 @@
 					});
 					return false;
 				}
-				console.log("this.userId", this.userId)
 				if(this.userId) {
 					//验证token是否过期
 					_this.axios.defaults.headers.common['token'] = this.token;
@@ -607,7 +600,6 @@
 									type: 'warning'
 								}).then(() => {
 									sessionStorage.clear()
-									console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 									var newUrl = baseUrl.baseUrl + '/web/auth/login';
 									window.open(newUrl)
 									return false;
@@ -778,7 +770,6 @@
 					return false;
 				}
 
-				console.log("_this.form.name.length", _this.form.name.length)
 				if(_this.form.name.length > 50) {
 					_this.messageOpen('软件名称不能超过50字，请重新输入', 'warning')
 					return false;
@@ -801,7 +792,6 @@
 				}
 
 				if(!_this.firstDomains.userName) {
-					console.log('.firstDomains.companyValue', )
 					_this.messageOpen('请填写参赛人姓名', 'warning')
 					return false;
 				}
@@ -823,7 +813,6 @@
 					_this.messageOpen('请填写参赛人手机', 'warning')
 					return false;
 				}
-				console.log("_this.form.ifCheckedCns", _this.form.ifCheckedCns)
 				if(!_this.form.ifCheckedCns) {
 					_this.messageOpen('请填写科研开源软件创意大承诺书', 'warning')
 					return false;
@@ -893,7 +882,6 @@
 
 						}
 						var _this = this;
-						console.log("joinVo", JSON.stringify(joinVo))
 						_this.axios.defaults.headers.common['token'] = _this.token;
 						_this.axios.post(baseUrl.baseUrl + '/web/join/saveJoinInfo', joinVo)
 							.then(function(response) {
@@ -913,8 +901,6 @@
 							.catch(function(error) {
 								console.log(error);
 							})
-						console.log(".this.form.domains", this.form.domains)
-						console.log('form', this.form)
 					} else {
 						console.log('error submit!!');
 						return false;
@@ -941,7 +927,6 @@
 				_this.$nextTick(function() {
 
 					var L = _this.secondDomains.length;
-					console.log($('.deltrbtn').eq(L - 1))
 					$('.deltrbtn').eq(L - 1).attr("id", +L)
 
 				})
@@ -972,7 +957,6 @@
 				var thisId = $(eve).attr('id')
 				_this.secondDomains.splice(thisId - 1, 1)
 
-				console.log("thisId", thisId)
 			},
 			dialogPromptTrue: function() {
 				if(this.titType == true) {
@@ -994,7 +978,6 @@
 						_this.softCategoryOption = newResponse[1].sonList; //软件类型
 						_this.LanguageOption = newResponse[4].sonList; //变成语言
 						_this.userInterfaceOption = newResponse[3].sonList; //用户接口
-						console.log('下拉', _this.opensourceTypeOption)
 
 					})
 			},
@@ -1004,9 +987,6 @@
 			},
 			// 鼠标单击的事件
 			onClick: function(e, editor) {
-				console.log('Element clicked')
-				console.log(e)
-				console.log(editor)
 			},
 			// 清空内容
 			clear: function() {

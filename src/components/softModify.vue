@@ -322,7 +322,6 @@
 				});
 				_this.$nextTick(function() {
 					var L = _this.secondDomains.length;
-					console.log($('.deltrbtn').eq(L - 1))
 					$('.deltrbtn').eq(L - 1).attr("id", +L)
 				})
 			},
@@ -332,7 +331,6 @@
 				var eve = event.currentTarget
 				var thisId = $(eve).attr('id')
 				_this.secondDomains.splice(thisId - 1, 1)
-				console.log("thisId", thisId)
 			},
 			//获取报名表单下拉内容
 			getListOption: function() {
@@ -346,7 +344,6 @@
 						_this.softCategoryOption = newResponse[1].sonList; //软件类型
 						_this.LanguageOption = newResponse[4].sonList; //变成语言
 						_this.userInterfaceOption = newResponse[3].sonList; //用户接口
-						console.log('下拉', _this.opensourceTypeOption)
 
 					})
 			},
@@ -357,7 +354,6 @@
 				params.append("dictId", 6);
 				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId', params)
 					.then(function(response) {
-						console.log("response.data.list", response.data.list)
 						_this.operatingSystemOption = response.data.list
 
 					})
@@ -374,31 +370,25 @@
 
 						var softInfoObg = response.data.softInfo;
 						var userListObg = response.data.userList;
-						console.log("2222", softInfoObg)
 						var softDocObg = response.data.softDoc;
 						_this.softId = response.data.softInfo.id;
 						_this.form.name = softInfoObg.softName;
 						_this.form.developer = softInfoObg.developers;
 						_this.form.softVersion = softInfoObg.softVersion;
-						console.log("6666", softInfoObg.opensourceTypes)
 						_this.form.opensourceType = softInfoObg.opensourceTypes;
 						_this.form.softCategory = softInfoObg.categoryIds;
 						_this.form.Language = softInfoObg.programmingLanguages;
 						_this.form.userInterface = softInfoObg.userInterfaces;
 						_this.form.applicationField = softInfoObg.applicationFields;
 						_this.form.operatingSystem = softInfoObg.operatingSystems;
-						console.log("softInfoObg.isSelf", softInfoObg.isSelf)
-						console.log("_this.form.operatingSystem", _this.form.operatingSystem)
 						_this.form.softUrl=_this.getSoftUrl = softInfoObg.softUrl;
 						_this.form.abstract = softInfoObg.softIntroduce;
 						_this.form.ifCrossPlatform = softInfoObg.isPlatform == 1 ? true : false;
 						_this.form.ifSelfStudy = softInfoObg.isSelf == 1 ? true : false;
 						_this.form.ifHsowRealName = softInfoObg.isShowDeveloperName == 0 ? true : false;
-						console.log("softInfoObg.isPlatform", softInfoObg.isPlatform)
 
 						if(userListObg.length > 0) {
 							var firstUserListObg = userListObg[0]
-							console.log("userListObg", userListObg)
 							_this.firstDomains.userName = firstUserListObg.userName;
 
 							_this.firstDomains.userUnit = firstUserListObg.userUnit;
@@ -436,7 +426,6 @@
 					params.append("softUrl", _this.form.softUrl);
 					_this.axios.post(baseUrl.baseUrl + '/web/soft/checkIsEqualsSoftUrl', params)
 						.then(function(response) {
-							console.log("response.data", response.data)
 							if(response.data.code != 0) {
 								_this.$alert(response.data.msg, '提示信息', {
 									confirmButtonText: '确定',
@@ -540,7 +529,6 @@
 					return false;
 				}
 
-				console.log("_this.form.name.length", _this.form.name.length)
 				if(_this.form.name.length > 50) {
 					_this.messageOpen('软件名称不能超过50字，请重新输入', 'warning')
 					return false;
@@ -568,7 +556,6 @@
 				if(_this.form.ifSelfStudy == 1) {
 
 					if(!_this.firstDomains.userName) {
-						console.log('.firstDomains.companyValue', )
 						_this.messageOpen('请填写参赛人姓名', 'warning')
 						return false;
 					}
@@ -636,7 +623,6 @@
 						}
 
 						var _this = this;
-						console.log("joinVo", JSON.stringify(joinVo))
 
 						_this.axios.defaults.headers.common['token'] = _this.token;
 						_this.axios.post(baseUrl.baseUrl + '/web/user/saveSoftInfoUpdate', joinVo)
@@ -651,7 +637,6 @@
 										type: 'warning'
 									}).then(() => {
 										sessionStorage.clear()
-										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 										var newUrl = baseUrl.baseUrl + '/web/auth/login';
 										window.open(newUrl)
 										return false;
@@ -671,8 +656,6 @@
 							.catch(function(error) {
 								console.log(error);
 							})
-						console.log(".this.form.domains", this.form.domains)
-						console.log('form', this.form)
 					} else {
 						console.log('error submit!!');
 						return false;

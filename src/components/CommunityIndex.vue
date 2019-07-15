@@ -161,7 +161,6 @@ export default {
   			var classifyBox=$(this).find('.classify-box')
   			classifyBox.show()
   			
-  			console.log("this",$(this).find('.classify-box'))
   		})
   		$(".soft-classify-list li").mouseout(function(){
   				$('.classify-box').hide()

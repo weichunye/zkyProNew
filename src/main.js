@@ -68,7 +68,7 @@ console.log("userEntity", userEntity); // => tom
 	}
 )*/
 
-Vue.prototype.token = "0e46975e15708b1cc3364a264450ce80";
+Vue.prototype.token = "1b5d13b4ac79fada76b39de9c0a85006";
 Vue.prototype.userId = 1;
 Vue.prototype.userName = "temporary";
 Vue.prototype.userInfo = {

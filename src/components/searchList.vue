@@ -78,7 +78,6 @@
 		methods: {
 			getList: function() {
 				var _this = this;
-				console.log("this.$route.query", this.$route.query)
 				var keyword =_this.$route.query.keyword?_this.$route.query.keyword:''
 				var params = new URLSearchParams();
 				params.append("page", _this.pageNum);
@@ -90,7 +89,6 @@
 					.then(function(response) {
 						_this.softData = response.data.page.records;
 						_this.totalPage = response.data.page.total
-						console.log("response",response)
 						_this.$nextTick(function() {
 							var curJ = $('.software-box')
 							$(curJ).eq(curJ.length - 1).css('border', '0px solid #fff')

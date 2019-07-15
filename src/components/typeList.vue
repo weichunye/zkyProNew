@@ -79,7 +79,6 @@
 			_this.getList();
 			_this.categoryName = _this.$route.query.categoryName;
 			_this.parentNamenew = _this.$route.query.ParentName == "首页" ? '' : _this.$route.query.ParentName;
-			console.log("_this.parentName", _this.ParentName)
 
 		},
 		methods: {
@@ -104,7 +103,6 @@
 				params.append("limit", _this.limit);
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftListByConditionForBrowseNum', params)
 					.then(function(response) {
-						console.log("response1111", response)
 						_this.softData = response.data.page.records;
 						_this.totalPage = response.data.page.total;
 						_this.$nextTick(function() {

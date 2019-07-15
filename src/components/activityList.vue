@@ -105,7 +105,6 @@ export default {
   	var _this=this;
   	_this.activitytype=_this.$route.query.type;
   	_this.parentNameNew=_this.activitytype=='end'?'已结束活动':'正在进行活动'
-  	console.log("_this.ParentName",_this.parentNameNew)
   	if(_this.activitytype=='end'){
   			//活动已结束展示
   	_this.activeDataList('activeEnd','/web/activity/queryActivityListByCondition ','3')
@@ -120,7 +119,6 @@ export default {
   },
    methods: {  
    	activeDataList:function(ele,url,satus){
-   		console.log("ele",ele)
    		var _this=this;
    	var params = new URLSearchParams();
   	params.append("page", _this.pageNum);
@@ -129,7 +127,6 @@ export default {
 		_this.axios.post(baseUrl.baseUrl+url,params)
   	.then(function(response){
   		_this[ele]=response.data.page.list;
-  		console.log("参赛列表",_this[ele])
   	
   		
   	})

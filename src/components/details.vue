@@ -359,7 +359,6 @@
 			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params1)
 				.then(function(response) {
 					_this.hotList = response.data.page.list;
-					console.log("_this.hotList", response)
 				})
 			//获取标签列表
 			_this.getSoftLabel()
@@ -369,7 +368,6 @@
 			_this.$nextTick(function() {
 				_this.myChart = this.$echarts.init(document.getElementById('oscilloGram'))
 
-				console.log("myChart", _this.myChart)
 				_this.myChart.setOption(_this.option);
 			})
 			_this.$nextTick(function() {
@@ -397,7 +395,6 @@
 				params.append("labelNum", 5);
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftInfoById', params)
 					.then(function(response) {
-						console.log("获取信息", response)
 						_this.softData = response.data.softInfo;
 						_this.statInfo = response.data.statInfo;
 						_this.runUrl = response.data.softInfo.runUrl;
@@ -409,8 +406,8 @@
 						var downloadNumNew = _this.statInfo.downloadNum > 100 ? 100 : _this.statInfo.downloadNum;
 						var browseNumNew = _this.statInfo.browseNum > 100 ? 100 : _this.statInfo.browseNum;
 						var runNumNew = _this.statInfo.runNum > 100 ? 100 : _this.statInfo.runNum;
+						
 						_this.option.series[0].data[0].value = [collectionNumNew, enjoyNumNew, downloadNumNew, browseNumNew, runNumNew]
-						console.log("_this[option].series[0].data[0]", _this.option.series[0].data[0].value)
 						_this.myChart.setOption(_this.option);
 
 						if(_this.softData.opensourceType == 1) {
@@ -437,7 +434,6 @@
 						if(_this.softData.opensourceType == 8) {
 							_this.softData.opensourceType = '其他类型'
 						}
-						console.log("response6666", response)
 					})
 			},
 			/*runThisSoft: function() {
@@ -533,7 +529,6 @@
 				params.append("userId", this.userId);
 				_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
 					.then(function(response) {
-						console.log("6666666666888888", response.data)
 						window.open(response.data.url)
 					})
 
@@ -569,7 +564,6 @@
 
 				_this.axios.post(baseUrl.baseUrl + '/web/user/saveFollow', softFollowHistory)
 					.then(function(response) {
-						console.log("response.data.code", response.data.code)
 						//验证token是否过期
 						if(response.data.code == 401) {
 							_this.$confirm(response.data.msg, '提示', {
@@ -599,9 +593,7 @@
 								_this.sharShow = true;
 								$('.sharbox-over a').each(function(index, item) {
 									$(item).unbind().bind('click', function() {
-										console.log("_this.statInfo.enjoyNum", _this.statInfo.enjoyNum)
 										_this.statInfo.enjoyNum = _this.statInfo.enjoyNum + 1;
-										console.log("_this.statInfo.enjoyNum", _this.statInfo.enjoyNum)
 										_this.sharShow = false;
 									})
 								})
@@ -633,8 +625,6 @@
 						console.log(error);
 					})
 
-				console.log("this.userId", this.userId)
-				console.log("this.userId", this.token)
 
 			},
 
@@ -678,7 +668,6 @@
 							_this.activityIngId = response.data.config.paramValue;
 						}
 
-						console.log("	_this.activityIngId", _this.activityIngId)
 
 					})
 					.catch(function(error) {
@@ -693,10 +682,8 @@
 				params2.append("limit", 5);
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/getSoftLabelBySoftId', params2)
 					.then(function(response) {
-						console.log("标签", response)
 
 						_this.labelInfo = response.data.page.list;
-						console.log("标签", response)
 
 					})
 
@@ -717,7 +704,6 @@
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/getSoftLabelBySoftId', params2)
 					.then(function(response) {
 						_this.labelInfoAdd = response.data.page.list;
-						console.log("标签", _this.labelInfoAdd)
 
 					})
 			},
@@ -746,11 +732,9 @@
 				_this.softLabelArr.push(this.softLabel)
 				_this.$nextTick(function() {
 					var emL = _this.softLabelArr.length;
-					console.log("	$('.softLabellist em').eq(emL-1)", $('.labelem'))
 					$('.labelem').eq(emL - 1).attr('data-mark', emL)
 				})
 				this.softLabel = ''
-				console.log(",this.softLabelArr", this.softLabelArr)
 
 			},
 			delLabel: function() {
@@ -758,7 +742,6 @@
 				var eve = event.currentTarget;
 				var dataMark = $(eve).data('mark');
 				_this.softLabelArr.splice(dataMark - 1, 1);
-				console.log("_this.softLabelArr", _this.softLabelArr)
 			},
 			addLabel: function() {
 				var _this = this;
@@ -771,13 +754,11 @@
 					var cur = _this.checkedCities1[i]
 					this.softLabelArr = newSoftStr + cur + ','
 				}
-				console.log("this.softLabelArr", this.softLabelArr)
 
 				var params = new URLSearchParams();
 				params.append("userId", this.userId);
 				params.append("softId", _this.softId);
 				params.append("softLabel", _this.softLabelArr);
-				console.log("checkedCities1", _this.checkedCities1);
 
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/addSoftLabel', params)
 					.then(function(response) {
@@ -791,7 +772,6 @@
 							_this.getSoftLabelList()
 
 						}
-						console.log("response", response)
 
 					})
 					.catch(function(error) {
@@ -812,7 +792,6 @@
 				params.append("softId", this.$route.query.id);
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/getSoftDocPackage', params)
 					.then(function(response) {
-						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
 							_this.ifDownWordUrl = response.data.packageUrl

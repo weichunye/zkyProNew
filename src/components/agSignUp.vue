@@ -501,7 +501,6 @@
 			_this.getListOption()
 
 			if(this.$route.query.check) {
-				console.log("this.$route.query.check", this.$route.query.check)
 				_this.checkId = this.$route.query.softId;
 				_this.joinVoUrl = '/web/join/joinInfoUpdate';
 				_this.ifCheck = true;
@@ -542,7 +541,6 @@
 				_this.$nextTick(function() {
 
 					var L = _this.secondDomains.length;
-					console.log($('.deltrbtn').eq(L - 1))
 					$('.deltrbtn').eq(L - 1).attr("id", +L)
 
 				})
@@ -554,7 +552,6 @@
 				var eve = event.currentTarget
 				var thisId = $(eve).attr('id')
 				_this.secondDomains.splice(thisId - 1, 1)
-				console.log("thisId", thisId)
 			},
 			//获取报名表单下拉内容
 			getListOption: function() {
@@ -568,7 +565,6 @@
 						_this.softCategoryOption = newResponse[1].sonList; //软件类型
 						_this.LanguageOption = newResponse[4].sonList; //变成语言
 						_this.userInterfaceOption = newResponse[3].sonList; //用户接口
-						console.log('下拉', _this.opensourceTypeOption)
 
 					})
 			},
@@ -577,7 +573,6 @@
 				var _this = this;
 				_this.axios.post(baseUrl.baseUrl + '/web/join/joinDocPackageDownload')
 					.then(function(response) {
-						console.log("esponse.data", response.data)
 						_this.wordUrl = baseUrl.baseUrlImg + response.data.packageUrl
 
 					})
@@ -590,7 +585,6 @@
 				params.append("dictId", 6);
 				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId',params)
 					.then(function(response) {
-						console.log("response.data.list", response.data.list)
 						_this.operatingSystemOption = response.data.list
 
 					})
@@ -605,7 +599,6 @@
 				params.append("token", this.token);
 				_this.axios.post(baseUrl.baseUrl + 'web/user/getJoinDetail', params)
 					.then(function(response) {
-						console.log("2222", response)
 						var softInfoObg = response.data.softInfo;
 						var userListObg = response.data.userList;
 						var teacherObg = response.data.teacher[0];
@@ -613,22 +606,18 @@
 						_this.softId = response.data.softInfo.id;
 						_this.form.name = softInfoObg.softName;
 						_this.form.softVersion = softInfoObg.softVersion;
-						console.log("6666", softInfoObg.opensourceTypes)
 						_this.form.opensourceType = softInfoObg.opensourceTypes;
 						_this.form.softCategory = softInfoObg.categoryIds;
 						_this.form.Language = softInfoObg.programmingLanguages;
 						_this.form.userInterface = softInfoObg.userInterfaces;
 						_this.form.applicationField = softInfoObg.applicationFields;
 						_this.form.operatingSystem = softInfoObg.operatingSystems;
-						console.log("_this.form.operatingSystem", _this.form.operatingSystem)
 						_this.form.softUrl=_this.getSoftUrl = softInfoObg.softUrl;
 						_this.form.abstract = softInfoObg.softIntroduce;
 						_this.form.ifCrossPlatform = softInfoObg.isPlatform == 1 ? true : false;
 						_this.form.ifHsowRealName = softInfoObg.isShowDeveloperName == 0 ? true : false;
-						console.log("softInfoObg.isPlatform", softInfoObg.isPlatform)
 
 						var firstUserListObg = userListObg[0]
-						console.log("userListObg.userList[0]", _this.firstDomains.userName)
 						_this.firstDomains.userName = firstUserListObg.userName;
 						_this.firstDomains.userUnit = firstUserListObg.userUnit;
 						_this.firstDomains.userJob = firstUserListObg.userJob;
@@ -636,11 +625,9 @@
 						for(var i = 1; i < userListObg.length; i++) {
 							_this.secondDomains.push(userListObg[i])
 						}
-						console.log("teacherObg", teacherObg)
 						_this.isTeacherVal.teacherName = teacherObg.userName;
 						_this.isTeacherVal.teacherUnit = teacherObg.userUnit;
 						_this.isTeacherVal.teacherPhone = teacherObg.userPhone;
-						console.log("softDocObg.analysisDoc", baseUrl.baseUrlImg + softDocObg.analysisDoc)
 						_this.analysisDocUrl = baseUrl.baseUrlImg + softDocObg.analysisDoc
 						_this.frameworkReportDocUrl = baseUrl.baseUrlImg + softDocObg.frameworkReportDoc
 						_this.itemBookDocUrl = baseUrl.baseUrlImg + softDocObg.itemBookDoc
@@ -684,8 +671,6 @@
 				this.$refs.analysisRef.submit();
 			},
 			analysisDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
-				console.log("this.analysisCheck",this.analysisCheck)
 				this.form.analysisDoc = response.filePath;
 				this.form.analysisName = response.originalFileName;
 				var codeStype;
@@ -712,7 +697,6 @@
 				this.$refs.itemBookRef.submit();
 			},
 			itemBookDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.itemBookDoc = response.filePath;
 				this.form.itemBookName = response.originalFileName;
 				var codeStype;
@@ -733,7 +717,6 @@
 				this.$refs.userDocRef.submit();
 			},
 			userDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.userDoc = response.filePath;
 				this.form.userDocName = response.originalFileName;
 				var codeStype;
@@ -754,7 +737,6 @@
 				this.$refs.softResultDocRef.submit();
 			},
 			softResultDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.softResultDoc = response.filePath
 				var codeStype;
 				if(response.code == 0) {
@@ -791,7 +773,6 @@
 				this.$refs.testDocRef.submit();
 			},
 			testDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.testDoc = response.filePath;
 				this.form.testDocName = response.originalFileName;
 				var codeStype;
@@ -812,7 +793,6 @@
 			ImgSuccessFirst: function(response, file, fileList) {
 				this.form.softImgOne = response.filePath;
 				this.form.softImgOneName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -829,7 +809,6 @@
 			ImgSuccessSecond: function(response, file, fileList) {
 				this.form.softImgTwo = response.filePath;
 				this.form.softImgTwoName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -846,7 +825,6 @@
 			ImgSuccessThird: function(response, file, fileList) {
 				this.form.softImgThree = response.filePath;
 				this.form.softImgThreeName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -863,7 +841,6 @@
 			videoSuccessFirst: function(response, file, fileList) {
 				this.form.softVideo = response.filePath;
 				this.form.softVideoName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -897,7 +874,6 @@
 					params.append("softUrl", _this.form.softUrl);
 					_this.axios.post(baseUrl.baseUrl + '/web/soft/checkIsEqualsSoftUrl', params)
 						.then(function(response) {
-							console.log("response.data", response.data)
 							if(response.data.code != 0) {
 								_this.$alert(response.data.msg, '提示信息', {
 									confirmButtonText: '确定',
@@ -1029,7 +1005,6 @@
 					return false;
 				}
 
-				console.log("_this.form.name.length", _this.form.name.length)
 				if(_this.form.name.length > 50) {
 					_this.messageOpen('软件名称不能超过50字，请重新输入', 'warning')
 					return false;
@@ -1056,7 +1031,6 @@
 							}*/
 
 				if(!_this.firstDomains.userName) {
-					console.log('.firstDomains.companyValue', )
 					_this.messageOpen('请填写参赛人姓名', 'warning')
 					return false;
 				}
@@ -1078,7 +1052,6 @@
 					_this.messageOpen('请填写参赛人手机', 'warning')
 					return false;
 				}
-				console.log("_this.form.ifCheckedCns", _this.form.ifCheckedCns)
 				if(!_this.form.ifCheckedCns) {
 					_this.messageOpen('请勾选科研开源软件创意大承诺书', 'warning')
 					return false;
@@ -1211,7 +1184,6 @@
 
 						}
 						var _this = this;
-						console.log("joinVo", JSON.stringify(joinVo))
 						_this.axios.defaults.headers.common['token'] = _this.token;
 						_this.axios.post(baseUrl.baseUrl + _this.joinVoUrl, joinVo)
 							.then(function(response) {
@@ -1225,7 +1197,6 @@
 										type: 'warning'
 									}).then(() => {
 										sessionStorage.clear()
-										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 										var newUrl = baseUrl.baseUrl + '/web/auth/login';
 										window.open(newUrl)
 										return false;
@@ -1243,8 +1214,6 @@
 							.catch(function(error) {
 								console.log(error);
 							})
-						console.log(".this.form.domains", this.form.domains)
-						console.log('form', this.form)
 					} else {
 						console.log('error submit!!');
 						return false;

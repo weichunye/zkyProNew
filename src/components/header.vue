@@ -74,7 +74,6 @@
 			var _this = this;
 		
 			_this.toLoginUrl = baseUrl.baseUrl + 'web/auth/login'
-			console.log("this.userId", this.userId)
 				if(this.userId){
 				_this.showLogin=true;
 			}else{
@@ -93,7 +92,6 @@
 			},
 				signOut:function(){
 				sessionStorage.clear()
-					console.log(" sessionStorage.getItem('sessionData');", sessionStorage.getItem('sessionData'))
 				
 			},
 			toSearchList: function() {

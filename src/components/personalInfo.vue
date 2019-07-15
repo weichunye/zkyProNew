@@ -705,7 +705,6 @@
 				params1.append("limit", _this.limit);
 				_this.axios.post(baseUrl.baseUrl + '/web/user/mySoftList', params1)
 					.then(function(response) {
-						console.log("我的软件", response.data)
 						_this.mySoftList = response.data.page.list;
 						_this.mySoftObj.page = response.data.page.currPage;
 						_this.mySoftObj.total = response.data.page.totalCount;
@@ -724,7 +723,6 @@
 				params1.append("limit", _this.limit);
 				_this.axios.post(baseUrl.baseUrl + '/web/user/listMyFeedback', params1)
 					.then(function(response) {
-						console.log("我的投递", response.data)
 						_this.myfeedbackList = response.data.page.list;
 						_this.myfeedbackObj.page = response.data.page.currPage;
 						_this.myfeedbackObj.total = response.data.page.totalCount;
@@ -734,7 +732,6 @@
 					})
 			},
 			handleRemove: function(file, fileList) {
-				console.log(file, fileList);
 			},
 			handlePictureCardPreview: function(file) {
 				this.dialogImageUrl = file.url;
@@ -770,7 +767,6 @@
 						_this.myJoinList = response.data.page.records;
 						_this.myJoinObj.page = response.data.page.current;
 						_this.myJoinObj.total = response.data.page.total;
-						console.log("我参加的竞赛", _this.myJoinList)
 
 					})
 					.catch(function(error) {
@@ -783,7 +779,6 @@
 				this.$refs.analysisRef.submit();
 			},
 			analysisDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.analysisDoc = response.filePath;
 				this.form.analysisName = response.originalFileName;
 
@@ -796,13 +791,11 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList1", this.fileList1)
 				this.fileList1 = []
 
 			},
 			analysisDocChange(file) {
 			  	this.analysisCheck=file.name
-			  	console.log("this.analysisCheck",this.analysisCheck)
        			 
       			},
 			//项目规格书
@@ -810,7 +803,6 @@
 				this.$refs.itemBookRef.submit();
 			},
 			itemBookDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.itemBookDoc = response.filePath;
 				this.form.itemBookName = response.originalFileName;
 				var codeStype;
@@ -821,7 +813,6 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList2", this.fileList2)
 				this.fileList2 = []
 
 			},
@@ -832,7 +823,6 @@
 				this.$refs.userDocRef.submit();
 			},
 			userDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.userDoc = response.filePath;
 				this.form.userDocName = response.originalFileName;
 				var codeStype;
@@ -843,7 +833,6 @@
 					codeStype = 'warning'
 				}
 				this.messageOpen(response.msg, codeStype)
-				console.log("this.fileList4", this.fileList4)
 				this.fileList4 = []
 
 			},
@@ -854,7 +843,6 @@
 				this.$refs.softResultDocRef.submit();
 			},
 			softResultDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.softResultDoc = response.filePath
 				this.$alert(response.msg, '提示信息', {
 					confirmButtonText: '确定',
@@ -886,7 +874,6 @@
 				this.$refs.testDocRef.submit();
 			},
 			testDocSuccess: function(response, file, fileList) {
-				console.log("response", response)
 				this.form.testDoc = response.filePath;
 				this.form.testDocName = response.originalFileName;
 				var codeStype;
@@ -906,7 +893,6 @@
 			ImgSuccessFirst: function(response, file, fileList) {
 				this.form.softImgOne = response.filePath;
 				this.form.softImgOneName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -923,7 +909,6 @@
 			ImgSuccessSecond: function(response, file, fileList) {
 				this.form.softImgTwo = response.filePath;
 				this.form.softImgTwoName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -940,7 +925,6 @@
 			ImgSuccessThird: function(response, file, fileList) {
 				this.form.softImgThree = response.filePath;
 				this.form.softImgThreeName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -957,7 +941,6 @@
 			videoSuccessFirst: function(response, file, fileList) {
 				this.form.softVideo = response.filePath;
 				this.form.softVideoName = response.originalFileName;
-				console.log("response", response)
 				var codeStype;
 				if(response.code == 0) {
 					codeStype = 'success'
@@ -993,7 +976,6 @@
 				if(tab.index == 5) {
 					_this.getmyfeedbackList()
 				}
-				console.log("tab", tab, event)
 
 			},
 
@@ -1341,7 +1323,6 @@
 					.catch(function(error) {
 						console.log(error);
 					})
-				console.log('form', this.form)
 
 			},
 			submitForm: function(formName) {
@@ -1436,7 +1417,6 @@
 								.catch(function(error) {
 									console.log(error);
 								})
-							console.log('form', this.form)
 						} else {
 							console.log('error submit!!');
 							return false;

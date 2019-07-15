@@ -457,7 +457,6 @@
 			var _this = this;
 			_this.userIdData = this.userId;
 			_this.toLoginUrl = baseUrl.baseUrl + 'web/auth/login'
-			console.log("this.userId", this.userId)
 			if(this.userId) {
 				_this.showLogin = true;
 			} else {
@@ -468,7 +467,6 @@
 			_this.searchArr.itemType = _this.$route.query.itemType ? _this.$route.query.itemType : 1;
 			if(_this.searchArr.itemType == 1) {
 				_this.searchArr.itemType = '软件'
-				console.log('666')
 
 			}
 			if(_this.searchArr.itemType == 2) {
@@ -666,7 +664,6 @@
 				params.append("userId", this.userId);
 				_this.axios.post(baseUrl.baseUrl + '/web/softrun/clickSoftInfoRunTime', params)
 									.then(function(response) {
-										console.log("6666666666888888", response.data)
 										window.open(response.data.url)
 									})
 				
@@ -678,7 +675,6 @@
 				params.append("softId", this.$route.query.id);
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/getSoftDocPackage', params)
 					.then(function(response) {
-						console.log("esponse.data", response.data)
 						if(response.data.code == 0) {
 							_this.DownWordUrl = baseUrl.baseUrlImg + response.data.packageUrl;
 							_this.ifDownWordUrl = response.data.packageUrl
@@ -696,7 +692,6 @@
 				params.append("dictId", 7);
 				_this.axios.post(baseUrl.baseUrl + '/api/dict/getDictDetailsByDictId', params)
 					.then(function(response) {
-						console.log("response.data.list888888", response.data.list)
 						_this.feedbackOption = response.data.list
 
 					})
@@ -716,7 +711,6 @@
 					params.append("softUrl", _this.form.softUrl);
 					_this.axios.post(baseUrl.baseUrl + '/web/soft/checkIsEqualsSoftUrl', params)
 						.then(function(response) {
-							console.log("response.data", response.data)
 							if(response.data.code != 0) {
 								_this.$alert(response.data.msg, '提示信息', {
 									confirmButtonText: '确定',
@@ -796,7 +790,6 @@
    		}*/
 				if(_this.form.ifSelfStudy) {
 					if(!_this.firstDomains.userName) {
-						console.log('.firstDomains.companyValue', )
 						_this.messageOpen('请填写开发人员姓名', 'warning')
 						return false;
 					}
@@ -858,7 +851,6 @@
 
 				}
 
-				console.log("sofoVo", JSON.stringify(sofoVo))
 				_this.$refs[formName].validate((valid) => {
 					if(valid) {
 						var _this = this;
@@ -890,7 +882,6 @@
 										type: 'warning'
 									}).then(() => {
 										sessionStorage.clear()
-										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 										var newUrl = baseUrl.baseUrl + '/web/auth/login';
 										window.open(newUrl)
 										return false;
@@ -909,7 +900,6 @@
 								console.log(error);
 							})
 
-						console.log('form', this.form)
 					} else {
 						console.log('error submit!!');
 						return false;
@@ -980,7 +970,6 @@
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftListByKeyword', params1)
 					.then(function(response) {
 
-						console.log("_this.response", response)
 					})
 
 			},
@@ -1004,7 +993,6 @@
 				_this.$nextTick(function() {
 
 					var L = _this.secondDomains.length;
-					console.log($('.deltrbtn').eq(L - 1))
 					$('.deltrbtn').eq(L - 1).attr("id", +L)
 
 				})
@@ -1019,7 +1007,6 @@
 				var thisId = $(eve).attr('id')
 				_this.secondDomains.splice(thisId - 1, 1)
 
-				console.log("thisId", thisId)
 			},
 			closePop: function() {
 				//向父级传值
@@ -1043,7 +1030,6 @@
 					path: '/searchList',
 					query: this.searchArr
 				});
-				console.log("this.searchArr", this.searchArr)
 				this.$emit('serachList', true)
 			},
 			//提交意见反馈
@@ -1069,7 +1055,6 @@
 					return false;
 				}
 
-				console.log('问题', feedback)
 				_this.$refs[formName].validate((valid) => {
 					if(valid) {
 						_this.axios.defaults.headers.common['token'] = _this.token;
@@ -1090,7 +1075,6 @@
 										type: 'warning'
 									}).then(() => {
 										sessionStorage.clear()
-										console.log(" sessionStorage", sessionStorage.getItem('sessionData'))
 										var newUrl = baseUrl.baseUrl + '/web/auth/login';
 										window.open(newUrl)
 										_this.dialogFeedback = false;
@@ -1109,7 +1093,6 @@
 							.catch(function(error) {
 								console.log(error);
 							})
-						console.log('form', this.form)
 					} else {
 						console.log('error submit!!');
 						return false;
