@@ -139,7 +139,7 @@
 	
 	.header .header-top .reposbox .logo {
 		float: left;
-		margin-left: 10px;
+		margin: 10px 10px 0 0;
 		height: 46px;
 		width: auto;
 	}

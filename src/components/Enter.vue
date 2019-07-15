@@ -63,9 +63,9 @@
 						<dl>
 							<dt><p><span>{{item.softName}}</span></p> </dt>
 							<dd>
-								<p><img src="../assets/icon/icon_4.png" />{{item.collectionNum}}</p>
-								<p><img src="../assets/icon/icon_5.png" />{{item.downloadNum}}</p>
-								<p><img src="../assets/icon/icon_6.png" />{{item.runNum}}</p>
+								<p><img src="../assets/icon/icon_4.png" />{{item.browseNum}}</p>
+								<p><img src="../assets/icon/icon_5.png" />{{item.collectionNum}}</p>
+								<p><img src="../assets/icon/icon_6.png" />{{item.enjoyNum}}</p>
 							</dd>
 						</dl>
 					</router-link>

@@ -66,7 +66,7 @@
 								</router-link>
 								<div v-if="!item.isMatchSoft" class="btn-box">
 								
-									<button v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1&&item.firstAudit==1" @click="getText(item.softName,item.softUrl,item.id)" class="button4">请专家评估</button>
+									<!--<button v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1&&item.firstAudit==1" @click="getText(item.softName,item.softUrl,item.id)" class="button4">请专家评估</button>-->
 									<router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
 										<button class="button1">查看</button>
 									</router-link>
@@ -78,17 +78,17 @@
 
 								</div>
 								<div v-else="" class="btn-box">
-									<button v-if="item.isExpertEvaluate==0&&item.isMatchSoft&&item.firstAudit==1" @click="expertReview(item.id)" class="button4">参赛作品请专家评估</button>
+									<!--<button v-if="item.isExpertEvaluate==0&&item.isMatchSoft&&item.firstAudit==1" @click="expertReview(item.id)" class="button4">参赛作品请专家评估</button>-->
 <router-link :to="{path:'/details',query:{id:item.id,ParentName:'个人中心'}}">
 										<button class="button1">查看</button>
 									</router-link>
 								</div>
-								<!--			<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
+											<p v-if="item.isExpertEvaluate==0&&!item.isMatchSoft&&item.isSelf==1&&item.firstAudit==1" @click="getText(item.softName,item.softUrl,item.id)" class=" state-zjpg">请专家评估
 							</p>
-							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft">
+							<p @click="expertReview(item.id)" class=" state-zjpg" v-if="item.isExpertEvaluate==0&&item.isMatchSoft&&item.firstAudit==1">
 								参赛作品请专家评估
 							</p>
--->
+
 							</div>
 						</div>
 						<div v-else="" class="el-tab-software">
