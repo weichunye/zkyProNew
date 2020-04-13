@@ -66,36 +66,37 @@
 
 					</div>
 					<dl class="listdl">
-            <dt><img src="../assets/activity/logo_0.jpg"/>
+						<dt><img :src="theSecond.img"/>
   				<div class="prizebg prizebg2">
+  				    
   				</div>
   				</dt>
-            <dd>北京小米智能科技有限公司</dd>
-						<dd class="tip2">分布式key-Value存储系统Pegasus</dd>
+						<dd>{{theSecond.name}}</dd>
 					</dl>
 					<dl class="listdl">
-						<dt><img src="../assets/activity/logo_1.jpg"/>
+						<dt><img :src="theFirst.img"/>
   				<div class="prizebg prizebg1">
-
+  				    
   				</div>
   				</dt>
-            <dd>中国科学院计算机网络信息中心
-            </dd>
-            <dd class="tip1">科学大数据流水线系统PiFlow</dd>
+						<dd>{{theFirst.name}}</dd>
 					</dl>
 					<dl class="listdl">
-            <dt><img src="../assets/activity/logo_2.jpg"/>
+						<dt><img :src="theThird.img"/>
   				<div class="prizebg prizebg3">
-
+  				    
   				</div>
   				</dt>
-            <dd>北京航空航天大学</dd>
-            <dd class="tip3">高性能计算性能分析工具CCTlib</dd>
+						<dd>{{theThird.name}}</dd>
 					</dl>
 					<div class="alllist">
-						<h3>三等奖</h3>
+						<h3>榜单</h3>
 						<div class="alllist-con">
-              <ul id="ul1"><li>中国科学院软件研究所</li> <li class="content">可举证云存储</li> <li>长春大学</li><li class="content">听障儿童语言康复训练软件</li> <li>数据堂</li> <li class="content">交互式智能图像分割标注客户端</li> </ul>
+							<ul id="ul1" v-for="item in activityData.activityUserList">
+								<li>{{item.userName}}</li>
+							</ul>
+							<ul id="ul2">
+							</ul>
 						</div>
 
 					</div>
@@ -109,16 +110,26 @@
 				</div>
 
 				<ul class="wonderfultime">
-				<li><img src="../assets/img/the_pic_11.jpg"></li>
-         <li><img src="../assets/img/the_pic_22.jpg"></li>
-          <li><img src="../assets/img/the_pic_33.jpg"></li>
-          <li><img src="../assets/img/the_pic_44.jpg"></li>
+					<!-- <li  v-for="item in activityData.activityVideoList">
+  				<video width="280" height="200" controls>
+  <source :src=" item.videoUrl" type="video/mp4">
+您的浏览器不支持Video标签。
+</video>
+  			</li> -->
+					<li v-for="item in activityData.activityVideoList">
+
+						<img :src="item.imgUrl" />
+					</li>
+					<!--	<li><img src="http://39.105.190.39:8080/rossc/upload/20190418/023bff7f9a7742febb084f558bf1f7f3.jpg"></li>
+			<li><img src="http://39.105.190.39:8080/rossc/upload/20190418/023bff7f9a7742febb084f558bf1f7f3.jpg"></li>
+			<li><img src="http://39.105.190.39:8080/rossc/upload/20190418/023bff7f9a7742febb084f558bf1f7f3.jpg"></li>
+			<li><img src="http://39.105.190.39:8080/rossc/upload/20190418/023bff7f9a7742febb084f558bf1f7f3.jpg"></li>-->
 
 				</ul>
 
 				<!--//精彩瞬间-->
 				<!--举办单位-->
-			<!--	<div class="hostunit">
+				<div class="hostunit">
 					<div class="title-top title-top1">
 						<span class="span1">4</span>
 						<span class="span2">举办单位</span>
@@ -130,7 +141,7 @@
 						</el-carousel-item>
 					</el-carousel>
 
-				</div>-->
+				</div>
 
 				<!--//举办单位-->
 			</div>
@@ -184,7 +195,7 @@
 			</div>
 			<div class="copy-box">
 				<p class="copy">
-					1996 - 2020 中国科学院计算机网络信息中心 版权所有<br> Copyright 1996-2020 Computer Network Information Center, Chinese Academy of Sciences. All Rights Reserved.<br> 京ICP备案号，京ICP备09112257号-94
+					1996 - 2019 中国科学院计算机网络信息中心 版权所有<br> Copyright 1996-2019 Computer Network Information Center, Chinese Academy of Sciences. All Rights Reserved.<br> 京ICP备案号，京ICP备09112257号-94
 					<br> 服务支持信息：电话：010-58812182 邮箱：nienm@sccas.cn
 				</p>
 			</div>
@@ -552,7 +563,7 @@
 					}
 				})
 
-			//获取所有二级分类
+			//获取所有二级分类  	
 			_this.getListOption()
 			_this.getWorldUrl()
 
@@ -632,7 +643,7 @@
 								path: '/personalInfo'
 							});
 						}).catch(() => {
-
+							
 						});*/
 
 					/*		_this.$alert('请先登录', '提示信息', {
@@ -658,8 +669,8 @@
   	.then(function(response){
   		console.log("esponse.data",response.data)
   		//打包前要删除
-
-
+  	
+  		
   		if(response.data.code==451){
   			 _this.$alert(response.data.msg, '提示信息', {
           confirmButtonText: '确定', });
@@ -672,15 +683,15 @@
   				_this.$router.push({
 					path: '/signUp',
 					query:{activityId:_this.activityInfo.id}
-
+			
 		});
   			}
-
+		   		
 		   		}
-
+  	
   		console.log("是否报名验证",response)
-
-
+  	
+  		
   	})
 	   },*/
 
@@ -829,10 +840,10 @@
 				status: 0,
 				updateTime: ""
 			}
-
+			
 			 joinVo[arr].push(curObj);
-		}
-
+		}	
+		
    		}*/
 
 				_this.$refs[formName].validate((valid) => {
@@ -982,7 +993,7 @@
 				this.$refs.editor.clear()
 			},
 
-			beginroll: function() { //先获取三个元素
+			beginroll: function() { //先获取三个元素	
 				var area = $(".alllist-con"),
 					ul1 = $("#ul1"),
 					ul2 = $("#ul2");
@@ -1025,11 +1036,11 @@
 	body {
 		background: #fff;
 	}
-
+	
 	.activityGame {
 		background: #fff;
 	}
-
+	
 	.activityGame .logo {
 		position: absolute;
 		left: -50px;
@@ -1037,76 +1048,76 @@
 		width: 300px;
 		height: 80px;
 	}
-
+	
 	.activityGame .signdialog {
 		width: 680px;
 	}
-
+	
 	.activityGame .signdialog .bottom {
 		overflow: hidden;
 		width: 100%;
 	}
-
+	
 	.activityGame .signdialog .bottom .left {
 		float: left;
 		margin-left: 30px;
 		width: 400px;
 	}
-
+	
 	.activityGame .signdialog .bottom .left a {
 		font-size: 12px;
 		color: #3bade9;
 		line-height: 24px;
 		text-decoration: underline;
 	}
-
+	
 	.activityGame .signdialog .bottom .left .el-form-item__content {
 		line-height: 26px;
 	}
-
+	
 	.activityGame .signdialog .bottom .right {
 		float: right;
 		margin: 20px 20px 0 0;
 		width: 200px;
 	}
-
+	
 	.activityGame .signdialog .el-dialog__body {
 		padding: 10px;
 	}
-
+	
 	.activityGame .signdialog .el-input {
 		height: 40px;
 	}
-
+	
 	.activityGame .signdialog .el-form-item {
 		float: left;
 		margin-bottom: 2px;
 	}
-
+	
 	.activityGame .signdialog .el-input .el-input__inner {
 		height: 40px;
 		line-height: 40px;
 	}
-
+	
 	.activityGame .signdialog .box-input {
 		margin-left: 38px;
 		width: 580px;
 		height: 300px;
 	}
-
+	
 	.activityGame .signdialog .box-input .el-input__inner {
 		margin-left: 30px;
 		width: 600px;
 		height: 100px;
 	}
-
+	
 	.activityGame .signdialog .addti {
 		font-style: normal;
 		font-size: 14px;
 		font-weight: bold;
 		color: #F56C6C;
 	}
-
+	
 	.activityGame .signdialog .addti1 {
 		position: absolute;
 		left: 100px;
@@ -1117,19 +1128,19 @@
 		font-weight: bold;
 		color: #F56C6C;
 	}
-
+	
 	.activityGame .signdialog .box-big {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
 	}
-
+	
 	.activityGame .signdialog .box-big-2 {
 		position: relative;
 		width: 100%;
 		overflow: hidden
 	}
-
+	
 	.activityGame .signdialog .box-big-2 a {
 		padding: 4px 15px;
 		font-size: 12px;
@@ -1138,27 +1149,27 @@
 		background: #e59235;
 		border-radius: 3px;
 	}
-
+	
 	.activityGame .signdialog .box-big-2 .el-input {
 		width: 470px;
 	}
-
+	
 	.activityGame .signdialog .box-big .el-input {
 		width: 520px;
 	}
-
+	
 	.activityGame .signdialog .box-small {
 		width: 100%;
 		overflow: hidden;
 	}
-
+	
 	.activityGame .signdialog .diatit {
 		margin: 0;
 		line-height: 14px;
 		font-size: 12px;
 		color: #999;
 	}
-
+	
 	.activityGame .signdialog .h3 {
 		width: 100%;
 		font-size: 16px;
@@ -1167,7 +1178,7 @@
 		color: #666;
 		text-align: center;
 	}
-
+	
 	.activityGame .signdialog .singtext {
 		padding: 5px 0;
 		margin: 0 auto;
@@ -1177,7 +1188,7 @@
 		text-align: center;
 		background: #d0e1f1;
 	}
-
+	
 	.activityGame .signdialog .singtext .deltrbtn {
 		margin-top: 18px;
 		padding: 5px;
@@ -1188,29 +1199,29 @@
 		background: #c42c12;
 		cursor: pointer;
 	}
-
+	
 	.activityGame .signdialog .singtext .el-input .el-input__inner {
 		line-height: 26px;
 		height: 26px;
 	}
-
+	
 	.activityGame .signdialog .singtext .el-form-item__label {
 		line-height: 28px;
 	}
-
+	
 	.activityGame .signdialog .el-dialog__header {
 		background: #84a9e3;
 		border-bottom: 1px solid #bfd0e2;
 	}
-
+	
 	.activityGame .signdialog .el-dialog__title {
 		color: #fff;
 	}
-
+	
 	.activityGame .signdialog .el-dialog__headerbtn .el-dialog__close {
 		color: #fff;
 	}
-
+	
 	.activityGame .signdialog .singtext .addtr {
 		margin-top: 5px;
 		padding: 2px 5px;
@@ -1220,59 +1231,59 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
-
+	
 	.activityGame .signdialog .tinymce-editor {
 		margin: 5px auto;
 		width: 588px;
 	}
-
+	
 	.activityGame .signdialog .singtext .el-input {
 		width: 120px;
 	}
-
+	
 	.activityGame .signdialog .box-small .el-input {
 		width: 196px;
 	}
-
+	
 	.activityGame .signdialog .domainsnum {}
-
+	
 	.activityGame .signdialog .domainsnum span {
 		line-height: 40px;
 		font-weight: bold;
 		font-size: 14px;
 		color: #F56C6C;
 	}
-
+	
 	.activityGame .signdialog .el-form-item__content {
 		line-height: 48px;
 	}
-
+	
 	.activityGame .signdialog .el-form-item__label {
 		line-height: 48px;
 	}
-
+	
 	.activityGame .signdialog .el-input__icon {
 		line-height: 10px;
 	}
-
+	
 	.activityGame .signdialog .textp {
 		font-size: 12px;
 		line-height: 12px;
 		color: #F56C6C;
 	}
-
+	
 	.activityGame .banner-top {
 		width: 100%;
 		height: 636px;
 		background: #0b54f9 url(../assets/activity/banner_top_bg.jpg) center top no-repeat;
 	}
-
+	
 	.activityGame .banner-top .reposbox {
 		position: relative;
 		margin: 0 auto;
 		width: 1200px;
 	}
-
+	
 	.activityGame .reposbox .sign-up-btn {
 		position: absolute;
 		left: 50%;
@@ -1283,7 +1294,7 @@
 		cursor: pointer;
 		background: url(../assets/activity/btn_signup.png) no-repeat;
 	}
-
+	
 	.activityGame .banner-top .session-num {
 		position: absolute;
 		top: 230px;
@@ -1298,7 +1309,7 @@
 		text-align: center;
 		background: #55c20b;
 	}
-
+	
 	.activityGame .banner-top .back-index {
 		position: absolute;
 		top: 5px;
@@ -1310,7 +1321,7 @@
 		line-height: 38px;
 		text-decoration: underline;
 	}
-
+	
 	.activityGame .banner-top .game-state-nostart {
 		position: absolute;
 		top: 68px;
@@ -1319,7 +1330,7 @@
 		height: 138px;
 		background: url(../assets/activity/game_state_nostart.png) no-repeat
 	}
-
+	
 	.activityGame .banner-top .game-state-start {
 		position: absolute;
 		top: 68px;
@@ -1328,7 +1339,7 @@
 		height: 138px;
 		background: url(../assets/activity/game_state_start.png) no-repeat;
 	}
-
+	
 	.activityGame .banner-top .game-state-end {
 		position: absolute;
 		top: 68px;
@@ -1337,7 +1348,7 @@
 		height: 138px;
 		background: url(../assets/activity/game_state_end.png) no-repeat
 	}
-
+	
 	.activityGame .banner-top .game-state {
 		position: absolute;
 		top: 180px;
@@ -1350,7 +1361,7 @@
 		color: #de482f;
 		font-style: italic;
 	}
-
+	
 	.activityGame .banner-top .game-time {
 		position: absolute;
 		top: 436px;
@@ -1361,97 +1372,82 @@
 		color: #fff;
 		letter-spacing: 1px;
 	}
-
+	
 	.activityGame .bd-list {
 		overflow: hidden;
 		margin: 0 0 15px 0;
 		width: 1200px;
 		background: #f5f5f5;
 	}
-
+	
 	.activityGame .bd-list .linebg {
 		float: left;
 		width: 10px;
 		height: 270px;
 		background: #9db1e0;
 	}
-
+	
 	.activityGame .bd-list .listdl {
 		float: left;
-    margin: 50px 0 0 25px;
-    width: 260px;
+		margin: 50px 0 0 80px;
+		width: 153px;
 	}
-
+	
 	.activityGame .bd-list .listdl dt {
 		position: relative;
 		width: 153px;
 		height: 160px;
+		background: url(../assets/img/head_pic.png) no-repeat center top;
 		background-size: cover;
 	}
-
+	
 	.activityGame .bd-list .listdl dt img {
-    position: absolute;
-    left: 55px;
-    top: 7px;
-    width: 139px;
-    height: 139px;
-    border-radius: 50%;
+		position: absolute;
+		left: 7px;
+		top: 7px;
+		width: 139px;
+		height: 139px;
+		border-radius: 50%;
 	}
-
+	
 	.activityGame .bd-list .listdl dt .prizebg {
 		position: absolute;
 		left: 0;
 		top: 0;
-    width: 200px;
-    height: 160px;
-    z-index: 5;
+		width: 153px;
+		height: 160px;
+		z-index: 5;
 	}
-
+	
 	.activityGame .bd-list .listdl dt .prizebg1 {
-    background: url(../assets/activity/the_second_bg.png) no-repeat 48px 0;
-
+		background: url(../assets/activity/the_first_bg.png) no-repeat;
 	}
-
+	
 	.activityGame .bd-list .listdl dt .prizebg2 {
-    background: url(../assets/activity/the_first_bg.png)  no-repeat 48px 0;
-
+		background: url(../assets/activity/the_second_bg.png) no-repeat;
 	}
-
+	
 	.activityGame .bd-list .listdl dt .prizebg3 {
-		background: url(../assets/activity/the_third_bg.png)  no-repeat 48px 0;
+		background: url(../assets/activity/the_third_bg.png) no-repeat;
 	}
-
+	
 	.activityGame .bd-list .listdl dd {
-		width: 260px;
-		font-size: 14px;
+		width: 139px;
+		font-size: 18px;
 		line-height: 40px;
 		color: #666;
 		letter-spacing: 1px;
 		text-align: center;
 	}
-  .activityGame .bd-list .listdl .tip2 {
-    background-color: #ffe885;
-    letter-spacing: 0;
-    font-size: 12px;
-  }
-  .activityGame .bd-list .listdl .tip1 {
-    background-color:#ffe2bf;
-    letter-spacing: 0;
-    font-size: 12px;
-  }
-  .activityGame .bd-list .listdl .tip3 {
-    background-color:#c9f653;
-    letter-spacing: 0;
-    font-size: 12px;
-  }
+	
 	.activityGame .bd-list .alllist {
-    position: relative;
-    float: right;
-    width: 320px;
-    height: 282px;
-    background: #b3cfda;
+		position: relative;
+		float: right;
+		width: 320px;
+		height: 270px;
+		background: #9db1e0;
 	}
-
+	
 	.activityGame .bd-list .alllist-con {
 		overflow: hidden;
 		position: absolute;
@@ -1462,21 +1458,15 @@
 		height: 230px;
 		border: 1px solid #fff;
 	}
-
+	
 	.activityGame .bd-list .alllist-con li {
 		width: 100%;
 		text-indent: 20px;
-		line-height: 25px;
-		font-size: 16px;
+		line-height: 22px;
+		font-size: 14px;
 		color: #fff;
 	}
-  .activityGame .bd-list .alllist-con .content {
-    padding-bottom: 20px;
-    font-size: 14px;
-    height: 20px;
-    margin-top: 0;
-  }
-
+	
 	.activityGame .bd-list .alllist h3 {
 		display: block;
 		position: absolute;
@@ -1488,10 +1478,10 @@
 		font-weight: normal;
 		color: #fff;
 		text-align: center;
-		background: #b3cfda;
+		background: #9db1e0;
 		z-index: 1;
 	}
-
+	
 	.activityGame .title-top {
 		overflow: hidden;
 		margin: 50px 0 30px 0;
@@ -1501,15 +1491,15 @@
 		font-weight: bold;
 		color: #fff;
 	}
-
+	
 	.activityGame .title-top1 {
 		background: url(../assets/activity/title_bg.png) left top no-repeat;
 	}
-
+	
 	.activityGame .title-top2 {
 		background: url(../assets/activity/title_bg_long.png) left top no-repeat;
 	}
-
+	
 	.activityGame .title-top .span1 {
 		float: left;
 		margin-left: 21px;
@@ -1519,7 +1509,7 @@
 		text-align: center;
 		color: #006af5;
 	}
-
+	
 	.activityGame .title-top .span2 {
 		float: left;
 		display: inline-block;
@@ -1528,14 +1518,14 @@
 		color: #fff;
 		line-height: 32px;
 	}
-
+	
 	.activityGame .objective {
 		margin-bottom: 50px;
 		width: 1200px;
 		height: 246px;
 		background: url(../assets/activity/text_bg.png) no-repeat;
 	}
-
+	
 	.activityGame .objective .objectivep {
 		padding: 80px 30px 0;
 		font-size: 16px;
@@ -1543,13 +1533,13 @@
 		text-indent: 22px;
 		color: #666;
 	}
-
+	
 	.activityGame .stepimg {
 		margin-top: 30px;
 		width: 1200px;
 		height: 195px;
 	}
-
+	
 	.activityGame .entry-mode {
 		padding: 10px 20px;
 		width: 1160px;
@@ -1557,26 +1547,26 @@
 		line-height: 36px;
 		background: #ededed;
 	}
-
+	
 	.activityGame .review-top {
 		width: 1200px;
 		height: 47px;
 		background: url(../assets/activity/review_bg_top.jpg) no-repeat;
 	}
-
+	
 	.activityGame .review-bottom {
 		width: 1200px;
 		height: 44px;
 		background: url(../assets/activity/review_bg_bottom.jpg) no-repeat;
 	}
-
+	
 	.activityGame .review-center {
 		overflow: hidden;
 		padding: 0 30px;
 		width: 1140px;
 		background: url(../assets/activity/review_bg_center.jpg) repeat-y;
 	}
-
+	
 	.activityGame .review-center h4 {
 		display: inline-block;
 		margin: 20px 0 10px;
@@ -1586,13 +1576,13 @@
 		line-height: 30px;
 		background: #f2bc18;
 	}
-
+	
 	.activityGame .review-center p {
 		font-size: 16px;
 		line-height: 26px;
 		color: #666;
 	}
-
+	
 	.activityGame .review-center p i {
 		display: inline-block;
 		margin-right: 5px;
@@ -1601,19 +1591,19 @@
 		border-radius: 50%;
 		background: #c72d08;
 	}
-
+	
 	.activityGame .bottom-box {
 		width: 100%;
 		height: 720px;
 		background: #095cfc;
 	}
-
+	
 	.activityGame .bottom-box .bottom-box-top {
 		width: 100%;
 		height: 104px;
 		background: url(../assets/activity/bottom_top_bg.png) repeat-x;
 	}
-
+	
 	.activityGame .bottom-box .prize-box {
 		position: relative;
 		margin: 50px auto 0;
@@ -1622,13 +1612,13 @@
 		height: 443px;
 		background: url(../assets/activity/Prize_bg.png) no-repeat;
 	}
-
+	
 	.activityGame .bottom-box .copy-box {
 		padding: 10px 0;
 		width: 100%;
 		border-top: 1px solid #dedede;
 	}
-
+	
 	.activityGame .bottom-box .copy {
 		padding: 10px 0;
 		margin: 0px auto;
@@ -1638,12 +1628,12 @@
 		line-height: 20px;
 		color: #dcdee6;
 	}
-
+	
 	.activityGame .bottom-box .prize-box ul {
 		overflow: hidden;
 		margin: 130px 10px 0 30px;
 	}
-
+	
 	.activityGame .bottom-box .prize-box ul li {
 		margin-left: 80px;
 		padding: 138px 0 42px 0;
@@ -1658,23 +1648,23 @@
 		text-align: center;
 		text-indent: 16px;
 	}
-
+	
 	.activityGame .bottom-box .prize-box ul .li1 {
 		background: url(../assets/activity/Prize_1.png) no-repeat;
 	}
-
+	
 	.activityGame .bottom-box .prize-box ul .li2 {
 		background: url(../assets/activity/Prize_2.png) no-repeat;
 	}
-
+	
 	.activityGame .bottom-box .prize-box ul .li3 {
 		background: url(../assets/activity/Prize_3.png) no-repeat;
 	}
-
+	
 	.activityGame .bottom-box .prize-box ul .li4 {
 		background: url(../assets/activity/Prize_4.png) no-repeat;
 	}
-
+	
 	.activityGame .bottom-box .prize-box .prize4 {
 		position: absolute;
 		left: 355px;
@@ -1684,36 +1674,36 @@
 		line-height: 26px;
 		color: #fff;
 	}
-
+	
 	.activityGame .wonderfultime {
 		overflow: hidden;
 		width: 1200px;
 	}
-
+	
 	.activityGame .wonderfultime li {
-		margin: 15px 20px;
+		margin: 15px 10px;
 		float: left;
 	}
-
+	
 	.activityGame .wonderfultime li img {
-    width: 260px;
-    height: 280px;
+		width: 280px;
+		height: 160px;
 	}
-
+	
 	.activityGame .hostunit {
 		width: 100%;
 	}
-
+	
 	.activityGame .el-carousel__container {
 		margin: 0 auto;
 		width: 900px;
 	}
-
+	
 	.activityGame .el-carousel__item img {
 		width: 300px;
 		border: 1px solid #dedede;
 	}
-
+	
 	.float_word {
 		display: block;
 		position: fixed;
@@ -1729,7 +1719,7 @@
 		z-index: 10000;
 		background: url(../assets/icon/icon_word.png) no-repeat;
 	}
-
+	
 	.present_float {
 		display: block;
 		position: fixed;
@@ -1738,7 +1728,7 @@
 		width: 180px;
 		z-index: 10000;
 	}
-
+	
 	.present_float .present-bottom {
 		position: relative;
 		margin-top: 150px;
@@ -1747,13 +1737,13 @@
 		background: url(../assets/activity/present_float.png) no-repeat;
 		z-index: 10005;
 	}
-
+	
 	.present_float .ballute_box {
 		position: relative;
 		width: 420px;
 		height: 370px;
 	}
-
+	
 	.present_float .ballute_blue {
 		position: absolute;
 		right: 20px;
@@ -1766,7 +1756,7 @@
 		-webkit-animation-fill-mode: both;
 		animation-fill-mode: both;
 	}
-
+	
 	.present_float .ballute_pink {
 		position: absolute;
 		left: 26px;
@@ -1779,7 +1769,7 @@
 		-webkit-animation-fill-mode: both;
 		animation-fill-mode: both;
 	}
-
+	
 	.present_float .ballute_red {
 		position: absolute;
 		left: 5px;
@@ -1792,29 +1782,29 @@
 		-webkit-animation-fill-mode: both;
 		animation-fill-mode: both;
 	}
-
+	
 	.activityGame .sharbox-over {
 		position: absolute;
 		left: 800px;
 		top: 490px;
 		width: 300px;
 	}
-
+	
 	.activityGame .sharbox-over .p {
 		float: left;
 		font-size: 14px;
 		line-height: 42px;
 		color: #fff;
 	}
-
+	
 	.activityGame .sharbox-over .social-share {
 		float: left;
 	}
-
+	
 	.activityGame .sharbox-over .social-share a {
 		background: #fff;
 	}
-
+	
 	@media only screen and (max-width:1200px) {
 		body {
 			background: #fff;
@@ -1826,7 +1816,7 @@
 		.activityGame .title-top .span1{
 		font-size: 30px;
 			line-height: 40px;
-			color: #fff;
+			color: #fff;	
 		}
 		.activityGame .title-top .span2{
 			font-size: 30px;
@@ -1851,7 +1841,7 @@
 			line-height: 36px;
 		}*/
 	}
-
+	
 	@keyframes ballute_pink {
 		0% {
 			transform: rotate(10deg);
@@ -1879,7 +1869,7 @@
 			/*定义动画的旋转中心点*/
 		}
 	}
-
+	
 	@-webkit-keyframes ballute_pink {
 		0% {
 			transform: rotate(10deg);

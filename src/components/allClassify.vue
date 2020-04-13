@@ -93,9 +93,9 @@ export default {
 			var params1 = new URLSearchParams();
 			params1.append("page", 1);
 			params1.append("limit", 10);
-			_this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params1)
+			this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params1)
 				.then(function(response) {
-					_this.hotList = response.data.page.list;
+					this.hotList = response.data.page.list;
 					console.log("_this.hotList", response)
 				})
   	

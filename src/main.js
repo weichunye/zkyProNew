@@ -11,6 +11,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 /*import $ from 'jquery'*/
 import Cookies from 'js-cookie'
+import {Passport} from  './utils/checkLogin'
 import echarts from 'echarts'
 import 'babel-polyfill'
 import promise from 'es6-promise'
@@ -40,15 +41,31 @@ Vue.prototype.messageOpen = function(msg, type) {
 	});
 
 }
+
+var option={
+  umtUrl:'http://passport.escience.cn', //umt的地址，必填
+  viewPort:$("#testDiv"),						//显示message的地方，可不填
+  message:'登录',					//提示信息的内容，可不填
+  loginclass:'登录'
+}
+var newOption={
+  target:'none',   //无作用
+  appname:'dct', //应用名称
+  theme:'ddl'	   //如果在umt里面有定制版，
+}
+var  passport= new Passport(option)
+console.log("passport",passport)
+var newPassport= passport.checkAndLogin("http://cstsai.cstcloud.cn/web/auth/login",newOption)
+console.log("passport00",newPassport)
 var userJsonStr = sessionStorage.getItem('sessionData');
 var userEntity = JSON.parse(userJsonStr);
 
-/*if(userEntity){
+if(userEntity){
 Vue.prototype.token = userEntity.token;
 Vue.prototype.userInfo = userEntity.userInfo;
 Vue.prototype.userId = userEntity.userId;
 }
-*/
+
 
 console.log("userEntity", userEntity); // => tom
 //获取个人信息
@@ -68,13 +85,13 @@ console.log("userEntity", userEntity); // => tom
 	}
 )*/
 
-Vue.prototype.token = "1b5d13b4ac79fada76b39de9c0a85006";
+/* Vue.prototype.token = "1b5d13b4ac79fada76b39de9c0a85006";
 Vue.prototype.userId = 1;
 Vue.prototype.userName = "temporary";
 Vue.prototype.userInfo = {
 			trueName:'索隆',
 			cstnetId:'3852555555@qq.com'
-}
+} */
 
 /*Vue.prototype.token = "";
 Vue.prototype.userId = '';*/

@@ -5,12 +5,12 @@
 const path = require('path')
 /* const baseUrl = "http://39.105.190.39:8080/rossc/";
 const baseUrlImg = "http://39.105.190.39:8080/rossc/upload/"; */
-/*const baseUrl = "http://localhost:8080/rossc/";
-const baseUrlImg = "http://localhost:8080/rossc/upload/";*/
-const baseUrl = "http://192.168.1.200:8080/rossc/";
-const baseUrlImg = "http://192.168.1.200:8080/rossc/upload/";
- /*const baseUrl = "http://cstsai.cstcloud.cn/rossc/";
-const baseUrlImg = " http://cstsai.cstcloud.cn/rossc/upload/"; */
+/*const baseUrl = "http://localhost:8002/rossc/";
+const baseUrlImg = "http://localhost:8002/rossc/upload/";*/
+/* const baseUrl = "http://192.168.1.36:8080/rossc/";
+const baseUrlImg = "http://192.168.1.36:8080/rossc/upload/";*/
+ const baseUrl = "http://cstsai.cstcloud.cn/rossc/";
+const baseUrlImg = " http://cstsai.cstcloud.cn/rossc/upload/";
 
 
 module.exports = {
@@ -22,14 +22,13 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: '192.168.1.11', // can be overwritten by process.env.HOST
+    host: 'localhost', // can be overwritten by process.env.HOST
    /*host: '159.226.186.92', // can be overwritten by process.env.HOST*/
-    port: 8010, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    port: 8002, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
-
     // Use Eslint Loader?
     // If true, your code will be linted during bundling and
     // linting errors and warnings will be shown in the console.

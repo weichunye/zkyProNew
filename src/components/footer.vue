@@ -1,8 +1,8 @@
 <template>
   <div class="foot">
  <p>
- 1996 - 2019 中国科学院计算机网络信息中心 版权所有<br>
-Copyright  1996-2019 Computer Network Information Center, Chinese Academy of Sciences. All Rights Reserved.<br>
+ 1996 - 2020 中国科学院计算机网络信息中心 版权所有<br>
+Copyright  1996-2020 Computer Network Information Center, Chinese Academy of Sciences. All Rights Reserved.<br>
 京ICP备案号，京ICP备09112257号-94<br>
 服务支持信息：电话：010-58812182  邮箱：nienm@sccas.cn
  </p>

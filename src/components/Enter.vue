@@ -94,6 +94,10 @@
 			</router-link>
 
 		</div>
+    <div class="xieyi">
+      <img src="../assets/img/banner_shengming.png" alt="">
+      
+    </div>
 		<!--分类应用领域-->
 		<div id="contype" class="content contype ">
 			<div v-for="item in indexSoftList" class="soft-con">
@@ -626,6 +630,11 @@
 	.enter .contenttop .recommend .con dl dd .spanbg {
 		background: #29ABE2;
 	}
+  .enter .xieyi{
+    margin: 15px auto;
+    width: 1204px;
+    height: 489px;
+  }
 	
 	.enter .contenttop .hotbox {
 		float: left;
