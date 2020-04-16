@@ -55,7 +55,8 @@ var newOption={
 }
 var  passport= new Passport(option)
 console.log("passport",passport)
-var newPassport= passport.checkAndLogin("http://cstsai.cstcloud.cn/web/auth/login",newOption)
+var newPassport= passport.checkAndLogin("http://cstsai.cstcloud.cn/rossc/web/auth/login",newOption)
+
 console.log("passport00",newPassport)
 var userJsonStr = sessionStorage.getItem('sessionData');
 var userEntity = JSON.parse(userJsonStr);
