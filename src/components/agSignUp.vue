@@ -42,54 +42,76 @@
 
 							<el-form-item label="开源类型" :label-width="formLabelWidth">
 								<em class="addti">*</em>
-								<el-select v-model="form.opensourceType" value-key="id" filterable multiple placeholder="请选择开源类型">
+							<!--	<el-select v-model="form.opensourceType" value-key="id" filterable multiple placeholder="请选择开源类型">
 									<el-option v-for="item in opensourceTypeOption " :key="item.id" :label="item.ctyName" :value="item">
 									</el-option>
-								</el-select>
+								</el-select>-->
+                <el-cascader
+                  v-model="form.openType"
+                  :options="openTypeOption"
+                  :props="{ multiple: true, checkStrictly: true }"
+                  clearable></el-cascader>
 							</el-form-item>
+              <el-form-item prop="softCategory" label="收费方式" :label-width="formLabelWidth">
+                <el-cascader
+                  v-model="form.softCategory"
+                  :options="softCategoryOption"
+                  :props="{ multiple: true, checkStrictly: true }"
+                  clearable></el-cascader>
+              </el-form-item>
 						</div>
-						<div class="box-big">
+            <div class="box-big">
 
-							<el-form-item label="软件类别" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
-									<el-option v-for="item in softCategoryOption " :key="item.id" :label="item.ctyName" :value="item">
-									</el-option>
-								</el-select>
+              <el-form-item label="软件类别" :label-width="formLabelWidth">
+                <em class="addti">*</em>
+                <!--	<el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
+                    <el-option v-for="item in softCategoryOption " :key="item.id" :label="item.ctyName" :value="item">
+                    </el-option>
+                  </el-select>-->
+                <el-cascader
+                  v-model="form.opensourceType"
+                  :options="opensourceTypeOption"
+                  :props="{ multiple: true, checkStrictly: true }"
+                  clearable></el-cascader>
 
-							</el-form-item>
-						</div>
-						<div class="box-big">
-
-							<el-form-item label="编程语言" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-select v-model="form.Language" value-key="id" filterable multiple placeholder="请选择编程语言">
-									<el-option v-for="item in LanguageOption " :key="item.id" :label="item.ctyName" :value="item">
-									</el-option>
-								</el-select>
-							</el-form-item>
-						</div>
-						<div class="box-big">
-
-							<el-form-item label="用户接口" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-select v-model="form.userInterface" value-key="id" filterable multiple placeholder="请选择用户接口">
-									<el-option v-for="item in userInterfaceOption " :key="item.id" :label="item.ctyName" :value="item">
-									</el-option>
-								</el-select>
-							</el-form-item>
-						</div>
-						<div class="box-big">
-
-							<el-form-item label="应用领域" :label-width="formLabelWidth">
-								<em class="addti">*</em>
-								<el-select v-model="form.applicationField" value-key="id" filterable multiple placeholder="请选择应用领域">
-									<el-option v-for="item in applicationFieldOption " :key="item.id" :label="item.ctyName" :value="item">
-									</el-option>
-								</el-select>
-							</el-form-item>
-
-						</div>
+              </el-form-item>
+            </div>
+            <div class="box-big">
+              <el-form-item label="编程语言" :label-width="formLabelWidth">
+                <em class="addti">*</em>
+                <!--<el-select v-model="form.Language" value-key="id" filterable multiple placeholder="请选择编程语言">
+                  <el-option v-for="item in LanguageOption " :key="item.id" :label="item.ctyName" :value="item">
+                  </el-option>
+                </el-select>-->
+                <el-cascader
+                  v-model="form.Language"
+                  :options="LanguageOption"
+                  :props="{ multiple: true, checkStrictly: true }"
+                  clearable></el-cascader>
+              </el-form-item>
+              <el-form-item prop="userInterface" label="学科领域" :label-width="formLabelWidth">
+                <!--<el-select v-model="form.userInterface" value-key="id" filterable multiple placeholder="请选择用户接口">
+                  <el-option v-for="item in userInterfaceOption " :key="item.id" :label="item.ctyName" :value="item">
+                  </el-option>
+                </el-select>-->
+                <el-cascader
+                  v-model="form.userInterface"
+                  :options="userInterfaceOption"
+                  :props="{ multiple: true, checkStrictly: true }"
+                  clearable></el-cascader>
+              </el-form-item>
+              <el-form-item prop="applicationField" label="开发领域" :label-width="formLabelWidth">
+                <!--<el-select v-model="form.applicationField" value-key="id" filterable multiple placeholder="请选择应用领域">
+                  <el-option v-for="item in applicationFieldOption " :key="item.id" :label="item.ctyName" :value="item">
+                  </el-option>
+                </el-select>-->
+                <el-cascader
+                  v-model="form.applicationField"
+                  :options="applicationFieldOption"
+                  :props="{ multiple: true, checkStrictly: true }"
+                  clearable></el-cascader>
+              </el-form-item>
+            </div>
 						<div class="box-big">
 							<el-form-item label="操作平台" :label-width="formLabelWidth">
 								<em class="addti">*</em>
@@ -283,7 +305,7 @@
 									<em class="addti">*</em>
 									<el-input :disabled="true" v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
 									<div class="tit">
-										
+
 									</div>
 								</el-form-item>
 								<el-upload class="upload-demo" ref="frameworkReportDocRef" :action=upUrl :on-success='frameworkReportDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList9">
@@ -373,8 +395,6 @@
 		</div>
 	</div>
 </template>
-<script type="text/javascript">
-</script>
 <script>
 	import TinymceEditor from '@/components/tinymce-editor'
 	import baseUrl from '../../config/index.js'
@@ -391,10 +411,11 @@
 					softVersion: '',
 					opensourceType: [],
 					applicationField: [],
-					softCategory: [],
 					Language: [],
 					userInterface: [],
 					operatingSystem: [],
+          openType:[],//开源类型
+          softCategory:[],//收费方式
 					softUrl: '',
 					ifCheckedCns: '',
 					ifCheckedMzs: '',
@@ -492,6 +513,7 @@
 				formLabelWidth: '150px',
 				ifCheck: false,
 				wordUrl: '',
+        openTypeOption:[],
 
 			}
 		},
@@ -558,13 +580,15 @@
 				var _this = this;
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/softCtyAllList')
 					.then(function(response) {
-						var newResponse = response.data.list
-
-						_this.opensourceTypeOption = newResponse[2].sonList; //开源类型
-						_this.applicationFieldOption = newResponse[0].sonList; //应用领域
-						_this.softCategoryOption = newResponse[1].sonList; //软件类型
-						_this.LanguageOption = newResponse[4].sonList; //变成语言
-						_this.userInterfaceOption = newResponse[3].sonList; //用户接口
+            var newResponse = response.data.list
+            console.log("+++++++++++++++++++",newResponse)
+            _this.opensourceTypeOption = newResponse[5].children; //软件类型
+            _this.applicationFieldOption = newResponse[1].children; //开发领域
+            _this.softCategoryOption = newResponse[4].children; //收费方式
+            _this.LanguageOption = newResponse[3].children; //变成语言
+            _this.userInterfaceOption = newResponse[0].children; //学科领域
+            _this.openTypeOption = newResponse[2].children; //开源类型
+            console.log("------------------",_this.openTypeOption)
 
 					})
 			},
@@ -679,17 +703,17 @@
 
 				} else {
 					codeStype = 'warning'
-					
+
 				}
 				this.messageOpen(response.msg, codeStype)
 				this.fileList1 = []
 
-	
+
 			},
 			  analysisDocChange(file) {
 			  	this.analysisCheck=file.name
-			  
-       			 
+
+
       			},
 
 			//项目规格书
@@ -748,7 +772,7 @@
 				this.messageOpen(response.msg, codeStype)
 
 			},
-			
+
 			/*submitFrameworkReportDoc() {
 				this.$refs.frameworkReportDocRef.submit();
 			},
@@ -868,7 +892,7 @@
 
 					}
 					if(_this.getSoftUrl&&_this.form.softUrl==_this.getSoftUrl){
-						
+
 					}else{
 						var params = new URLSearchParams();
 					params.append("softUrl", _this.form.softUrl);
@@ -886,7 +910,7 @@
 							console.log(error);
 						})
 					}
-					
+
 
 				}
 
@@ -904,7 +928,6 @@
 				var joinVo = {
 					activityId: this.$route.query.activityId,
 					applicationField: '',
-					applicationFieldList: _this.form.applicationField,
 					createTime: "",
 					createUser: "",
 					developers: "",
@@ -923,7 +946,6 @@
 					isSelf: 1,
 					isShowDeveloperName: '',
 					opensourceType: '',
-					opensourceTypeList: _this.form.opensourceType,
 					operatingSystem: '',
 					programmingLanguage: '',
 					programLanguageList: _this.form.Language,
@@ -935,7 +957,6 @@
 					softLicense: "",
 					softLogo: "",
 					softName: _this.form.name,
-					softSonCtyList: _this.form.softCategory,
 					softUrl: _this.form.softUrl,
 					softVersion: _this.form.softVersion,
 					updateTime: "",
@@ -944,6 +965,11 @@
 					userInterfaceList: _this.form.userInterface,
 					isMatchSoft: 1,
 					userList: [],
+          softSonCtyList: this.form.applicationField,
+          opensourceTypeList: this.form.openType,//开源类型
+          chargingMethodList : this.form.softCategory,//收费方式
+          softTypeList  : this.form.opensourceType,//软件类别
+          applicationFieldList   : this.form.userInterface,//学科领域
 					softDoc: {
 						analysisDoc: this.form.analysisDoc,
 						createTime: "",
@@ -1121,10 +1147,10 @@
 				status: 0,
 				updateTime: ""
 			}
-			
+
 			 joinVo[arr].push(curObj);
-		}	
-		
+		}
+
    		}*/
 
 				_this.$refs[formName].validate((valid) => {
@@ -1229,12 +1255,12 @@
 	.bodybg {
 		background: #eef5f9;
 	}
-	
+
 	.addbg {
 		width: 100%;
 		background: url(../assets/bg/sign_bg.png) repeat;
 	}
-	
+
 	.agSignUp-box {
 		padding: 0 0 20px 0;
 		margin: 20px auto;
@@ -1242,7 +1268,7 @@
 		border: 1px solid #dedede;
 		background: #fff;
 	}
-	
+
 	.agSignUp h2 {
 		margin: 0 0 20px 0;
 		width: 100%;
@@ -1255,7 +1281,7 @@
 		background: linear-gradient(to bottom, #dfecfa 0%, #2295d9 8%, #4794e4 100%);
 		border-bottom: 2px solid #2b75c2;
 	}
-	
+
 	.agSignUp h2 span {
 		float: right;
 		margin-right: 10px;
@@ -1266,39 +1292,39 @@
 		cursor: pointer;
 		text-decoration: underline;
 	}
-	
+
 	.agSignUp h2 span:hover {
 		color: #fdd765;
 	}
-	
+
 	.agSignUp .box-big {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .box-big .el-select__tags {
 		margin-left: 15px;
 	}
-	
+
 	.agSignUp .box-teacher {
 		overflow: hidden;
 		margin-top: 15px;
 	}
-	
+
 	.agSignUp .box-teacher .el-input {
 		float: left;
 		width: 191px;
 		margin-left: 13px;
 	}
-	
+
 	.agSignUp .diatit {
 		padding:10px 0 0px 18px;
 		line-height: 18px;
 		font-size: 12px;
 		color: #d3d5d6;
 	}
-	
+
 	.agSignUp .h3 {
 		margin: 0 auto;
 		width: 500px;
@@ -1309,12 +1335,12 @@
 		text-align: center;
 		text-indent: 70px;
 	}
-	
+
 	.agSignUp .h3 span {
 		margin-left: 10px;
 		color: #999;
 	}
-	
+
 	.agSignUp .singtext {
 		padding: 5px 0;
 		margin: 0 0 15px 165px;
@@ -1324,18 +1350,18 @@
 		text-align: center;
 		background: #d0e1f1;
 	}
-	
+
 	.agSignUp .singtext td {
 		line-height: 30px;
 	}
-	
+
 	.agSignUp .singtext .el-input__inner {
 		margin-top: 10px;
 		width: 100%;
 		height: 30px;
 		line-height: 30px;
 	}
-	
+
 	.agSignUp .singtext .deltrbtn {
 		margin-top: 10px;
 		font-size: 12px;
@@ -1345,7 +1371,7 @@
 		background: #e26556;
 		cursor: pointer;
 	}
-	
+
 	.agSignUp .singtext .addtr {
 		display: inline-block;
 		margin: 10px 0 0 150px;
@@ -1358,19 +1384,19 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
-	
+
 	.agSignUp .singtext .el-input {
 		padding: 0 5px;
 		box-sizing: border-box;
 	}
-	
+
 	.addti {
 		font-style: normal;
 		font-size: 14px;
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	
+
 	.agSignUp .addti {
 		float: left;
 		font-style: normal;
@@ -1378,43 +1404,43 @@
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	
+
 	.agSignUp .box-big .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 600px;
 	}
-	
+
 	.agSignUp .domainsnum span {
 		line-height: 40px;
 		font-weight: bold;
 		font-size: 14px;
 		color: #F56C6C;
 	}
-	
+
 	.agSignUp .tinymce-editor {
 		margin-left: 10px;
 		width: 600px;
 	}
-	
+
 	.agSignUp .box-input {
 		margin-top: 10px;
 		float: left;
 	}
-	
+
 	.agSignUp .bottom {
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .left-box {
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .right-box {
 		display: block;
 		margin: 10px auto;
 	}
-	
+
 	.agSignUp .right-box button {
 		padding: 15px 0;
 		margin: 10px;
@@ -1426,51 +1452,51 @@
 		background: #4794e4;
 		border: 1px dashed #4794e4;
 	}
-	
+
 	.agSignUp .box {
 		width: 100%;
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .box .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 260px;
 	}
-	
+
 	.agSignUp .examinedialog {
 		width: 820px;
 	}
-	
+
 	.agSignUp .examinedialog input {
 		width: 220px;
 	}
-	
+
 	.agSignUp .examinedialog .box {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.agSignUp .examinedialog .box-1 {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.agSignUp .examinedialog .box-1 .el-form-item__content {
 		width: 600px;
 	}
-	
+
 	.agSignUp .examinedialog .box .el-form-item__content {
 		width: 280px;
 	}
-	
+
 	.agSignUp .examinedialog .tit {
 		margin: 5px 0 0 12px;
 		overflow: hidden;
 		width: 100px;
 		height: 36px;
 	}
-	
+
 	.agSignUp .examinedialog .tit button {
 		float: left;
 		margin: 10px 0 0 5px;
@@ -1481,7 +1507,7 @@
 		background: #fdd765;
 		border-radius: 3px;
 	}
-	
+
 	.agSignUp .examinedialog .tit p {
 		float: left;
 		margin-left: 20px;
@@ -1489,22 +1515,22 @@
 		line-height: 24px;
 		color: #cc0000;
 	}
-	
+
 	.agSignUp .examinedialog .upload-demo {
 		position: relative;
 		width: 360px;
 		display: inline-block;
 	}
-	
+
 	.agSignUp .examinedialog .bottom {
 		overflow: hidden;
 		padding: 5px;
 	}
-	
+
 	.agSignUp .examinedialog .bottom .right {
 		float: right;
 	}
-	
+
 	.agSignUp .avatar-uploader .el-upload {
 		border: 1px dashed #d9d9d9;
 		border-radius: 6px;
@@ -1512,11 +1538,11 @@
 		position: relative;
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .avatar-uploader .el-upload:hover {
 		border-color: #409EFF;
 	}
-	
+
 	.agSignUp .avatar-uploader-icon {
 		font-size: 28px;
 		color: #8c939d;
@@ -1525,29 +1551,29 @@
 		line-height: 100px;
 		text-align: center;
 	}
-	
+
 	.agSignUp .upload-box {
 		margin: 20px;
 		float: left;
 	}
-	
+
 	.agSignUp .upload-box p {
 		width: 100%;
 		text-align: center;
 	}
-	
+
 	.agSignUp .avatar {
 		width: 100px;
 		height: 100px;
 		display: block;
 	}
-	
+
 	.avatar-uploader {
 		position: relative;
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.avatar-uploader .addShowPic {
 		position: absolute;
 		left: 0;
@@ -1555,38 +1581,38 @@
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list {
 		position: absolute;
 		left: 0;
 		top: 0;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item {
 		margin: 0;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item-thumbnail {
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name {
 		width: 0;
 		margin: 0;
 	}
-	
+
 	.el-upload-list__item.is-success .el-upload-list__item-status-label {
 		z-index: 100;
 	}
-	
+
 	.agSignUp .header-top {
 		width: 100%;
 		height: 46px;
 		background: #4b505d;
 	}
-	
+
 	.agSignUp .header-top .reposbox {
 		overflow: hidden;
 		position: relative;
@@ -1597,21 +1623,21 @@
 		line-height: 46px;
 		color: #fff;
 	}
-	
+
 	.agSignUp .header-top .reposbox .logo {
 		float: left;
 		margin-left: 10px;
 		height: 46px;
 		width: auto;
 	}
-	
+
 	.agSignUp .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
 		line-height: 46px;
 		color: #fff;
 	}
-	
+
 	.agSignUp .header-top .reposbox .right-text {
 		float: right;
 		margin-right: 10px;
@@ -1620,7 +1646,7 @@
 		color: #f4f4f4;
 		cursor: pointer;
 	}
-	
+
 	.agSignUp .gitUrl {
 		padding: 9px 6px;
 		border: 1px solid #dedede;
@@ -1630,27 +1656,27 @@
 		margin-left: 5px;
 		border-radius: 4px;
 	}
-	
+
 	.agSignUp .el-button--success {
 		background: #46c3a1;
 		border: 1px dashed #46c3a1;
 	}
-	
+
 	.agSignUp .el-button--primary {
 		background: #67C23A;
 		border: 1px dashed #67C23A;
 	}
-	
+
 	.agSignUp .el-button--success span,
 	.agSignUp .el-button--primary span {
 		color: #fff;
 	}
-	
+
 	.agSignUp .right-box .el-button--primary span {
 		font-size: 16px;
 		color: #fff;
 	}
-	
+
 	.agSignUp .uploadtit {
 		display: block;
 		margin-bottom: 20px;
@@ -1660,16 +1686,16 @@
 		color: #606266;
 		line-height: 16px;
 	}
-	
+
 	.box-1 .el-form-item {
 		padding: 0;
 		margin: 0;
 	}
-	
+
 	.box-big .el-form-item {
 		margin-bottom: 10px;
 	}
-	
+
 	.float_word {
 		display: block;
 		position: fixed;
@@ -1690,6 +1716,6 @@
 		width: 100%;
 		font-size: 12px;
 		color: #F56C6C;
-		
+
 	}
 </style>

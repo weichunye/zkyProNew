@@ -29,7 +29,7 @@
 				<a  class="right-text" @click="signOut" href="https://passport.escience.cn/logout?WebServerURL=http://cstsai.cstcloud.cn">退 &nbsp;出 </a>
 				<p @click="toPersonalInfo" class="right-text">{{userInfo.trueName}},&nbsp;&nbsp;个人中心&nbsp;&nbsp;&nbsp;|</p>
 				</div>
-				
+
 			</div>
 
 		</div>
@@ -52,7 +52,7 @@
 					itemType: 1,
 					page: 1,
 				},
-			
+        userId:'',
 				searchOptions: [{
 						value: 1,
 						label: '软件'
@@ -72,14 +72,19 @@
 
 		mounted() {
 			var _this = this;
-		
+      $.getScript("http://passport.escience.cn/js/isLogin.do", function(){
+        _this.userId=data.result?window.SITE_CONFIG['userId']:""
+      })
+
 			_this.toLoginUrl = baseUrl.baseUrl + 'web/auth/login'
-				if(this.userId){
+
+				if(	_this.userId){
 				_this.showLogin=true;
 			}else{
 					_this.showLogin=false;
 			}
-		
+      console.log("\t_this.userId22222222",	_this.userId)
+
 		},
 
 		methods: {
@@ -92,7 +97,7 @@
 			},
 				signOut:function(){
 				sessionStorage.clear()
-				
+
 			},
 			toSearchList: function() {
 				this.$router.push({
@@ -112,18 +117,18 @@
 		height:66px;
 		background: #4b505d;
 	}
-	
+
 	.header .classify {
 		float: left;
 		width: 80px;
 	}
-	
+
 	.header .input {
 		float: left;
 		width: 320px;
 		line-height: 32px;
 	}
-	
+
 	.header .header-top .reposbox {
 		overflow: hidden;
 		position: relative;
@@ -134,30 +139,30 @@
 		line-height: 66px;
 		color: #fff;
 	}
-	
+
 	.header .header-top .reposbox .logo {
 		float: left;
 		margin: 10px 10px 0 0;
 		height: 46px;
 		width: auto;
 	}
-	
+
 	.header .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
 		line-height: 66px;
 		color: #fff;
 	}
-	
+
 	.header .header-top .reposbox .search-box {
 		overflow: hidden;
 		float: left;
 		margin: 14px 0 0 260px;
 		width: 500px;
 		height: 40px;
-		
+
 	}
-	
+
 	.header .header-top .reposbox .search-box input {
 		float: left;
 		margin: 0;
@@ -170,7 +175,7 @@
 		border: 0;
 		border-left: 1px solid #dedede;
 	}
-	
+
 	.header .header-top .reposbox .search-box button {
 		display: block;
 		float: left;
@@ -184,7 +189,7 @@
 		box-sizing: border-box;
 		border: none;
 	}
-	
+
 	.header .header-top .reposbox .search-box select {
 		float: left;
 		margin-right: 10px;
@@ -192,7 +197,7 @@
 		height: 32px;
 		border: 1px solid #dede;
 	}
-	
+
 	.header .header-top .reposbox .right-text {
 		float: right;
 		margin-right: 10px;

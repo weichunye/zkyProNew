@@ -7,10 +7,10 @@ const path = require('path')
 const baseUrlImg = "http://39.105.190.39:8080/rossc/upload/"; */
 /*const baseUrl = "http://localhost:8002/rossc/";
 const baseUrlImg = "http://localhost:8002/rossc/upload/";*/
-/* const baseUrl = "http://192.168.1.36:8080/rossc/";
-const baseUrlImg = "http://192.168.1.36:8080/rossc/upload/";*/
- const baseUrl = "http://cstsai.cstcloud.cn/rossc/";
-const baseUrlImg = " http://cstsai.cstcloud.cn/rossc/upload/";
+ const baseUrl = "http://192.168.1.8:8080/rossc/";
+const baseUrlImg = "http://192.168.1.8:8080/rossc/upload/";
+/* const baseUrl = "http://cstsai.cstcloud.cn/rossc/";
+const baseUrlImg = " http://cstsai.cstcloud.cn/rossc/upload/";*/
 
 
 module.exports = {
@@ -22,7 +22,7 @@ module.exports = {
     proxyTable: {},
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
+    host: '192.168.1.4', // can be overwritten by process.env.HOST
    /*host: '159.226.186.92', // can be overwritten by process.env.HOST*/
     port: 8002, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,

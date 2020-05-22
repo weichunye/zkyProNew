@@ -35,7 +35,7 @@
     	background: #f0f8ed;
     	border: 1px solid #c5dbbc;
     	z-index: 10001;
-    	
+
     }
     #ieBox h2{
     	position: relative;
@@ -53,7 +53,7 @@
      	top: -60px;
      	width: 81px;
      	height: 81px;
-     
+
      }
      .p_up{
      	display: inline-block;
@@ -70,7 +70,7 @@
       	font-size: 14px;
       	color: #666;
       	line-height: 20px;
-      	
+
       }
       #ieBox h4{
       	margin: 0;
@@ -87,7 +87,7 @@
        	padding: 10px;
        	font-size: 22px;
        	color: #333;
-       	
+
        }
        #ieBox .browserlist{
        	margin: 10px 0;
@@ -118,9 +118,12 @@
        	text-align: center;
        	border-radius: 10px;
        	background: #fd8300;
-       	
+
        }
 		</style>
+    <script>
+      window.SITE_CONFIG = {};
+    </script>
 	</head>
 
 	<body>
@@ -202,7 +205,7 @@
 				}
 
 			}
-	
+
 		 function ismobile() {
 				var mobileArry = ["iPhone", "iPad", "Android", "Windows Phone", "BB10; Touch", "BB10; Touch", "PlayBook", "Nokia"];
 				var ua = navigator.userAgent;
@@ -211,9 +214,9 @@
 				});
 				return res.length > 0;
 			}
-	
-	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串  
-	var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器  
+
+	var userAgent = navigator.userAgent; //取得浏览器的userAgent字符串
+	var isIE = userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1; //判断是否IE<11浏览器
 	var isIE11 = userAgent.indexOf('Trident') > -1 && userAgent.indexOf("rv:11.0") > -1;
 
 	var browser = {
@@ -225,7 +228,7 @@
 		}()
 	}
 	if(browser.versions.trident && !isIE11) {
-	
+
 		$('#masking').show()
 		$('#ieBox').show()
 
