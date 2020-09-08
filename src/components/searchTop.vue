@@ -29,6 +29,8 @@
 						<el-option v-for="item in searchOptions" :key="item.value" :label="item.label" :value="item.value">
 						</el-option>
 					</el-select>
+
+					</select>
 					<div class="input">
 
 						<el-input @keyup.enter.native="toSearchList" v-model.trim="searchArr.keyword" auto-complete="off"></el-input>
@@ -100,88 +102,40 @@
 					<el-form-item prop="softVersion" label="软件版本" :label-width="formLabelWidth">
 						<el-input v-model="form.softVersion" placeholder="请输入软件版本" auto-complete="off"></el-input>
 					</el-form-item>
-					<el-form-item prop="openType" label="开源类型" :label-width="formLabelWidth">
-						<!--<el-select v-model="form.opensourceType" value-key="id" filterable multiple placeholder="请选择开源类型">
+					<el-form-item prop="opensourceType" label="开源类型" :label-width="formLabelWidth">
+						<el-select v-model="form.opensourceType" value-key="id" filterable multiple placeholder="请选择开源类型">
 							<el-option v-for="item in opensourceTypeOption" :key="item.id" :label="item.ctyName" :value="item">
 							</el-option>
-						</el-select>-->
-            <el-cascader
-              v-model="form.openType"
-              :options="openTypeOption"
-              :props="{ multiple: true, checkStrictly: true }"
-              clearable></el-cascader>
+						</el-select>
 					</el-form-item>
-          <el-form-item prop="softCategory" label="收费方式" :label-width="formLabelWidth">
-            <!--    <el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
-                  <el-option v-for="item in softCategoryOption " :key="item.id" :label="item.ctyName" :value="item">
-                  </el-option>
-                </el-select>-->
-            <el-cascader
-              v-model="form.softCategory"
-              :options="softCategoryOption"
-              :props="{ multiple: true, checkStrictly: true }"
-              clearable></el-cascader>
-          </el-form-item>
 
-					<el-form-item prop="opensourceType" label="软件类别" :label-width="formLabelWidth">
-<!--						<el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
+					<el-form-item prop="softCategory" label="软件类别" :label-width="formLabelWidth">
+						<el-select v-model="form.softCategory" value-key="id" filterable multiple placeholder="请选择软件类别">
 							<el-option v-for="item in softCategoryOption " :key="item.id" :label="item.ctyName" :value="item">
 							</el-option>
-						</el-select>-->
-            <el-cascader
-              v-model="form.opensourceType"
-              :options="opensourceTypeOption"
-              :props="{ multiple: true, checkStrictly: true }"
-              clearable></el-cascader>
+						</el-select>
 
 					</el-form-item>
 					<el-form-item prop="Language" label="编程语言" :label-width="formLabelWidth">
-						<!--<el-select v-model="form.Language" value-key="id" filterable multiple placeholder="请选择编程语言">
+						<el-select v-model="form.Language" value-key="id" filterable multiple placeholder="请选择编程语言">
 							<el-option v-for="item in LanguageOption " :key="item.id" :label="item.ctyName" :value="item">
 							</el-option>
-						</el-select>-->
-            <el-cascader
-              v-model="form.Language"
-              :options="LanguageOption"
-              :props="{ multiple: true, checkStrictly: true }"
-              clearable></el-cascader>
+						</el-select>
 					</el-form-item>
-          <el-form-item prop="userInterface" label="学科领域" :label-width="formLabelWidth">
-            <!--<el-select v-model="form.userInterface" value-key="id" filterable multiple placeholder="请选择用户接口">
-              <el-option v-for="item in userInterfaceOption " :key="item.id" :label="item.ctyName" :value="item">
-              </el-option>
-            </el-select>-->
-            <el-cascader
-              v-model="form.userInterface"
-              :options="userInterfaceOption"
-              :props="{ multiple: true, checkStrictly: true }"
-              clearable></el-cascader>
-          </el-form-item>
-          <el-form-item prop="applicationField" label="开发领域" :label-width="formLabelWidth">
-            <!--<el-select v-model="form.applicationField" value-key="id" filterable multiple placeholder="请选择应用领域">
-              <el-option v-for="item in applicationFieldOption " :key="item.id" :label="item.ctyName" :value="item">
-              </el-option>
-            </el-select>-->
-            <el-cascader
-              v-model="form.applicationField"
-              :options="applicationFieldOption"
-              :props="{ multiple: true, checkStrictly: true }"
-              clearable></el-cascader>
-          </el-form-item>
 				</div>
 				<div class="box-small">
-					<!--<el-form-item prop="userInterface" label="用户接口" :label-width="formLabelWidth">
+					<el-form-item prop="userInterface" label="用户接口" :label-width="formLabelWidth">
 						<el-select v-model="form.userInterface" value-key="id" filterable multiple placeholder="请选择用户接口">
 							<el-option v-for="item in userInterfaceOption " :key="item.id" :label="item.ctyName" :value="item">
 							</el-option>
 						</el-select>
-					</el-form-item>-->
-				<!--	<el-form-item prop="applicationField" label="应用领域" :label-width="formLabelWidth">
+					</el-form-item>
+					<el-form-item prop="applicationField" label="应用领域" :label-width="formLabelWidth">
 						<el-select v-model="form.applicationField" value-key="id" filterable multiple placeholder="请选择应用领域">
 							<el-option v-for="item in applicationFieldOption " :key="item.id" :label="item.ctyName" :value="item">
 							</el-option>
 						</el-select>
-					</el-form-item>-->
+					</el-form-item>
 
 				</div>
 				<div class="box-big1">
@@ -192,12 +146,7 @@
 						</el-select>
 					</el-form-item>
 				</div>
-        <div class="box-big1">
-          <el-form-item prop="isSync" label="是否同步到科研软件汇聚平台" :label-width="formLabelWidth">
-            <el-radio v-model="form.isSync" label= '0'>否</el-radio>
-            <el-radio v-model="form.isSync" label= '1'>是</el-radio>
-          </el-form-item>
-        </div>
+
 				<div class="box-big1">
 
 					<el-form-item prop="softUrl" label="代码地址" :label-width="formLabelWidth">
@@ -368,7 +317,6 @@
 				deliveringData: {
 
 				},
-        userId: window.SITE_CONFIG['userId'],
 				userIdData: '',
 				form: {
 					domains: [],
@@ -385,8 +333,7 @@
 					operatingSystem: [],
 					ifShowRealName: false,
 					ifSelfStudy: false, //是否为自研
-					ifHsowRealName: false,
-          isSync:false
+					ifHsowRealName: false
 				},
 				ifCheckedMzs: false,
 				dialogDelivering: false,
@@ -414,14 +361,14 @@
 						message: '请填写版本号',
 						trigger: 'blur'
 					}],
-          openType: [{
+					opensourceType: [{
 						required: true,
 						message: '请填写开源类型',
 						trigger: 'blur'
 					}],
 					applicationField: [{
 						required: true,
-						message: '请填写开发领域',
+						message: '请填写应用领域',
 						trigger: 'blur'
 					}],
 					softCategory: [{
@@ -436,7 +383,7 @@
 					}],
 					userInterface: [{
 						required: true,
-						message: '请填写学科领域',
+						message: '请填写用户接口',
 						trigger: 'blur'
 					}],
 					softUrl: [{
@@ -485,7 +432,6 @@
 				LanguageOption: [],
 				userInterfaceOption: [],
 				operatingSystemOption: [],
-        openTypeOption: [],
 				firstDomains: {
 					"activityId": 0,
 					"awardLevel": 0,
@@ -511,7 +457,6 @@
 			var _this = this;
 			_this.userIdData = this.userId;
 			_this.toLoginUrl = baseUrl.baseUrl + 'web/auth/login'
-      console.log("searchTOpid======",this.userId)
 			if(this.userId) {
 				_this.showLogin = true;
 			} else {
@@ -674,7 +619,7 @@
 
 										});
 									} else if(response.data.code == -1) {
-
+										
 										_this.$alert(
 									"试用时间已结束，请通过“nienm@sccas.cn”该邮箱联系管理员", '提示信息', {
 										confirmButtonText: '确定',
@@ -710,9 +655,9 @@
 						console.log(error);
 					})
 			},
-*/
+*/				
 			runThisSoft:function(){
-
+				
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("softId", this.$route.query.id);
@@ -721,7 +666,7 @@
 									.then(function(response) {
 										window.open(response.data.url)
 									})
-
+				
 			},
 			//下载文档
 			DownWorlds: function() {
@@ -789,6 +734,7 @@
 
 				var sofoVo = {
 					applicationField: "",
+					applicationFieldList: this.form.applicationField,
 					createTime: "",
 					createUser: this.userId,
 					expertEvaluateRejectReason: "",
@@ -807,6 +753,7 @@
 					isShowDeveloperName: '',
 					developers: this.form.developer,
 					opensourceType: "",
+					opensourceTypeList: this.form.opensourceType,
 					operatingSystemList: this.form.operatingSystem,
 					operatingSystem: "",
 					programmingLanguage: "",
@@ -818,17 +765,13 @@
 					softLicense: "",
 					softLogo: "",
 					softName: this.form.name,
+					softSonCtyList: this.form.softCategory,
 					softUrl: this.form.softUrl,
 					softVersion: this.form.softVersion,
 					updateTime: "",
 					userInterface: "",
 					isMatchSoft: 0,
 					userInterfaceList: this.form.userInterface,
-          softSonCtyList: this.form.applicationField,
-          opensourceTypeList: this.form.openType,//开源类型
-          chargingMethodList : this.form.softCategory,//收费方式
-          softTypeList  : this.form.opensourceType,//软件类别
-          applicationFieldList   : this.form.userInterface,//学科领域
 					userList: [],
 				}
 
@@ -889,7 +832,7 @@
 					rank: 0,
 					status: 0,
 					softId: this.checkId,
-					userId: window.SITE_CONFIG['userId'],
+					userId: this.userId,
 					userJob: this.firstDomains.userJob,
 					userName: this.firstDomains.userName,
 					userPhone: this.firstDomains.userPhone,
@@ -995,18 +938,12 @@
 				_this.axios.post(baseUrl.baseUrl + '/web/soft/softCtyAllList')
 					.then(function(response) {
 						var newResponse = response.data.list
-            console.log("newResponse=======================================",newResponse)
-					/*	_this.opensourceTypeOption = newResponse[2].children; //开源类型
-						_this.applicationFieldOption = newResponse[0].children; //应用领域
-						_this.softCategoryOption = newResponse[1].children; //软件类型
-						_this.LanguageOption = newResponse[4].children; //变成语言
-						_this.userInterfaceOption = newResponse[3].children; //用户接口*/
-            _this.opensourceTypeOption = newResponse[5].children; //软件类型
-            _this.applicationFieldOption = newResponse[1].children; //开发领域
-            _this.softCategoryOption = newResponse[4].children; //收费方式
-            _this.LanguageOption = newResponse[3].children; //变成语言
-            _this.userInterfaceOption = newResponse[0].children; //学科领域
-            _this.openTypeOption = newResponse[2].children; //开源类型
+
+						_this.opensourceTypeOption = newResponse[2].sonList; //开源类型
+						_this.applicationFieldOption = newResponse[0].sonList; //应用领域
+						_this.softCategoryOption = newResponse[1].sonList; //软件类型
+						_this.LanguageOption = newResponse[4].sonList; //变成语言
+						_this.userInterfaceOption = newResponse[3].sonList; //用户接口
 
 					})
 			},
@@ -1176,7 +1113,7 @@
 				console.log(" sessionStorage.getItem('sessionData');", sessionStorage.getItem('sessionData'))
 
 			},
-
+		
 
 		}
 	}
@@ -1187,92 +1124,92 @@
 		width: 100%;
 		height: 100%;
 	}
-
+	
 	.searchTop .box-big1 .el-input__inner,
 	.searchTop .box-small .el-input__inner {
 		width: 400px;
 	}
-
+	
 	.searchTop .examinedialog {
 		width: 600px;
 	}
-
+	
 	.searchTop .examinedialog .box-input {
 		margin-left: 10px;
 		width: 540px;
 	}
-
+	
 	.searchTop .examinedialog .bottom .right {
 		margin: 0 auto 20px;
 		width: 290px;
 	}
-
+	
 	.searchTop .examinedialog .bottom {
 		overflow: hidden;
 		width: 100%;
 	}
-
+	
 	.searchTop .searchtop-box {
 		padding: 10px 0;
 		width: 100%;
 		height: 110px;
 		background: url(../assets/bg/search_top_bg.png) left bottom repeat-x;
 	}
-
+	
 	.searchTop .musttit {
 		margin-left: 5px;
 		font-size: 18px;
 		font-weight: bold;
 		color: #d50d24;
 	}
-
+	
 	.searchTop .el-dialog {
 		width: 700px;
 	}
-
+	
 	.searchTop .el-dialog__body {
 		padding: 5px 10px;
 	}
-
+	
 	.searchTop .ajpsbtn {
 		margin-left: 440px;
 		margin-bottom: 20px;
 	}
-
+	
 	.searchTop .searchtop-box .con {
 		overflow: hidden;
 		margin: 0 auto;
 		width: 1200px;
 	}
-
+	
 	.searchTop .searchtop-box .con .logo {
 		float: left;
 		margin-top: 10px;
 		height: 90px;
 		width: auto;
 	}
-
+	
 	.searchTop .searchtop-box .con .search-box {
 		overflow: hidden;
 		float: left;
 		margin: 40px 0 0 50px;
 		width: 600px;
 	}
-
+	
 	.searchTop .searchtop-box .con .search-box .classify {
 		float: left;
 		width: 120px;
 		height: 34px;
 		border: 1px solid #dedede;
 	}
-
+	
 	.searchTop .searchtop-box .con .search-box .classify .el-input__inner {
 		width: 120px;
 		height: 34px;
 		line-height: 34px;
 		border: none;
 	}
-
+	
 	.searchTop .searchtop-box .con .search-box .input {
 		float: left;
 		margin-left: 10px;
@@ -1281,14 +1218,14 @@
 		background: #fff;
 		border: 1px solid #dedede;
 	}
-
+	
 	.searchTop .searchtop-box .con .search-box .input .el-input__inner {
 		width: 340px;
 		height: 34px;
 		line-height: 34px;
 		border: none;
 	}
-
+	
 	.searchTop .searchtop-box .con .search-box button {
 		float: left;
 		width: 100px;
@@ -1298,7 +1235,7 @@
 		color: #fff;
 		background: #e26556;
 	}
-
+	
 	.searchTop .searchtop-box .btn {
 		display: block;
 		float: right;
@@ -1314,13 +1251,13 @@
 		cursor: pointer;
 		background: url(../assets/bg/btn_bg_1.png) no-repeat;
 	}
-
+	
 	.searchTop .header-top {
 		width: 100%;
 		height: 66px;
 		background: #4b505d;
 	}
-
+	
 	.searchTop .header-top .reposbox {
 		overflow: hidden;
 		position: relative;
@@ -1331,21 +1268,21 @@
 		line-height: 66px;
 		color: #fff;
 	}
-
+	
 	.searchTop .header-top .reposbox .logo {
 		float: left;
 		margin: 10px 10px 0 0;
 		height: 46px;
 		width: auto;
 	}
-
+	
 	.searchTop .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
 		line-height: 66px;
 		color: #fff;
 	}
-
+	
 	.searchTop .header-top .reposbox .right-text {
 		float: right;
 		margin-right: 10px;
@@ -1354,7 +1291,7 @@
 		color: #f4f4f4;
 		cursor: pointer;
 	}
-
+	
 	.float-nav {
 		position: fixed;
 		top: 230px;
@@ -1362,7 +1299,7 @@
 		width: 60px;
 		border-radius: 2px;
 	}
-
+	
 	.float-nav li {
 		width: 60px;
 		height: 86px;
@@ -1370,22 +1307,22 @@
 		background: #3c6bf7;
 		cursor: pointer;
 	}
-
+	
 	.float-nav .libg {
 		background: #979899;
 	}
-
+	
 	.float-nav li:hover {
 		background: #d40303;
 	}
-
+	
 	.float-nav li img {
 		display: block;
 		padding: 8px 0 3px 0;
 		margin: 0px auto;
 		width: 50px;
 	}
-
+	
 	.float-nav li p {
 		width: 100%;
 		font-size: 12px;
@@ -1393,7 +1330,7 @@
 		text-align: center;
 		color: #fff;
 	}
-
+	
 	.searchTop .singtext {
 		padding: 5px 0;
 		margin: 0 0 20px 50px;
@@ -1403,14 +1340,14 @@
 		text-align: center;
 		background: #d0e1f1;
 	}
-
+	
 	.searchTop .domainsnum span {
 		line-height: 40px;
 		font-weight: bold;
 		font-size: 14px;
 		color: #F56C6C;
 	}
-
+	
 	.searchTop .singtext .deltrbtn {
 		padding: 0 5px;
 		font-size: 12px;
@@ -1422,7 +1359,7 @@
 		background: #c42c12;
 		cursor: pointer;
 	}
-
+	
 	.searchTop .singtext .addtr {
 		display: inline-block;
 		margin: 5px 0 0 160px;
@@ -1435,18 +1372,18 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
-
+	
 	.searchTop .singtext .el-input {
 		padding: 5px;
 		box-sizing: border-box;
 	}
-
+	
 	.searchTop .singtext .el-input__inner {
 		width: 100%;
 		height: 30px;
 		line-height: 30px;
 	}
-
+	
 	.searchTop .h3 {
 		width: 100%;
 		line-height: 30px;
@@ -1454,32 +1391,32 @@
 		color: #333;
 		text-align: center;
 	}
-
+	
 	.searchTop .feedbackdia {}
-
+	
 	.searchTop .feedbackdia .fbox {
 		overflow: hidden;
 		width: 660px;
 		padding: 10px;
 	}
-
+	
 	.searchTop .feedbackdia .borda {
 		border-bottom: 1px dashed #dedede;
 	}
-
+	
 	.searchTop .feedbackdia .fbox .demonstration {
 		float: left;
 		font-size: 16px;
 		line-height: 30px;
 		color: #666;
 	}
-
+	
 	.searchTop .feedbackdia .fbox .el-rate {
 		float: left;
 		margin: 8px;
 		width: 300px;
 	}
-
+	
 	.searchTop .feedbackdia .h3 {
 		width: 100%;
 		font-size: 16px;
@@ -1487,13 +1424,13 @@
 		text-align: left;
 		font-weight: normal;
 	}
-
+	
 	.searchTop .dialog-footer {
 		display: block;
 		margin: 10px auto;
 		width: 200px;
 	}
-
+	
 	.searchTop .diatit {
 		padding-top: 5px;
 		font-size: 12px;

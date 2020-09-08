@@ -12,7 +12,7 @@
 
 body {
 	background: #f2f2f2;
-	
+
 }
 
 a {
@@ -110,11 +110,12 @@ li{
 	margin: 10px 0 0;
 	padding: 2% 3%;
 	width: 96%;
+  height: 130px;
 	border-bottom: 1px solid #CCCCCC;
 }
 .software-box:hover{
-	box-shadow:  0 5px 10px #dedede; /*底边阴影*/ 
-	
+	box-shadow:  0 5px 10px #dedede; /*底边阴影*/
+
 }
 .software-box:hover dd ,.software-box:hover dt h3,.software-box:hover dt p{
 	color: #ba7a73;
@@ -129,13 +130,16 @@ li{
 	max-height: 75px;
 }
 .software-box .dd{
+  overflow: hidden;
 	display: block;
 	margin-top: 3px;
 	width:100%;
 	font-size: 12px;
 	color: #000 ;
 	line-height: 20px;
+  height: 26px;
 	text-indent: 0;
+  white-space:nowrap;
 }
 .software-box .dd .span{
 		margin: 10px 8px 15px 0;
@@ -147,11 +151,11 @@ li{
 		border-radius: 4px;
 		background: #B3B3B3;
 		color: #fff;
-	
+
 }
 .software-box .dd .spanbg{
 	background: #29ABE2;
-	
+
 }
 .software-box .dd .spantime{
 	float: left;
@@ -186,7 +190,7 @@ li{
 	font-size: 14px;
 	color: #fff;
 	background: url(../../src/assets/bg/pinggu_bg.png) no-repeat;
-	
+
 }
 .software-box dt h3{
 	width: 100%;
@@ -239,7 +243,7 @@ li{
     font-size: 12px;
     color: #fff;
     background: #529fd8;
-	
+
 }
 .personal-info-box{
 	overflow: hidden;
@@ -261,7 +265,7 @@ li{
 	overflow: hidden;
 	display: block;
 	padding: 0 10px;
-	
+
 	color: #333;
 	font-weight: normal;
 }
@@ -310,7 +314,7 @@ li{
 .personal-info-box .p-box{
 	overflow: hidden;
 	width: 100%;
-	
+
 }
 .personal-info-box .rj-infor{
 	margin-left: 0px;
@@ -429,11 +433,11 @@ float: right;
 	box-sizing: border-box;
 	background: #fff;
 	border-radius: 2px;
-	
-	
+
+
 }
 .activity-box:hover{
-	box-shadow:  0 5px 10px #dedede; /*底边阴影*/ 
+	box-shadow:  0 5px 10px #dedede; /*底边阴影*/
 }
 .activity-box dt{
 	float: left;
@@ -476,11 +480,11 @@ float: right;
 }
 .activity-box dd .btn-apply{
 	background: #cf2d3a;
-	
+
 }
 .activity-box dd .btn-end{
 	background: #999797;
-	
+
 }
 .activity-box dd p{
 	width: 100%;
@@ -510,8 +514,8 @@ float: right;
 	font-size: 14px;
 	line-height: 20px;
 	cursor: pointer;
-	
-	
+
+
 }
 .crumbs span{
 	color: #999;
@@ -519,4 +523,4 @@ float: right;
 .crumbs span:hover{
 	color: #ba7a73;
 }
-   
+

@@ -403,7 +403,7 @@
 							<!--<button>下载模板</button>-->
 						</div>
 					</el-form-item>
-					<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :on-success='analysisDocSuccess' :on-change="analysisDocChange"  :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
+					<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='analysisDocSuccess' :on-change="analysisDocChange"  :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left:20px; width:120px" size="small" type="success" @click="submitUpload()">上     传</el-button>
 						<div slot="tip" class="el-upload__tip">{{form.analysisName}}描述设计架构，模块功能描述，相关依赖软件的说明，与同类软件对比分析等。只能上传 .doc/.docx/.pdf文件，且不超过1M <span v-if="analysisCheck&&!form.analysisName">请确认文档并上传</span></div>
@@ -418,7 +418,7 @@
 
 						</div>
 					</el-form-item>
-					<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :on-success='itemBookDocSuccess' :on-change="itemBookDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
+					<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='itemBookDocSuccess' :on-change="itemBookDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left:20px; width:120px" size="small" type="success" @click="submitItemBook()">上     传</el-button>
 						<div slot="tip" class="el-upload__tip">包括创作思路，科研领域，成功案例等。只能上传 .doc/.docx/.pdf文件，且不超过1M<span v-if="itemBookCheck&&!form.itemBookName">请确认文档并上传</span></div>
@@ -434,7 +434,7 @@
 
 						</div>
 					</el-form-item>
-					<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :on-success='testDocSuccess' :on-change="testDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
+					<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='testDocSuccess' :on-change="testDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left:20px; width:120px" size="small" type="success" @click="submitTestDoc()">上     传</el-button>
 						<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M<span  v-if="testDocCheck&&!form.testDocName">请确认文档并上传</span></div>
@@ -450,7 +450,7 @@
 
 						</div>
 					</el-form-item>
-					<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :on-success='userDocSuccess' :on-change="userDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
+					<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='userDocSuccess' :on-change="userDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
 						<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 						<el-button style="margin-left:20px; width:120px" size="small" type="success" @click="submitUserDoc()">上     传</el-button>
 						<div slot="tip" class="el-upload__tip">只能上传 .doc/.docx/.pdf文件，且不超过1M<span v-if="userDocCheck&&!form.userDocName" >请确认文档并上传</span></div>
@@ -552,7 +552,6 @@
 					state: '进行中',
 					ranking: '纪念奖'
 				}],
-        userId:window.SITE_CONFIG['userId'],
 				dialogReview: false,
 				innerVisible: false,
 				ActivityInfoPop: false,
@@ -657,7 +656,6 @@
 		},
 		mounted() {
 			var _this = this;
-			console.log("this.userId================",this.userId)
 			//我的软件
 			_this.getMySoft()
 			//获取下载数据
@@ -715,6 +713,17 @@
 						console.log(error);
 					})
 			},
+        beforeUploadDoc(file) {
+            var _this=this
+            var FileExt = file.name.replace(/.+\./, "");
+            if (['doc', 'docx','pdf'].indexOf(FileExt.toLowerCase()) === -1){
+                _this.$message({
+                    type: 'warning',
+                    message: '请上传后缀名为 .doc/.docx/.pdf的附件！'
+                });
+                return false;
+            }
+        },
 			//我的投递
 			getmyfeedbackList: function() {
 				var _this = this;

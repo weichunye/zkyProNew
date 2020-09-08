@@ -54,6 +54,26 @@
 			<div class="objective">
 				<p class="objectivep"> {{activityInfo.purpose}}</p>
 			</div>
+      <div id="acTd2" class="title-top title-top1">
+        <span class="span1">2</span>
+        <span class="span2">组织架构</span>
+      </div>
+      <div class="nuitbox1">
+       <!-- <dl>
+          <dt>主办单位:</dt><dd>中国科学院计算机网络信息中心 </dd>
+        </dl>
+        <dl class="dl-right">
+          <dt > 协办单位:</dt><dd>小米集团 </dd>
+        </dl>-->
+          <img src="../assets/activity/banner_1.png" alt="">
+      </div>
+  <!--    <div id="acTd3" class="title-top title-top2">
+        <span class="span1">3</span>
+        <span class="span2">专家评审委员会</span>
+      </div>
+      <div class="hold-box">
+        <img src="../assets/activity/banner_2.jpg" alt="">
+      </div>-->
 			<!--1-->
 			<div v-if="activityInfo.status==3">
 				<!--榜单-->
@@ -136,15 +156,15 @@
 			</div>
 			<div v-else="">
 				<!--2-->
-				<div id="acTd2" class="title-top title-top2">
-					<span class="span1">2</span>
+				<div id="acTd4" class="title-top title-top2">
+					<span class="span1">3</span>
 					<span class="span2">日程安排和比赛流程</span>
 				</div>
 				<img class="stepimg" :src="stepImgSrc" alt="日程安排和比赛流程" />
 				<!--2-->
 				<!--3-->
-				<div id="acTd3" class="title-top title-top1">
-					<span class="span1">3</span>
+				<div id="acTd5" class="title-top title-top1">
+					<span class="span1">4</span>
 					<span class="span2">参赛方式</span>
 				</div>
 				<div class="entry-mode">
@@ -153,8 +173,8 @@
 				</div>
 				<!--3-->
 				<!--4-->
-				<div id="acTd4" class="title-top title-top1">
-					<span class="span1">4</span>
+				<div id="acTd6" class="title-top title-top1">
+					<span class="span1">5</span>
 					<span class="span2">作品评审</span>
 				</div>
 				<div class="review-top">
@@ -179,7 +199,7 @@
 					<li class="li4">{{activityInfo.potentialAward}}</li>
 				</ul>
 				<p class="prize4">
-					所有报名参与大赛未获得奖项的有效选手，均将获得参赛纪念证书，软件可以在“中国科技云”科学软件开源社区发布。
+          奖项实际形式为奖金或者等值的小米产品。
 				</p>
 			</div>
 			<div class="copy-box">
@@ -430,6 +450,7 @@
 		},
 		data() {
 			return {
+        userId:this.userId,
 				activityData: '',
 				activityInfo: '',
 				disabled: false,
@@ -1069,6 +1090,11 @@
 		margin: 20px 20px 0 0;
 		width: 200px;
 	}
+  .activityGame .hold-box{
+    display: block;
+    margin: 10px auto;
+    width:1200px;
+  }
 
 	.activityGame .signdialog .el-dialog__body {
 		padding: 10px;
@@ -1682,6 +1708,7 @@
 		width: 500px;
 		font-size: 16px;
 		line-height: 26px;
+    text-align: center;
 		color: #fff;
 	}
 
@@ -1703,7 +1730,40 @@
 	.activityGame .hostunit {
 		width: 100%;
 	}
+  .nuitbox1{
+    padding: 40px 0;
+    overflow: hidden;
+    width: 100%;
+  }
+  .nuitbox1 img{
+    display: block;
+    margin: 0 auto;
+    width: 970px;
+  }
+  .nuitbox1 dl{
+    float: left;
+    width: 580px;
+    line-height: 40px;
+    border-bottom: 1px solid #0bac9d;
 
+  }
+  .nuitbox1 dl dt{
+    float: left;
+    margin-right: 10px;
+    width:180px ;
+    font-size: 16px;
+    color: #fff;
+    text-align: center;
+    background: linear-gradient(to bottom,#edca29 5%, #0db86a 6%, #0db86a 100% );
+  }
+  .nuitbox1 dl dd{
+    float: left;
+    font-size: 16px;
+    color: #666;
+  }
+  .nuitbox1 .dl-right{
+    float: right;
+  }
 	.activityGame .el-carousel__container {
 		margin: 0 auto;
 		width: 900px;
@@ -1843,6 +1903,7 @@
 			font-size: 16px;
 			line-height: 20px;
 		}
+
 		/*	.activityGame .entry-mode{
 			font-size: 24px;
 		}

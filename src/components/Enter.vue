@@ -12,20 +12,13 @@
           </p>
         </router-link>
         <div v-for="item in menuList" class="menu-li">
-          <p>{{item.label}}</p>
+          <p>{{item.ctyName}}</p>
           <em></em>
-          <ul class="menu-left-box">
-            <li v-for="(itemNew,index) in item.children" :style="{'width':itemNew.children.length>0?'100%':'auto','float':itemNew.children.length>0?'none':'left'}" :key="index" >
-              <router-link :to="{path:'/list',query:{categoryId:itemNew.value,categoryName:itemNew.label,ParentName:'首页'}}">
-                <span class="spanname">{{itemNew.label}}&nbsp&nbsp&nbsp|</span>
-              </router-link>
-              <router-link v-for="tihrdChild in itemNew.children" :to="{path:'/list',query:{categoryId:tihrdChild.value,categoryName:tihrdChild.label,ParentName:'首页'}}">
-                <span>{{tihrdChild.label}}</span>
-              </router-link>
-
-            </li>
-
-          </ul>
+          <div class="menu-left-box">
+            <router-link v-for="itemNew in item.sonList" :to="{path:'/list',query:{categoryId:itemNew.id,categoryName:itemNew.ctyName,ParentName:'首页'}}">
+              <span>{{itemNew.ctyName}}</span>
+            </router-link>
+          </div>
         </div>
       </div>
 
@@ -109,7 +102,9 @@
     <div id="contype" class="content contype ">
       <div v-for="item in indexSoftList" class="soft-con">
         <h4 class="classfiy">
+
           {{item.ctyName}}
+
         </h4>
         <el-tabs>
           <el-tab-pane v-for="secondItem in item.sonList" :label="secondItem.ctyName">
@@ -318,7 +313,6 @@
         _this.axios.post(baseUrl.baseUrl + url)
           .then(function(response) {
             _this[ele] = response.data.list;
-            console.log("ele=============", response.data.list)
             if(fun) {
               fun()
             }
@@ -468,7 +462,7 @@
     position: relative;
     display: block;
     padding: 6px 15px 6px 25px;
-    margin-top: 13px;
+    margin-top: 20px;
     font-size: 14px;
     height: 36px;
     line-height: 36px;
@@ -503,9 +497,8 @@
     background: url(../assets/icon/arrow.png) no-repeat;
   }
 
-  .enter .menu-left-box {
-    	display: none;
-/*    display: block;*/
+  .menu-left-box {
+    display: none;
     position: absolute;
     left: 190px;
     top: 0;
@@ -514,24 +507,17 @@
     background: #eef5f9;
     z-index: 2;
   }
-  .enter  .menu-left-box li{
-    margin: 4px 0;
-    overflow: hidden;
-  }
 
-  .enter	.menu-left-box span {
+  .menu-left-box span {
     float: left;
     margin: 0px 12px;
     padding: 3px;
     font-size: 14px;
     color: #666;
-    line-height: 16px;
-  }
-  .enter .menu-left-box .spanname{
-    color: #0b54f9;
+    line-height: 20px;
   }
 
-  .enter .menu-left-box span:hover {
+  .menu-left-box span:hover {
     background: #e26556;
     color: #fff;
   }

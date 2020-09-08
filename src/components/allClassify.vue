@@ -4,7 +4,7 @@
   	<!--面包屑-->
   		<div class="crumbs">
   		<span @click="back">首頁 </span><span>&nbsp;&nbsp;>&nbsp;</span>
-  		 <span>全部分类 </span>
+  		 <span>全部分类 </span>   
   		</div>
   			<!--//面包屑-->
   	<!--content-->
@@ -12,30 +12,26 @@
   		<!--left-box-->
   	<div class="left-box">
   		<ul>
-  			<li  v-for="item in mentListL">
-  			<h4>{{item.label}}</h4>
-  			<div>
-        <p v-for="secItem in item.children" :style="{'width':secItem.children.length>0?'100%':'auto','float':secItem.children.length>0?'none':'left'}">
-          <router-link   :to="{path:'/list',query:{categoryId:secItem.value,categoryName:secItem.label,ParentName:'全部分类'}}">
-            <span  class="spanname">{{secItem.label}} <em v-if="secItem.children.length">|</em> </span>
-          </router-link>
-				<router-link  v-for="thirdItem in secItem.children" :to="{path:'/list',query:{categoryId:thirdItem.value,categoryName:thirdItem.label,ParentName:'全部分类'}}">
-				<span >{{thirdItem.label}}</span>
+  			<li  v-for="item in mentListL"> 
+  			<h4>{{item.ctyName}}</h4>
+  			<p>
+				
+				<router-link  v-for="secItem in item.sonList" :to="{path:'/list',query:{categoryId:secItem.id,categoryName:secItem.ctyName,ParentName:'全部分类'}}">
+				<span >{{secItem.ctyName}}</span>
 				</router-link>
-        </p>
-
-
-  			</div>
+  			
+  				
+  			</p>
   			</li>
-
+  				
   		</ul>
-
+  	    
   	</div>
   	    <!--//left-box-->
   	    <!--right-box-->
   	   <div class="right-box">
   	   	<div class="num-list">
-  	   		<h3>推荐软件：	<router-link :to="{path:'/typeList',query:{typeId:'isHot',categoryName:'推荐软件',ParentName:'全部分类'}}"><span>更多</span></router-link></h3>
+  	   		<h3>热门软件：	<router-link :to="{path:'/typeList',query:{typeId:'isHot',categoryName:'热门软件',ParentName:'全部分类'}}"><span>更多</span></router-link></h3>
   	   		<router-link v-for="item in hotList" :to="{path:'/details',query:{id:item.id}}">
   	   			<dl >
 					<dt><span>{{item.softName}}</span> </dt>
@@ -47,22 +43,22 @@
   	   				<span class="span1">1</span>
   	   				<p>软件111</p>
   	   			</li>
-
+  	   			
   	   		</ul>-->
-
+  	   	    
   	   	</div>
   	   	<router-link target="_blank" :to="'activityGame?id='+activityIngId">
   	   	<div class="game-banner">
-
+  	   	    
   	   	</div>
   	   	</router-link>
-
-
+  	   	
+  	       
   	   </div>
   	     <!--//right-box-->
   	</div>
 
-
+  
    <foot></foot>
   </div>
 </template>
@@ -76,37 +72,33 @@ export default {
   components: {
 			foot,
 			searchTop
-
+		
 		},
   data () {
     return {
 		mentListL:[],
 		hotList: [],
 		activityIngId:'',
-
-
-
+    	
+    
+      
     }
   },
   mounted(){
 	  var _this=this;
 	  _this.getListData()
 	  _this.activityIng()
-
-
-
-    //获取推荐列表
-    var paramscom = new URLSearchParams();
-    paramscom.append("page", 1);
-    paramscom.append("limit", 8);
-    paramscom.append("isRecommend", 1);
-    _this.axios.post(baseUrl.baseUrl + '/web/soft/querySoftListByCondition ', paramscom)
-      .then(function(response) {
-        _this.hotList = response.data.page.list;
-     console.log("recommendedList",_this.recommendedList)
-      })
+	  
 			//获取热门软件
-
+			var params1 = new URLSearchParams();
+			params1.append("page", 1);
+			params1.append("limit", 10);
+			this.axios.post(baseUrl.baseUrl + '/web/soft/queryHotSoftListByCondition', params1)
+				.then(function(response) {
+					this.hotList = response.data.page.list;
+					console.log("_this.hotList", response)
+				})
+  	
   },
    methods: {
    	   	//获取信息列表
@@ -116,8 +108,8 @@ export default {
    	.then(function(response){
    		_this.mentListL=response.data.list;
 		console.log("1111",_this.mentListL)
-
-
+   		
+   		
    	})
    	},
    		//获取当前正在进行中活动
@@ -127,7 +119,7 @@ export default {
 					.then(function(response) {
 					_this.activityIngId=response.data.config.paramValue;
 					console.log("	_this.activityIngId",	_this.activityIngId)
-
+				
 					})
 					.catch(function(error) {
 						console.log(error);
@@ -142,11 +134,11 @@ export default {
 
 <style>
 	.allClassify{
-	background: #f8f8f8;
+	background: #f8f8f8;	
 	}
-
+	
 	.allClassify .content{
-
+		
 	}
 	.allClassify .min-height{
 		padding: 5px 0 15px;
@@ -161,6 +153,7 @@ export default {
 	.allClassify .content .left-box li{
 		padding: 5px 10px 10px;
 		width: 940px;
+		border-bottom: 1px dashed #dedede;
 	}
 	.allClassify .content .left-box li h4{
 		width: 100%;
@@ -169,34 +162,19 @@ export default {
 		line-height: 46px;
 		font-weight: normal;
 	}
-	.allClassify .content .left-box li div{
+	.allClassify .content .left-box li p{
 		overflow: hidden;
 		width: 100%;
 	}
-  .allClassify .content .left-box li div p{
-    margin: 5px 10px 5px 0;
-    padding: 5px 10px;
-    overflow: hidden;
-    border: 1px #dedede dashed;
-    box-sizing: content-box;
-    box-sizing: border-box;
-  }
 	.allClassify .content .left-box li p span{
 		display: inline-block;
-    margin: 0 10px;
 		float: left;
+		margin-right: 25px;
 		color: #999;
 		font-size: 14px;
-		line-height: 20px;
+		line-height: 26px;
 		cursor: pointer;
 	}
-  .allClassify .content .left-box li p em{
-    margin-left: 5px;
-    font-style: normal;
-  }
-  .allClassify .content .left-box li p .spanname{
-    color: #666;
-  }
 	.allClassify .content .left-box li p span:hover{
 		color: #ba7a73;
 	}
@@ -236,7 +214,7 @@ export default {
 	.allClassify .content .right-box .num-list ul li{
 		overflow: hidden;
 		line-height: 30px;
-
+		
 	}
 	.allClassify .content .right-box .num-list ul li span{
 		float: left;
@@ -253,7 +231,7 @@ export default {
 	.allClassify .content .right-box .num-list ul li .span1{
 		background: #e76112;
 	}
-
+	
 	.allClassify .content .right-box .num-list ul li p{
 		float: left;
 		margin-left: 10px;
@@ -270,17 +248,17 @@ export default {
 		color: #333;
 		cursor: pointer;
 	}
-
+	
 	.allClassify dl:hover span,
 	.allClassify dl:hover dd {
 		color: #ba7a73;
 	}
-
+	
 	.allClassify dl dt {
 		font-size: 14px;
 		line-height: 26px;
 	}
-
+	
 	.allClassify dl dt span {
 		display: block;
 		width: 220px;
@@ -289,15 +267,15 @@ export default {
 		white-space: nowrap;
 		font-weight: bold;
 	}
-
+	
 	.allClassify dl dd {
 		font-size: 12px;
 		color: #b3b5b3;
 	}
-
+	
 	.allClassify dl dd span {
 		margin: 0 10px 0 5px;
 		color: #c0c1c5;
 	}
-
+	
 </style>

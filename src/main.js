@@ -11,6 +11,7 @@ import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
 /*import $ from 'jquery'*/
 import Cookies from 'js-cookie'
+import {Passport} from  './utils/checkLogin'
 import echarts from 'echarts'
 import 'babel-polyfill'
 import promise from 'es6-promise'
@@ -26,6 +27,7 @@ import 'url-search-params-polyfill';
 require("heyui/themes/index.less")
 */
 Vue.prototype.$echarts = echarts
+
 Vue.config.productionTip = false;
 Vue.use(ElementUI);
 Vue.prototype.axios = axios;
@@ -37,48 +39,66 @@ Vue.prototype.messageOpen = function(msg, type) {
 		message: msg,
 		type: type
 	});
+
 }
+
+var option={
+  umtUrl:'http://passport.escience.cn', //umt的地址，必填
+  viewPort:$("#testDiv"),						//显示message的地方，可不填
+  message:'登录',					//提示信息的内容，可不填
+  loginclass:'登录'
+}
+var newOption={
+  target:'none',   //无作用
+  appname:'dct', //应用名称
+  theme:'ddl'	   //如果在umt里面有定制版，
+}
+var  passport= new Passport(option)
+console.log("passport",passport)
+var newPassport= passport.checkAndLogin("http://cstsai.cstcloud.cn/rossc/web/auth/login",newOption)
+
+console.log("passport00",newPassport)
 var userJsonStr = sessionStorage.getItem('sessionData');
 var userEntity = JSON.parse(userJsonStr);
+
 if(userEntity){
 Vue.prototype.token = userEntity.token;
 Vue.prototype.userInfo = userEntity.userInfo;
-  window.SITE_CONFIG['userId'] = userEntity.userId;
+Vue.prototype.userId = userEntity.userId;
 }
+
+
 console.log("userEntity", userEntity); // => tom
- Vue.prototype.token = "1b5d13b4ac79fada76b39de9c0a85006";
-window.SITE_CONFIG['userId'] = 1;
+//获取个人信息
+/*window.addEventListener('message', function(e)
+	{
+
+		console.log("个人信息数据", e.origin, e.data)
+		console.log("个人信息数据新的",e.data)
+		var newData=JSON.parse(e.data)
+		console.log("newData",newData)
+		Vue.prototype.token=newData.token;
+		Vue.prototype.userInfo=newData.userInfo;
+		Vue.prototype.userId=newData.userId;
+
+
+
+	}
+)*/
+
+/* Vue.prototype.token = "1b5d13b4ac79fada76b39de9c0a85006";
+Vue.prototype.userId = 1;
 Vue.prototype.userName = "temporary";
 Vue.prototype.userInfo = {
 			trueName:'索隆',
 			cstnetId:'3852555555@qq.com'
-}
-$.getScript("http://passport.escience.cn/js/isLogin.do", function(){
-  window.SITE_CONFIG['sessionIsTrue'] = data.result;
-  console.log(" window.SITE_CONFIG['sessionIsTrue']", window.SITE_CONFIG['sessionIsTrue'])
-  if(!sessionStorage.getItem('ifLocation')&&window.SITE_CONFIG['sessionIsTrue']){
-    window.location.href='http://cstsai.cstcloud.cn/rossc/web/auth/login'
-    sessionStorage.setItem('ifLocation',true)
-  }
-  sessionStorage.setItem('ifLocation',true)
-  if(sessionStorage.getItem('ifLocation')&&!window.SITE_CONFIG['sessionIsTrue']){
-    console.log("已经退出了")
-    window.SITE_CONFIG['userId']=null
-    sessionStorage.clear()
-  }
-})
-axios.interceptors.response.use(response => {
-  if (response.data.code === 401 || response.data.code === 10001) {
-    sessionStorage.removeItem("sessionData")
-    //跳转登录
-    window.location.href = window.SITE_CONFIG['apiURL'] + '/haoweb/web/auth/login'
-    return Promise.reject(response.data.msg)
-  }
-  return response
-}, error => {
-  console.error(error)
-  return Promise.reject(error)
-})
+} */
+
+/*Vue.prototype.token = "";
+Vue.prototype.userId = '';*/
+/*Vue.use(heyui)
+ */
+/* eslint-disable no-new */
 new Vue({
 	el: '#app',
 	router,
