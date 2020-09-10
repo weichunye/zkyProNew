@@ -208,7 +208,7 @@
 
 									</div>
 								</el-form-item>
-								<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :on-success='analysisDocSuccess' :on-change="analysisDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
+								<el-upload class="upload-demo" ref="analysisRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='analysisDocSuccess' :on-change="analysisDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList1">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitUpload()">上     传</el-button>
 									<a target="_blank" :href="analysisDocUrl">
@@ -228,9 +228,7 @@
 
 									</div>
 								</el-form-item>
-
-								<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :on-success='itemBookDocSuccess' :on-change="itemBookDocChange"  :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
-
+								<el-upload class="upload-demo" ref="itemBookRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='itemBookDocSuccess' :on-change="itemBookDocChange"  :limit="1" alllist-con :auto-upload="false" :file-list="fileList2">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitItemBook()">上     传</el-button>
 									<a target="_blank" :href="itemBookDocUrl">
@@ -246,10 +244,9 @@
 									<el-input :disabled="true" v-model="form.testDocName" placeholder="" auto-complete="off"></el-input>
 									<div class="tit">
 										<!--<button>下载模板</button>-->
-
 									</div>
 								</el-form-item>
-								<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :on-success='testDocSuccess' :on-change="testDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
+								<el-upload class="upload-demo" ref="testDocRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='testDocSuccess' :on-change="testDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList3">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitTestDoc()">上     传</el-button>
 									<a target="_blank" :href="testDocUrl">
@@ -265,10 +262,9 @@
 									<el-input :disabled="true" v-model="form.userDocName" placeholder="" auto-complete="off"></el-input>
 									<div class="tit">
 										<!--<button>下载模板</button>-->
-
 									</div>
 								</el-form-item>
-								<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :on-success='userDocSuccess' :on-change="userDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
+								<el-upload class="upload-demo" ref="userDocRef" :action=upUrl :before-upload="beforeUploadDoc"  :on-success='userDocSuccess' :on-change="userDocChange" :limit="1" alllist-con :auto-upload="false" :file-list="fileList4">
 									<el-button slot="trigger" size="small" type="primary">选取文件</el-button>
 									<el-button style="margin-left:5px; width:115px" size="small" type="success" @click="submitUserDoc()">上     传</el-button>
 									<a target="_blank" :href="userDocUrl">
@@ -283,7 +279,7 @@
 									<em class="addti">*</em>
 									<el-input :disabled="true" v-model="form.frameworkReportName" placeholder="" auto-complete="off"></el-input>
 									<div class="tit">
-										
+
 									</div>
 								</el-form-item>
 								<el-upload class="upload-demo" ref="frameworkReportDocRef" :action=upUrl :on-success='frameworkReportDocSuccess' :limit="1" alllist-con :auto-upload="false" :file-list="fileList9">
@@ -679,17 +675,17 @@
 
 				} else {
 					codeStype = 'warning'
-					
+
 				}
 				this.messageOpen(response.msg, codeStype)
 				this.fileList1 = []
 
-	
+
 			},
 			  analysisDocChange(file) {
 			  	this.analysisCheck=file.name
-			  
-       			 
+
+
       			},
 
 			//项目规格书
@@ -748,7 +744,7 @@
 				this.messageOpen(response.msg, codeStype)
 
 			},
-			
+
 			/*submitFrameworkReportDoc() {
 				this.$refs.frameworkReportDocRef.submit();
 			},
@@ -854,6 +850,17 @@
 				}
 
 			},
+        beforeUploadDoc(file) {
+            var _this=this
+            var FileExt = file.name.replace(/.+\./, "");
+            if (['doc', 'docx','pdf'].indexOf(FileExt.toLowerCase()) === -1){
+                _this.$message({
+                    type: 'warning',
+                    message: '请上传后缀名为 .doc/.docx/.pdf的附件！'
+                });
+                return false;
+            }
+        },
 			//验证git地址是否存在
 			checkUrl: function() {
 				var _this = this;
@@ -868,7 +875,7 @@
 
 					}
 					if(_this.getSoftUrl&&_this.form.softUrl==_this.getSoftUrl){
-						
+
 					}else{
 						var params = new URLSearchParams();
 					params.append("softUrl", _this.form.softUrl);
@@ -886,7 +893,7 @@
 							console.log(error);
 						})
 					}
-					
+
 
 				}
 
@@ -1121,10 +1128,10 @@
 				status: 0,
 				updateTime: ""
 			}
-			
+
 			 joinVo[arr].push(curObj);
-		}	
-		
+		}
+
    		}*/
 
 				_this.$refs[formName].validate((valid) => {
@@ -1229,12 +1236,12 @@
 	.bodybg {
 		background: #eef5f9;
 	}
-	
+
 	.addbg {
 		width: 100%;
 		background: url(../assets/bg/sign_bg.png) repeat;
 	}
-	
+
 	.agSignUp-box {
 		padding: 0 0 20px 0;
 		margin: 20px auto;
@@ -1242,7 +1249,7 @@
 		border: 1px solid #dedede;
 		background: #fff;
 	}
-	
+
 	.agSignUp h2 {
 		margin: 0 0 20px 0;
 		width: 100%;
@@ -1255,7 +1262,7 @@
 		background: linear-gradient(to bottom, #dfecfa 0%, #2295d9 8%, #4794e4 100%);
 		border-bottom: 2px solid #2b75c2;
 	}
-	
+
 	.agSignUp h2 span {
 		float: right;
 		margin-right: 10px;
@@ -1266,39 +1273,39 @@
 		cursor: pointer;
 		text-decoration: underline;
 	}
-	
+
 	.agSignUp h2 span:hover {
 		color: #fdd765;
 	}
-	
+
 	.agSignUp .box-big {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .box-big .el-select__tags {
 		margin-left: 15px;
 	}
-	
+
 	.agSignUp .box-teacher {
 		overflow: hidden;
 		margin-top: 15px;
 	}
-	
+
 	.agSignUp .box-teacher .el-input {
 		float: left;
 		width: 191px;
 		margin-left: 13px;
 	}
-	
+
 	.agSignUp .diatit {
 		padding:10px 0 0px 18px;
 		line-height: 18px;
 		font-size: 12px;
 		color: #d3d5d6;
 	}
-	
+
 	.agSignUp .h3 {
 		margin: 0 auto;
 		width: 500px;
@@ -1309,12 +1316,12 @@
 		text-align: center;
 		text-indent: 70px;
 	}
-	
+
 	.agSignUp .h3 span {
 		margin-left: 10px;
 		color: #999;
 	}
-	
+
 	.agSignUp .singtext {
 		padding: 5px 0;
 		margin: 0 0 15px 165px;
@@ -1324,18 +1331,18 @@
 		text-align: center;
 		background: #d0e1f1;
 	}
-	
+
 	.agSignUp .singtext td {
 		line-height: 30px;
 	}
-	
+
 	.agSignUp .singtext .el-input__inner {
 		margin-top: 10px;
 		width: 100%;
 		height: 30px;
 		line-height: 30px;
 	}
-	
+
 	.agSignUp .singtext .deltrbtn {
 		margin-top: 10px;
 		font-size: 12px;
@@ -1345,7 +1352,7 @@
 		background: #e26556;
 		cursor: pointer;
 	}
-	
+
 	.agSignUp .singtext .addtr {
 		display: inline-block;
 		margin: 10px 0 0 150px;
@@ -1358,19 +1365,19 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
-	
+
 	.agSignUp .singtext .el-input {
 		padding: 0 5px;
 		box-sizing: border-box;
 	}
-	
+
 	.addti {
 		font-style: normal;
 		font-size: 14px;
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	
+
 	.agSignUp .addti {
 		float: left;
 		font-style: normal;
@@ -1378,43 +1385,43 @@
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	
+
 	.agSignUp .box-big .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 600px;
 	}
-	
+
 	.agSignUp .domainsnum span {
 		line-height: 40px;
 		font-weight: bold;
 		font-size: 14px;
 		color: #F56C6C;
 	}
-	
+
 	.agSignUp .tinymce-editor {
 		margin-left: 10px;
 		width: 600px;
 	}
-	
+
 	.agSignUp .box-input {
 		margin-top: 10px;
 		float: left;
 	}
-	
+
 	.agSignUp .bottom {
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .left-box {
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .right-box {
 		display: block;
 		margin: 10px auto;
 	}
-	
+
 	.agSignUp .right-box button {
 		padding: 15px 0;
 		margin: 10px;
@@ -1426,51 +1433,51 @@
 		background: #4794e4;
 		border: 1px dashed #4794e4;
 	}
-	
+
 	.agSignUp .box {
 		width: 100%;
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .box .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 260px;
 	}
-	
+
 	.agSignUp .examinedialog {
 		width: 820px;
 	}
-	
+
 	.agSignUp .examinedialog input {
 		width: 220px;
 	}
-	
+
 	.agSignUp .examinedialog .box {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.agSignUp .examinedialog .box-1 {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.agSignUp .examinedialog .box-1 .el-form-item__content {
 		width: 600px;
 	}
-	
+
 	.agSignUp .examinedialog .box .el-form-item__content {
 		width: 280px;
 	}
-	
+
 	.agSignUp .examinedialog .tit {
 		margin: 5px 0 0 12px;
 		overflow: hidden;
 		width: 100px;
 		height: 36px;
 	}
-	
+
 	.agSignUp .examinedialog .tit button {
 		float: left;
 		margin: 10px 0 0 5px;
@@ -1481,7 +1488,7 @@
 		background: #fdd765;
 		border-radius: 3px;
 	}
-	
+
 	.agSignUp .examinedialog .tit p {
 		float: left;
 		margin-left: 20px;
@@ -1489,22 +1496,22 @@
 		line-height: 24px;
 		color: #cc0000;
 	}
-	
+
 	.agSignUp .examinedialog .upload-demo {
 		position: relative;
 		width: 360px;
 		display: inline-block;
 	}
-	
+
 	.agSignUp .examinedialog .bottom {
 		overflow: hidden;
 		padding: 5px;
 	}
-	
+
 	.agSignUp .examinedialog .bottom .right {
 		float: right;
 	}
-	
+
 	.agSignUp .avatar-uploader .el-upload {
 		border: 1px dashed #d9d9d9;
 		border-radius: 6px;
@@ -1512,11 +1519,11 @@
 		position: relative;
 		overflow: hidden;
 	}
-	
+
 	.agSignUp .avatar-uploader .el-upload:hover {
 		border-color: #409EFF;
 	}
-	
+
 	.agSignUp .avatar-uploader-icon {
 		font-size: 28px;
 		color: #8c939d;
@@ -1525,29 +1532,29 @@
 		line-height: 100px;
 		text-align: center;
 	}
-	
+
 	.agSignUp .upload-box {
 		margin: 20px;
 		float: left;
 	}
-	
+
 	.agSignUp .upload-box p {
 		width: 100%;
 		text-align: center;
 	}
-	
+
 	.agSignUp .avatar {
 		width: 100px;
 		height: 100px;
 		display: block;
 	}
-	
+
 	.avatar-uploader {
 		position: relative;
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.avatar-uploader .addShowPic {
 		position: absolute;
 		left: 0;
@@ -1555,38 +1562,38 @@
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list {
 		position: absolute;
 		left: 0;
 		top: 0;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item {
 		margin: 0;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item-thumbnail {
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name {
 		width: 0;
 		margin: 0;
 	}
-	
+
 	.el-upload-list__item.is-success .el-upload-list__item-status-label {
 		z-index: 100;
 	}
-	
+
 	.agSignUp .header-top {
 		width: 100%;
 		height: 46px;
 		background: #4b505d;
 	}
-	
+
 	.agSignUp .header-top .reposbox {
 		overflow: hidden;
 		position: relative;
@@ -1597,21 +1604,21 @@
 		line-height: 46px;
 		color: #fff;
 	}
-	
+
 	.agSignUp .header-top .reposbox .logo {
 		float: left;
 		margin-left: 10px;
 		height: 46px;
 		width: auto;
 	}
-	
+
 	.agSignUp .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
 		line-height: 46px;
 		color: #fff;
 	}
-	
+
 	.agSignUp .header-top .reposbox .right-text {
 		float: right;
 		margin-right: 10px;
@@ -1620,7 +1627,7 @@
 		color: #f4f4f4;
 		cursor: pointer;
 	}
-	
+
 	.agSignUp .gitUrl {
 		padding: 9px 6px;
 		border: 1px solid #dedede;
@@ -1630,27 +1637,27 @@
 		margin-left: 5px;
 		border-radius: 4px;
 	}
-	
+
 	.agSignUp .el-button--success {
 		background: #46c3a1;
 		border: 1px dashed #46c3a1;
 	}
-	
+
 	.agSignUp .el-button--primary {
 		background: #67C23A;
 		border: 1px dashed #67C23A;
 	}
-	
+
 	.agSignUp .el-button--success span,
 	.agSignUp .el-button--primary span {
 		color: #fff;
 	}
-	
+
 	.agSignUp .right-box .el-button--primary span {
 		font-size: 16px;
 		color: #fff;
 	}
-	
+
 	.agSignUp .uploadtit {
 		display: block;
 		margin-bottom: 20px;
@@ -1660,16 +1667,16 @@
 		color: #606266;
 		line-height: 16px;
 	}
-	
+
 	.box-1 .el-form-item {
 		padding: 0;
 		margin: 0;
 	}
-	
+
 	.box-big .el-form-item {
 		margin-bottom: 10px;
 	}
-	
+
 	.float_word {
 		display: block;
 		position: fixed;
@@ -1690,6 +1697,6 @@
 		width: 100%;
 		font-size: 12px;
 		color: #F56C6C;
-		
+
 	}
 </style>
