@@ -76,18 +76,18 @@
       <!--hotbox-->
     </div>
     <div class="game-banner">
-      <router-link target="_blank" :to="'activityGame?id='+activityIngId">
+      <router-link :to="'activityGame?id='+activityIngId">
         <div class="button-box">
-          <router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd1'">
+          <router-link  :to="'activityGame?id='+activityIngId+'&&acId=acTd1'">
 
           </router-link>
-          <router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd2'">
+          <router-link  :to="'activityGame?id='+activityIngId+'&&acId=acTd2'">
 
           </router-link>
-          <router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd3'">
+          <router-link  :to="'activityGame?id='+activityIngId+'&&acId=acTd3'">
 
           </router-link>
-          <router-link target="_blank" :to="'activityGame?id='+activityIngId+'&&acId=acTd4'">
+          <router-link  :to="'activityGame?id='+activityIngId+'&&acId=acTd4'">
 
           </router-link>
         </div>
@@ -209,8 +209,7 @@
         <a href="http://www.cnic.cn/front/pc.html#/cnicSite/home" target="_blank"> <img src="../assets/img/link_logo_1.png" /></a>
         <a href="http://www.cseep.cn" target="_blank"><img src="../assets/img/link_logo_2.png" /></a>
         <a href="http://www.cstos.cstcloud.cn" target="_blank"><img src="../assets/img/bottom_logo.png" /></a>
-
-
+        <a href="http://www.scihub.cstcloud.cn/" target="_blank"><img src="../assets/img/link_logo_5.png" /></a>
       </div>
 
     </div>

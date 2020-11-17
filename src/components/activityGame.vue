@@ -814,6 +814,10 @@
 					_this.messageOpen('请填写参赛人工作', 'warning')
 					return false;
 				}
+          if(_this.firstDomains.userJob&&_this.firstDomains.userJob.length>100) {
+              _this.messageOpen('请填写100字以内', 'warning')
+              return false;
+          }
 				if(!_this.form.abstract) {
 					_this.messageOpen('请填写作品摘要', 'warning')
 					return false;

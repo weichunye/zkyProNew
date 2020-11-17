@@ -114,7 +114,7 @@
 				</ul>-->
 			</div>
 
-			<router-link target="_blank" :to="'activityGame?id='+activityIngId">
+			<router-link  :to="'activityGame?id='+activityIngId">
 				<img class="right-box" src="../assets/bg/advertising_small.jpg" title="活动" />
 			</router-link>
 		</div>
@@ -140,7 +140,7 @@
 			<!--left-box-->
 			<!--right-box-->
 			<div class="right-box">
-				<h3>热门软件推荐 
+				<h3>热门软件推荐
 				<router-link :to="{path:'/typeList',query:{typeId:'isHot',categoryName:'热门软件',ParentName:'首页'}}"><span>更多</span></router-link>
 				</h3>
 
@@ -406,7 +406,7 @@
 						var downloadNumNew = _this.statInfo.downloadNum > 100 ? 100 : _this.statInfo.downloadNum;
 						var browseNumNew = _this.statInfo.browseNum > 100 ? 100 : _this.statInfo.browseNum;
 						var runNumNew = _this.statInfo.runNum > 100 ? 100 : _this.statInfo.runNum;
-						
+
 						_this.option.series[0].data[0].value = [collectionNumNew, enjoyNumNew, downloadNumNew, browseNumNew, runNumNew]
 						_this.myChart.setOption(_this.option);
 
@@ -485,7 +485,7 @@
 
 										});
 									} else if(response.data.code == -1) {
-										
+
 										_this.$alert(
 									"试用时间已结束，请通过“nienm@sccas.cn”该邮箱联系管理员", '提示信息', {
 										confirmButtonText: '确定',
@@ -809,7 +809,7 @@
 	.details {
 		background: #f8f8f8;
 	}
-	
+
 	.details .top-box {
 		overflow: hidden;
 		margin: 10px auto;
@@ -820,12 +820,12 @@
 	.details .el-dialog {
 		width: 600px;
 	}
-	
+
 	.details .el-dialog .labelList {
 		overflow: hidden;
 		padding: 10px 30px;
 	}
-	
+
 	.details .el-dialog .labelList span {
 		margin-right: 10px;
 		padding: 2px 8px;
@@ -835,11 +835,11 @@
 		background: #52a2c1;
 		border-radius: 5px;
 	}
-	
+
 	.details .el-dialog .softLabellist {
 		margin: 10px 0;
 	}
-	
+
 	.details .el-dialog .softLabellist span {
 		position: relative;
 		display: inline-block;
@@ -850,7 +850,7 @@
 		background: #f0efef;
 		border-radius: 10px;
 	}
-	
+
 	.details .el-dialog .softLabellist span em {
 		position: absolute;
 		right: -4px;
@@ -861,7 +861,7 @@
 		background: url(../assets/btn/close_1.jpg) no-repeat;
 		cursor: pointer;
 	}*/
-	
+
 	.details .top-box .left-box {
 		position: relative;
 		padding: 10px;
@@ -870,13 +870,13 @@
 		height: 260px;
 		background: #fff;
 	}
-	
+
 	.details .bshare-custom {
 		position: absolute;
 		left: 350px;
 		bottom: 20px;
 	}
-	
+
 	.details .top-box .left-box h2 {
 		width: 100%;
 		font-size: 24px;
@@ -884,7 +884,7 @@
 		line-height: 50px;
 		color: #666;
 	}
-	
+
 	.details .top-box .left-box h2 span {
 		margin-left: 10px;
 		padding: 0 4px;
@@ -895,7 +895,7 @@
 		line-height: 18px;
 		border-radius: 3px;
 	}
-	
+
 	.details .top-box .left-box .label {
 		display: inline-block;
 		margin: 5px 10px 10px 0;
@@ -905,7 +905,7 @@
 		color: #fff;
 		background: #529fd8;
 	}
-	
+
 	.details .top-box .left-box .addlabel {
 		display: inline-block;
 		margin: 5px 10px 10px;
@@ -918,26 +918,26 @@
 		border-radius: 5px;
 		cursor: pointer;
 	}
-	
+
 	.details .top-box .left-box .p {
 		width: 100%;
 		font-size: 14px;
 		color: #666;
 		line-height: 26px;
 	}
-	
+
 	.details .top-box .left-box .p em {
 		font-style: normal;
 		margin-left: 5px;
 		color: #555;
 	}
-	
+
 	.details .top-box .left-box .p a {
 		color: #c86f60;
 		line-height: 14px;
 		text-decoration: underline;
 	}
-	
+
 	.details .top-box .left-box .p span {
 		float: right;
 		margin-right: 10px;
@@ -947,7 +947,7 @@
 		color: #666;
 		line-height: 24px;
 	}
-	
+
 	.details .top-box .left-box .list-tools {
 		position: absolute;
 		left: 10px;
@@ -955,19 +955,19 @@
 		margin-top: 5px;
 		overflow: hidden
 	}
-	
+
 	.sharbox {
 		position: absolute;
 		left: 90px;
 		bottom: 50px;
 		background: #fff;
 	}
-	
+
 	.sharbox .sharbox-over {
 		position: relative;
 		width: 100%;
 	}
-	
+
 	.sharbox .sharbox-over .closebtn {
 		position: absolute;
 		top: -5px;
@@ -977,12 +977,12 @@
 		background: url(../assets/btn/close_1.jpg) no-repeat;
 		cursor: pointer;
 	}
-	
+
 	.details .top-box .left-box .list-tools li {
 		float: left;
 		margin-right: 20px;
 	}
-	
+
 	.details .top-box .left-box .list-tools li a {
 		display: inline-block;
 		padding-left: 6px;
@@ -992,26 +992,26 @@
 		background: #f0efef;
 		border-radius: 2px;
 	}
-	
+
 	.details .top-box .left-box .list-tools li .added {
 		color: #fff;
 		background: #f4b68d;
 	}
-	
+
 	.details .top-box .left-box .list-tools li .added span {
 		color: #fff;
 		border-left: 1px solid #fff;
 		background: #f4b68d;
 	}
-	
+
 	.details .top-box .left-box .list-tools li a:hover {
 		color: #d33c45;
 	}
-	
+
 	.details .top-box .left-box .list-tools li .hover:hover {
 		color: #666;
 	}
-	
+
 	.details .top-box .left-box .list-tools li a span {
 		display: inline-block;
 		margin-left: 6px;
@@ -1021,7 +1021,7 @@
 		border-left: 1px solid #dedede;
 		background: #f0efef;
 	}
-	
+
 	.details .top-box .left-box .btn-zhishu {
 		position: absolute;
 		right: 20px;
@@ -1034,22 +1034,22 @@
 		background: #fe7300;
 		cursor: pointer;
 	}
-	
+
 	.details .top-box .left-box .btn-zhishu:hover {
 		background: #32aa66;
 	}
-	
+
 	.details .top-box .left-box .list-hub {
 		position: absolute;
 		right: 20px;
 		bottom: 20px;
 		overflow: hidden;
 	}
-	
+
 	.indexbox {
 		opacity: 0;
 	}
-	
+
 	.details .top-box .left-box .list-hub li {
 		float: left;
 		overflow: hidden;
@@ -1060,19 +1060,19 @@
 		border: 1px solid #dedede;
 		border-radius: 2px;
 	}
-	
+
 	.details .top-box .left-box .list-hub li img {
 		float: left;
 		margin: 5px 5px;
 	}
-	
+
 	.details .top-box .left-box .list-hub li p {
 		float: left;
 		font-size: 14px;
 		color: #666;
 		line-height: 26px;
 	}
-	
+
 	.details .top-box .left-box .list-hub li i {
 		float: left;
 		display: inline-block;
@@ -1081,35 +1081,35 @@
 		height: 26px;
 		background: #dedede;
 	}
-	
+
 	.details .top-box .right-box {
 		float: right;
 		width: 250px;
 		height: 280px;
 	}
-	
+
 	.right-box a {
 		display: block;
 		height: 46px;
 	}
-	
+
 	.details .center-box {
 		overflow: hidden;
 		width: 1200px;
 		min-height: 5px;
 		background: #fff;
 	}
-	
+
 	.details .center-box .left-box {
 		float: left;
 		width: 940px;
 	}
-	
+
 	.details .center-box .left-box .min-height {
 		padding: 20px;
 		min-height: 400px;
 	}
-	
+
 	.details .center-box .left-box .min-height p {
 		padding: 10px 5px 0;
 		font-size: 14px;
@@ -1117,22 +1117,22 @@
 		color: #333;
 		text-indent: 20px;
 	}
-	
+
 	.details .center-box .left-box .min-height p span {
 		font-size: 14px;
 	}
-	
+
 	.details .center-box .left-box .min-height img {
 		margin: 5px auto;
 		max-width: 900px;
 		height: auto;
 	}
-	
+
 	.details .center-box .right-box {
 		float: right;
 		width: 230px;
 	}
-	
+
 	.details .center-box .right-box h3 {
 		margin-top: 20px;
 		display: block;
@@ -1143,7 +1143,7 @@
 		line-height: 30px;
 		font-weight: normal;
 	}
-	
+
 	.details .softlogo {
 		position: absolute;
 		right: 20px;
@@ -1151,35 +1151,35 @@
 		width: 100px;
 		height: auto;
 	}
-	
+
 	.details .center-box .right-box h3 span {
 		margin-right: 10px;
 		float: right;
 		font-size: 14px;
 		color: #d2525b;
 	}
-	
+
 	.details .center-box .right-box h3 a {
 		float: right;
 		display: inline-block;
 	}
-	
+
 	.details .center-box .right-box dl {
 		margin-top: 5px;
 		color: #333;
 		cursor: pointer;
 	}
-	
+
 	.details .center-box .right-box dl:hover span,
 	.details .center-box .right-box dl:hover dd {
 		color: #e33214;
 	}
-	
+
 	.details .center-box .right-box dl dt {
 		font-size: 14px;
 		line-height: 26px;
 	}
-	
+
 	.details .center-box .right-box dl dt span {
 		display: block;
 		width: 220px;
@@ -1188,17 +1188,17 @@
 		white-space: nowrap;
 		/*不换行 */
 	}
-	
+
 	.details .center-box .right-box dl dd {
 		font-size: 12px;
 		color: #999;
 	}
-	
+
 	.details .center-box .right-box dl dd span {
 		margin: 0 10px 0 5px;
 		color: #999;
 	}
-	
+
 	.details .indexbox {
 		position: absolute;
 		right: 100px;
@@ -1209,14 +1209,14 @@
 		z-index: 100;
 		background: #fff;
 	}
-	
+
 	.details .bottom-btn-box {
 		margin: 30px 0 50px 100px;
 		overflow: hidden;
 		text-align: center;
 		width: 800px;
 	}
-	
+
 	.details .bottom-btn-box li {
 		overflow: hidden;
 		display: inline-block;
@@ -1231,17 +1231,17 @@
 		border-radius: 5px;
 		cursor: pointer;
 	}
-	
+
 	.details .bottom-btn-box li:hover {
 		background: #e26556;
 	}
-	
+
 	.details .bottom-btn-box li img {
 		float: left;
 		margin: 6px 15px;
 		width: 36px;
 	}
-	
+
 	.details .bottom-btn-box li p {
 		float: left;
 		line-height: 48px;

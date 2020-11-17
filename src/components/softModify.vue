@@ -420,7 +420,7 @@
 
 					}
 					if(_this.getSoftUrl&&_this.form.softUrl==_this.getSoftUrl){
-						
+
 					}else{
 							var params = new URLSearchParams();
 					params.append("softUrl", _this.form.softUrl);
@@ -438,7 +438,7 @@
 							console.log(error);
 						})
 					}
-				
+
 
 				}
 
@@ -568,6 +568,10 @@
 						_this.messageOpen('请填写参赛人工作', 'warning')
 						return false;
 					}
+            if(_this.firstDomains.userJob&&_this.firstDomains.userJob.length>100) {
+                _this.messageOpen('请填写100字以内', 'warning')
+                return false;
+            }
 
 					if(!_this.firstDomains.userPhone) {
 						_this.messageOpen('请填写参赛人手机', 'warning')
@@ -672,12 +676,12 @@
 	.bodybg {
     background: #eef5f9;
 }
-	
+
 	.addbg {
 		width: 100%;
 		background: url(../assets/bg/sign_bg.png) repeat;
 	}
-	
+
 	.softModify-box {
 		padding: 0 0 20px 0;
 		margin: 20px auto;
@@ -685,7 +689,7 @@
 		border: 1px solid #dedede;
 		background: #fff;
 	}
-	
+
 	.softModify h2 {
 		margin: 0 0 20px 0;
 		width: 100%;
@@ -698,24 +702,24 @@
 		background: linear-gradient(to bottom, #dfecfa 0%, #2295d9 8%, #4794e4 100%);
 		border-bottom: 2px solid #2b75c2;
 	}
-	
+
 	.softModify .box-big {
 		position: relative;
 		width: 100%;
 		overflow: hidden;
 	}
-	
+
 	.softModify .box-big .el-select__tags {
 		margin-left: 15px;
 	}
-	
+
 	.softModify .diatit {
 		margin: 0;
 		line-height: 14px;
 		font-size: 12px;
 		color: #999;
 	}
-	
+
 	.softModify .h3 {
 		width: 100%;
 		font-size: 16px;
@@ -724,7 +728,7 @@
 		color: #666;
 		text-align: center;
 	}
-	
+
 	.softModify .singtext {
 		padding: 5px 0;
 		margin: 0 0 15px 165px;
@@ -734,18 +738,18 @@
 		text-align: center;
 		background: #d0e1f1;
 	}
-	
+
 	.softModify .singtext td {
 		line-height: 30px;
 	}
-	
+
 	.softModify .singtext .el-input__inner {
 		margin-top: 10px;
 		width: 100%;
 		height: 30px;
 		line-height: 30px;
 	}
-	
+
 	.softModify .singtext .deltrbtn {
 		margin-top: 10px;
 		font-size: 12px;
@@ -755,7 +759,7 @@
 		background: #e26556;
 		cursor: pointer;
 	}
-	
+
 	.softModify .singtext .addtr {
 		display: inline-block;
 		margin: 10px 0 0 150px;
@@ -768,19 +772,19 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
-	
+
 	.softModify .singtext .el-input {
 		padding: 0 5px;
 		box-sizing: border-box;
 	}
-	
+
 	.addti {
 		font-style: normal;
 		font-size: 14px;
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	
+
 	.softModify .addti {
 		float: left;
 		font-style: normal;
@@ -788,44 +792,44 @@
 		font-weight: bold;
 		color: #F56C6C;
 	}
-	
+
 	.softModify .box-big .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 600px;
 	}
-	
+
 	.softModify .domainsnum span {
 		line-height: 40px;
 		font-weight: bold;
 		font-size: 14px;
 		color: #F56C6C;
 	}
-	
+
 	.softModify .tinymce-editor {
 		margin-left: 10px;
 		width: 600px;
 	}
-	
+
 	.softModify .box-input {
 		margin-top: 10px;
 		float: left;
 	}
-	
+
 	.softModify .bottom {
 		overflow: hidden;
 	}
-	
+
 	.softModify .left-box {
 		overflow: hidden;
 	}
-	
+
 	.softModify .right-box {
 		display: block;
 		margin: 10px auto;
 		width: 460px;
 	}
-	
+
 	.softModify .right-box button {
 		padding: 15px 0;
 		margin: 10px;
@@ -837,55 +841,55 @@
 		background: #4794e4;
 		border: 1px dashed #4794e4;
 	}
-	
+
 	.softModify .right-box button span {
 		font-size: 16px;
 		font-weight: bold;
 		color: #fff;
 	}
-	
+
 	.softModify .box {
 		width: 100%;
 		overflow: hidden;
 	}
-	
+
 	.softModify .box .el-input {
 		float: left;
 		margin-left: 10px;
 		width: 260px;
 	}
-	
+
 	.softModify .examinedialog {
 		width: 820px;
 	}
-	
+
 	.softModify .examinedialog input {
 		width: 220px;
 	}
-	
+
 	.softModify .examinedialog .box {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.softModify .examinedialog .box-1 {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.softModify .examinedialog .box-1 .el-form-item__content {
 		width: 600px;
 	}
-	
+
 	.softModify .examinedialog .box .el-form-item__content {
 		width: 280px;
 	}
-	
+
 	.softModify .examinedialog .tit {
 		margin-top: 5px;
 		overflow: hidden;
 	}
-	
+
 	.softModify .examinedialog .tit button {
 		float: left;
 		margin: 10px 0 0 5px;
@@ -896,7 +900,7 @@
 		background: #ff9900;
 		border-radius: 5px;
 	}
-	
+
 	.softModify .examinedialog .tit p {
 		float: left;
 		margin-left: 20px;
@@ -904,22 +908,22 @@
 		line-height: 24px;
 		color: #cc0000;
 	}
-	
+
 	.softModify .examinedialog .upload-demo {
 		position: relative;
 		width: 360px;
 		display: inline-block;
 	}
-	
+
 	.softModify .examinedialog .bottom {
 		overflow: hidden;
 		padding: 5px;
 	}
-	
+
 	.softModify .examinedialog .bottom .right {
 		float: right;
 	}
-	
+
 	.softModify .avatar-uploader .el-upload {
 		border: 1px dashed #d9d9d9;
 		border-radius: 6px;
@@ -927,11 +931,11 @@
 		position: relative;
 		overflow: hidden;
 	}
-	
+
 	.softModify .avatar-uploader .el-upload:hover {
 		border-color: #409EFF;
 	}
-	
+
 	.softModify .avatar-uploader-icon {
 		font-size: 28px;
 		color: #8c939d;
@@ -940,29 +944,29 @@
 		line-height: 100px;
 		text-align: center;
 	}
-	
+
 	.softModify .upload-box {
 		margin: 20px;
 		float: left;
 	}
-	
+
 	.softModify .upload-box p {
 		width: 100%;
 		text-align: center;
 	}
-	
+
 	.softModify .avatar {
 		width: 100px;
 		height: 100px;
 		display: block;
 	}
-	
+
 	.avatar-uploader {
 		position: relative;
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.avatar-uploader .addShowPic {
 		position: absolute;
 		left: 0;
@@ -970,38 +974,38 @@
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list {
 		position: absolute;
 		left: 0;
 		top: 0;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item {
 		margin: 0;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item-thumbnail {
 		width: 100px;
 		height: 100px;
 	}
-	
+
 	.upload-box .el-upload-list--picture .el-upload-list__item.is-success .el-upload-list__item-name {
 		width: 0;
 		margin: 0;
 	}
-	
+
 	.el-upload-list__item.is-success .el-upload-list__item-status-label {
 		z-index: 100;
 	}
-	
+
 	.softModify .header-top {
 		width: 100%;
 		height: 46px;
 		background: #4b505d;
 	}
-	
+
 	.softModify .header-top .reposbox {
 		overflow: hidden;
 		position: relative;
@@ -1012,21 +1016,21 @@
 		line-height: 46px;
 		color: #fff;
 	}
-	
+
 	.softModify .header-top .reposbox .logo {
 		float: left;
 		margin-left: 10px;
 		height: 46px;
 		width: auto;
 	}
-	
+
 	.softModify .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
 		line-height: 46px;
 		color: #fff;
 	}
-	
+
 	.softModify .header-top .reposbox .right-text {
 		float: right;
 		margin-right: 10px;
@@ -1035,7 +1039,7 @@
 		color: #f4f4f4;
 		cursor: pointer;
 	}
-	
+
 	.softModify .gitUrl {
 		padding: 9px 6px;
 		border: 1px solid #dedede;

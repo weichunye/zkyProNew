@@ -41,7 +41,7 @@ Vue.prototype.messageOpen = function(msg, type) {
 	});
 
 }
-
+/*
 var option={
   umtUrl:'http://passport.escience.cn', //umt的地址，必填
   viewPort:$("#testDiv"),						//显示message的地方，可不填
@@ -57,7 +57,7 @@ var  passport= new Passport(option)
 console.log("passport",passport)
 var newPassport= passport.checkAndLogin("http://cstsai.cstcloud.cn/rossc/web/auth/login",newOption)
 
-console.log("passport00",newPassport)
+console.log("passport00",newPassport)*/
 var userJsonStr = sessionStorage.getItem('sessionData');
 var userEntity = JSON.parse(userJsonStr);
 
@@ -86,13 +86,13 @@ console.log("userEntity", userEntity); // => tom
 	}
 )*/
 
-/* Vue.prototype.token = "1b5d13b4ac79fada76b39de9c0a85006";
-Vue.prototype.userId = 1;
+ Vue.prototype.token = "84d429e78ebb758b7c18bfd20a5fd3ee";
+Vue.prototype.userId = 10;
 Vue.prototype.userName = "temporary";
 Vue.prototype.userInfo = {
 			trueName:'索隆',
-			cstnetId:'3852555555@qq.com'
-} */
+			cstnetId:'371246735@qq.com'
+}
 
 /*Vue.prototype.token = "";
 Vue.prototype.userId = '';*/

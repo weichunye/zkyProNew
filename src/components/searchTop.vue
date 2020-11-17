@@ -619,7 +619,7 @@
 
 										});
 									} else if(response.data.code == -1) {
-										
+
 										_this.$alert(
 									"试用时间已结束，请通过“nienm@sccas.cn”该邮箱联系管理员", '提示信息', {
 										confirmButtonText: '确定',
@@ -655,9 +655,9 @@
 						console.log(error);
 					})
 			},
-*/				
+*/
 			runThisSoft:function(){
-				
+
 				var _this = this;
 				var params = new URLSearchParams();
 				params.append("softId", this.$route.query.id);
@@ -666,7 +666,7 @@
 									.then(function(response) {
 										window.open(response.data.url)
 									})
-				
+
 			},
 			//下载文档
 			DownWorlds: function() {
@@ -802,6 +802,10 @@
 						_this.messageOpen('请填写开发人员工作', 'warning')
 						return false;
 					}
+            if(_this.firstDomains.userJob&&_this.firstDomains.userJob.length>100) {
+                _this.messageOpen('请填写100字以内', 'warning')
+                return false;
+            }
 					if(!_this.firstDomains.userPhone) {
 						_this.messageOpen('请填写开发人员手机', 'warning')
 						return false;
@@ -1113,7 +1117,7 @@
 				console.log(" sessionStorage.getItem('sessionData');", sessionStorage.getItem('sessionData'))
 
 			},
-		
+
 
 		}
 	}
@@ -1124,92 +1128,92 @@
 		width: 100%;
 		height: 100%;
 	}
-	
+
 	.searchTop .box-big1 .el-input__inner,
 	.searchTop .box-small .el-input__inner {
 		width: 400px;
 	}
-	
+
 	.searchTop .examinedialog {
 		width: 600px;
 	}
-	
+
 	.searchTop .examinedialog .box-input {
 		margin-left: 10px;
 		width: 540px;
 	}
-	
+
 	.searchTop .examinedialog .bottom .right {
 		margin: 0 auto 20px;
 		width: 290px;
 	}
-	
+
 	.searchTop .examinedialog .bottom {
 		overflow: hidden;
 		width: 100%;
 	}
-	
+
 	.searchTop .searchtop-box {
 		padding: 10px 0;
 		width: 100%;
 		height: 110px;
 		background: url(../assets/bg/search_top_bg.png) left bottom repeat-x;
 	}
-	
+
 	.searchTop .musttit {
 		margin-left: 5px;
 		font-size: 18px;
 		font-weight: bold;
 		color: #d50d24;
 	}
-	
+
 	.searchTop .el-dialog {
 		width: 700px;
 	}
-	
+
 	.searchTop .el-dialog__body {
 		padding: 5px 10px;
 	}
-	
+
 	.searchTop .ajpsbtn {
 		margin-left: 440px;
 		margin-bottom: 20px;
 	}
-	
+
 	.searchTop .searchtop-box .con {
 		overflow: hidden;
 		margin: 0 auto;
 		width: 1200px;
 	}
-	
+
 	.searchTop .searchtop-box .con .logo {
 		float: left;
 		margin-top: 10px;
 		height: 90px;
 		width: auto;
 	}
-	
+
 	.searchTop .searchtop-box .con .search-box {
 		overflow: hidden;
 		float: left;
 		margin: 40px 0 0 50px;
 		width: 600px;
 	}
-	
+
 	.searchTop .searchtop-box .con .search-box .classify {
 		float: left;
 		width: 120px;
 		height: 34px;
 		border: 1px solid #dedede;
 	}
-	
+
 	.searchTop .searchtop-box .con .search-box .classify .el-input__inner {
 		width: 120px;
 		height: 34px;
 		line-height: 34px;
 		border: none;
 	}
-	
+
 	.searchTop .searchtop-box .con .search-box .input {
 		float: left;
 		margin-left: 10px;
@@ -1218,14 +1222,14 @@
 		background: #fff;
 		border: 1px solid #dedede;
 	}
-	
+
 	.searchTop .searchtop-box .con .search-box .input .el-input__inner {
 		width: 340px;
 		height: 34px;
 		line-height: 34px;
 		border: none;
 	}
-	
+
 	.searchTop .searchtop-box .con .search-box button {
 		float: left;
 		width: 100px;
@@ -1235,7 +1239,7 @@
 		color: #fff;
 		background: #e26556;
 	}
-	
+
 	.searchTop .searchtop-box .btn {
 		display: block;
 		float: right;
@@ -1251,13 +1255,13 @@
 		cursor: pointer;
 		background: url(../assets/bg/btn_bg_1.png) no-repeat;
 	}
-	
+
 	.searchTop .header-top {
 		width: 100%;
 		height: 66px;
 		background: #4b505d;
 	}
-	
+
 	.searchTop .header-top .reposbox {
 		overflow: hidden;
 		position: relative;
@@ -1268,21 +1272,21 @@
 		line-height: 66px;
 		color: #fff;
 	}
-	
+
 	.searchTop .header-top .reposbox .logo {
 		float: left;
 		margin: 10px 10px 0 0;
 		height: 46px;
 		width: auto;
 	}
-	
+
 	.searchTop .header-top .reposbox .text {
 		float: left;
 		font-size: 14px;
 		line-height: 66px;
 		color: #fff;
 	}
-	
+
 	.searchTop .header-top .reposbox .right-text {
 		float: right;
 		margin-right: 10px;
@@ -1291,7 +1295,7 @@
 		color: #f4f4f4;
 		cursor: pointer;
 	}
-	
+
 	.float-nav {
 		position: fixed;
 		top: 230px;
@@ -1299,7 +1303,7 @@
 		width: 60px;
 		border-radius: 2px;
 	}
-	
+
 	.float-nav li {
 		width: 60px;
 		height: 86px;
@@ -1307,22 +1311,22 @@
 		background: #3c6bf7;
 		cursor: pointer;
 	}
-	
+
 	.float-nav .libg {
 		background: #979899;
 	}
-	
+
 	.float-nav li:hover {
 		background: #d40303;
 	}
-	
+
 	.float-nav li img {
 		display: block;
 		padding: 8px 0 3px 0;
 		margin: 0px auto;
 		width: 50px;
 	}
-	
+
 	.float-nav li p {
 		width: 100%;
 		font-size: 12px;
@@ -1330,7 +1334,7 @@
 		text-align: center;
 		color: #fff;
 	}
-	
+
 	.searchTop .singtext {
 		padding: 5px 0;
 		margin: 0 0 20px 50px;
@@ -1340,14 +1344,14 @@
 		text-align: center;
 		background: #d0e1f1;
 	}
-	
+
 	.searchTop .domainsnum span {
 		line-height: 40px;
 		font-weight: bold;
 		font-size: 14px;
 		color: #F56C6C;
 	}
-	
+
 	.searchTop .singtext .deltrbtn {
 		padding: 0 5px;
 		font-size: 12px;
@@ -1359,7 +1363,7 @@
 		background: #c42c12;
 		cursor: pointer;
 	}
-	
+
 	.searchTop .singtext .addtr {
 		display: inline-block;
 		margin: 5px 0 0 160px;
@@ -1372,18 +1376,18 @@
 		border-radius: 3px;
 		cursor: pointer;
 	}
-	
+
 	.searchTop .singtext .el-input {
 		padding: 5px;
 		box-sizing: border-box;
 	}
-	
+
 	.searchTop .singtext .el-input__inner {
 		width: 100%;
 		height: 30px;
 		line-height: 30px;
 	}
-	
+
 	.searchTop .h3 {
 		width: 100%;
 		line-height: 30px;
@@ -1391,32 +1395,32 @@
 		color: #333;
 		text-align: center;
 	}
-	
+
 	.searchTop .feedbackdia {}
-	
+
 	.searchTop .feedbackdia .fbox {
 		overflow: hidden;
 		width: 660px;
 		padding: 10px;
 	}
-	
+
 	.searchTop .feedbackdia .borda {
 		border-bottom: 1px dashed #dedede;
 	}
-	
+
 	.searchTop .feedbackdia .fbox .demonstration {
 		float: left;
 		font-size: 16px;
 		line-height: 30px;
 		color: #666;
 	}
-	
+
 	.searchTop .feedbackdia .fbox .el-rate {
 		float: left;
 		margin: 8px;
 		width: 300px;
 	}
-	
+
 	.searchTop .feedbackdia .h3 {
 		width: 100%;
 		font-size: 16px;
@@ -1424,13 +1428,13 @@
 		text-align: left;
 		font-weight: normal;
 	}
-	
+
 	.searchTop .dialog-footer {
 		display: block;
 		margin: 10px auto;
 		width: 200px;
 	}
-	
+
 	.searchTop .diatit {
 		padding-top: 5px;
 		font-size: 12px;
