@@ -77,20 +77,46 @@ export default {
   },
   mounted(){
   	var _this=this;
-	_this.getList()
-	_this.categoryName=_this.$route.query.categoryName;
-	_this.parentNamenew = _this.$route.query.ParentName == "首页" ? '' : _this.$route.query.ParentName;
+  	_this.categoryName=_this.$route.query.categoryName;
+	  _this.parentNamenew = _this.$route.query.ParentName == "首页" ? '' : _this.$route.query.ParentName;
+     setTimeout(()=>{
+         _this.getList()
+     },1000)
 
 
   },
+    watch: {
+        '$route'(to, from) {
+            this.getList()
+        }
+    },
    methods: {
    	//获取信息
    	getList:function(){
    		var _this=this;
+   		let categoryTwo= _this.$route.query.categoryTwo
+   		let categoryThree= _this.$route.query.categoryThree
+   		let type= _this.$route.query.type
+        let categoryTwoIndex,categoryThreeIndex,newcategoryTwo,newcategoryThree
+        if(type!='list'){
+          categoryTwoIndex=categoryTwo&&categoryTwo.lastIndexOf("@")
+         categoryThreeIndex=categoryThree&&categoryThree.lastIndexOf("@")
+            newcategoryTwo=categoryTwo.substring(0,categoryTwoIndex)
+            newcategoryThree=categoryThree.substring(0,categoryThreeIndex)
+        }else{
+            newcategoryTwo=categoryTwo
+            newcategoryThree=categoryThree
+        }
+
+
+        console.log("categoryThreeIndex",categoryThreeIndex)
    			var params = new URLSearchParams();
    			params.append("page", _this.pageNum);
    		params.append("limit", _this.limit);
    		params.append("categoryId", _this.$route.query.categoryId);
+        console.log("categoryTwo",categoryTwo)
+        params.append("categoryTwo",newcategoryTwo);
+        params.append("categoryThree",newcategoryThree);
    		console.log("_this.$route.query.categoryId",_this.$route.query.categoryId)
 
    			_this.axios.post(baseUrl.baseUrl+'/web/soft/queryPageBySecondCtyId',params)

@@ -90,7 +90,7 @@ console.log("userEntity", userEntity); // => tom
 Vue.prototype.userId = 10;
 Vue.prototype.userName = "temporary";
 Vue.prototype.userInfo = {
-			trueName:'索隆',
+			trueName:'索1隆',
 			cstnetId:'371246735@qq.com'
 }
 

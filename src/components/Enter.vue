@@ -5,20 +5,27 @@
     <div class="contenttop">
       <!--menu-left-->
       <div class="menu-left">
-        <router-link to="allClassify">
+<!--        <router-link to="allClassify">-->
           <p class="menu-top">
             全部分类
             <span></span>
           </p>
-        </router-link>
+     <!--   </router-link>-->
         <div v-for="item in menuList" class="menu-li">
-          <p>{{item.ctyName}}</p>
+          <p>{{item.label}}</p>
           <em></em>
-          <div class="menu-left-box">
-            <router-link v-for="itemNew in item.sonList" :to="{path:'/list',query:{categoryId:itemNew.id,categoryName:itemNew.ctyName,ParentName:'首页'}}">
-              <span>{{itemNew.ctyName}}</span>
-            </router-link>
-          </div>
+          <ul class="menu-left-box">
+            <li v-for="(itemNew,index) in item.children" :style="{'width':itemNew.children.length>0?'100%':'auto','float':itemNew.children.length>0?'none':'left'}" :key="index" >
+              <router-link :to="{path:'/list',query:{type:'menu',categoryId:item.value,categoryTwo:itemNew.value,categoryThree:'',categoryName:itemNew.label,ParentName:'首页'}}">
+                <span class="spanname">{{itemNew.label}}&nbsp&nbsp&nbsp|</span>
+              </router-link>
+              <router-link v-for="tihrdChild in itemNew.children" :to="{path:'/list',query:{type:'menu',categoryId:item.value,categoryTwo:itemNew.value,categoryThree:tihrdChild.value,categoryName:tihrdChild.label,ParentName:'首页'}}">
+                <span>{{tihrdChild.label}} </span>
+              </router-link>
+
+            </li>
+
+          </ul>
         </div>
       </div>
 
@@ -102,13 +109,11 @@
     <div id="contype" class="content contype ">
       <div v-for="item in indexSoftList" class="soft-con">
         <h4 class="classfiy">
-
           {{item.ctyName}}
-
         </h4>
         <el-tabs>
           <el-tab-pane v-for="secondItem in item.sonList" :label="secondItem.ctyName">
-            <router-link :to="{path:'/list',query:{categoryId:secondItem.id,categoryName:secondItem.ctyName,ParentName:'首页'}}"><span class="more">更多</span></router-link>
+            <router-link :to="{path:'/list',query:{type:'list',categoryId:secondItem.parentId,categoryTwo:secondItem.id,categoryThree:'',categoryName:secondItem.ctyName,ParentName:'首页'}}"><span class="more">更多</span></router-link>
             <div class="el-tab-software">
               <router-link v-if="secondItem.softList.length>0" v-for="thitdItem in secondItem.softList" :to="{path:'/details',query:{id:thitdItem.id,ParentName:'首页'}}">
                 <dl class="software-box">
@@ -507,16 +512,35 @@
     z-index: 2;
   }
 
-  .menu-left-box span {
+  .enter .menu-left-box {
+    display: none;
+    /*    display: block;*/
+    position: absolute;
+    left: 190px;
+    top: 0;
+    padding: 20px 10px;
+    width: 600px;
+    background: #eef5f9;
+    z-index: 2;
+  }
+  .enter  .menu-left-box li{
+    margin: 4px 0;
+    overflow: hidden;
+  }
+
+  .enter	.menu-left-box span {
     float: left;
     margin: 0px 12px;
     padding: 3px;
     font-size: 14px;
     color: #666;
-    line-height: 20px;
+    line-height: 16px;
+  }
+  .enter .menu-left-box .spanname{
+    color: #0b54f9;
   }
 
-  .menu-left-box span:hover {
+  .enter .menu-left-box span:hover {
     background: #e26556;
     color: #fff;
   }

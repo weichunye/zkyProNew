@@ -42,7 +42,7 @@
 				</p>
 				<p class="p">软件类别: <em> |&nbsp;&nbsp;{{softData.softCategoryName}} </em>
 					<span v-if="softData.isShowDeveloperName">开&nbsp;发&nbsp;&nbsp;者： <em>{{softData.developers}}</em></span></p>
-				<p class="p">软件来源:
+				<p class="p" style="line-height: 18px">软件来源:
 					<a target="_blank" :href="newSoftUrl">{{softData.softUrl}}</a>
 				</p>
 				<ul class="list-tools">
