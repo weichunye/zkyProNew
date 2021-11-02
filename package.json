@@ -19,7 +19,7 @@
     "echarts": "^4.2.1",
     "element-ui": "^2.13.1",
     "js-cookie": "^2.2.0",
-    "tinymce": "^4.8.5",
+    "tinymce": "^5.10.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-social-share": "0.0.3"
